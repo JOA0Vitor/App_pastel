@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false, //tirar a faixa de debug
       theme: ThemeData(
         primarySwatch: Colors.blue, //trocar a cor
-        textTheme: GoogleFonts.pacificoTextTheme(),
+        textTheme: GoogleFonts.aBeeZeeTextTheme(),
       ),
       home: const LoginPage(),
     );
