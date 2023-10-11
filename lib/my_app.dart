@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
       //Tras varios itens
       debugShowCheckedModeBanner: false, //tirar a faixa de debug
       theme: ThemeData(
-        primarySwatch: Colors.blue, //trocar a cor
         textTheme: GoogleFonts.aBeeZeeTextTheme(),
       ),
       home: const LoginPage(),
