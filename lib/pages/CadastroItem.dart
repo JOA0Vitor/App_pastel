@@ -9,7 +9,7 @@ class CadastroItem extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: Text(texto)), //Header and
-        body: const Center(child: Text("Cadastro")),
+        body: const Center(child: Text("Aqui vou fazer o cadastro do itens")),
       ),
     );
   }

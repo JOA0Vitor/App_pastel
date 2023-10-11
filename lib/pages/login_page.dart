@@ -199,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                     alignment:
                         Alignment.center, //A linhar o texto dentro do bloco
                     child: const Text(
-                      "Criar conta",
+                      "Criar uma conta",
                       style: TextStyle(fontSize: 20),
                     )),
                 const SizedBox(
