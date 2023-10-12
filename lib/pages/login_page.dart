@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trilhaapp/pages/Cadastro_login.dart';
 import 'package:trilhaapp/pages/menu.dart'; //padrao ios
 
 class LoginPage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xFF7D79D0),
+        backgroundColor: Color.fromARGB(255, 177, 177, 177),
         body: SingleChildScrollView(
           child: ConstrainedBox(
             constraints: BoxConstraints(
@@ -61,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                     onChanged: (value) {
                       debugPrint(value);
                     },
-                    style: const TextStyle(color: Colors.white70),
+                    style: const TextStyle(color: Colors.black87),
                     decoration: const InputDecoration(
                         contentPadding: EdgeInsets.only(top: 17),
                         hintText: "Email",
@@ -97,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                         //ele é uma variavel que cada vez que a gente click ele vai retorna uam função e parametro string
                         debugPrint(value);
                       },
-                      style: const TextStyle(color: Colors.white70),
+                      style: const TextStyle(color: Colors.black87),
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.only(top: 9),
                         hintText: "Senha",
@@ -166,12 +167,12 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                             ),
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.white70)),
+                            backgroundColor: MaterialStateProperty.all(
+                                Color.fromARGB(179, 0, 0, 0))),
                         child: const Text(
                           'Entrar',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Color.fromARGB(255, 255, 255, 255),
                             fontSize: 15,
                           ),
                         )),
@@ -191,19 +192,29 @@ class _LoginPageState extends State<LoginPage> {
                           fontSize: 20,
                           color: Color.fromARGB(250, 148, 22, 13))),
                 ),
-                Container(
-                    //Botão
-                    //color: Colors.white70,
-                    margin: const EdgeInsets.only(top: 10, bottom: 10),
-                    height: 30,
-                    alignment:
-                        Alignment.center, //A linhar o texto dentro do bloco
-                    child: const Text(
-                      "Criar uma conta",
-                      style: TextStyle(fontSize: 20),
-                    )),
+                InkWell(
+                  child: Container(
+                      //Botão
+                      //color: Colors.white70,
+                      margin: const EdgeInsets.only(top: 10, bottom: 10),
+                      height: 30,
+                      alignment:
+                          Alignment.center, //A linhar o texto dentro do bloco
+                      child: const Text(
+                        "Criar uma conta",
+                        style: TextStyle(fontSize: 20),
+                      )),
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const cadastro_login()),
+                      (Route<dynamic> route) => true,
+                    );
+                  },
+                ),
                 const SizedBox(
-                  height: 40,
+                  height: 60,
                 ),
               ],
             ),

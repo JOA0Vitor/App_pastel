@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/pages/CadastroItem.dart';
+import 'package:trilhaapp/pages/adicionarItem.dart';
 import 'package:trilhaapp/pages/login_page.dart';
 
 class MyMenu extends StatefulWidget {
@@ -14,7 +14,10 @@ class _MyMenuState extends State<MyMenu> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: const Text("Menu")),
+        appBar: AppBar(
+          title: const Text("Menu"),
+          backgroundColor: Color.fromARGB(255, 2, 133, 255),
+        ),
         body: const Column(
           children: [
             SizedBox(
@@ -65,13 +68,11 @@ class _MyMenuState extends State<MyMenu> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const CadastroItem(
-                                texto: "Cadastro de itens",
-                              )),
+                          builder: (context) => const adicionarItem()),
                     );
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 InkWell(
@@ -84,7 +85,7 @@ class _MyMenuState extends State<MyMenu> {
                   ),
                   onTap: () {},
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 InkWell(
@@ -97,7 +98,7 @@ class _MyMenuState extends State<MyMenu> {
                   ),
                   onTap: () {},
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 InkWell(
@@ -110,10 +111,10 @@ class _MyMenuState extends State<MyMenu> {
                   ),
                   onTap: () {},
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 300,
                 ),
-                Divider(),
+                const Divider(),
                 InkWell(
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 10),
