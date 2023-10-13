@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/pages/menu.dart';
 
 // ignore: camel_case_types
 class cadastro_login extends StatefulWidget {
@@ -29,7 +28,7 @@ class _cadastro_loginState extends State<cadastro_login> {
             padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 const Text(
                     "Preencha o espaço abaixo para começar a usar o app"),
                 const SizedBox(
@@ -93,40 +92,52 @@ class _cadastro_loginState extends State<cadastro_login> {
                 //       debugPrint(emailController.text);
                 //     },
                 //     child: const Text("Salvar")),
-                TextButton(
-                    onPressed: () {
-                      //No if se for igual vai entrar na tela de menu
-                      // if (emailController.text.trim() == "pastel@gmail.com" &&
-                      //     senhaController.text.trim() == "teste123") {
-                      //   Navigator.pushReplacement(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => const MyMenu()));
-                      // } else {
-                      //   //No else vai gerar um erro na tela
-                      //   ScaffoldMessenger.of(context)
-                      //       .showSnackBar(const SnackBar(
-                      //           content: Text(
-                      //     "Email ou senha incorreta",
-                      //     style: TextStyle(),
-                      //   )));
-                      // }
-                    },
-                    style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    child: TextButton(
+                        onPressed: () {
+                          // ignore: unused_label
+
+                          // ignore: unused_label
+
+                          //No if se for igual vai entrar na tela de menu
+                          // if (emailController.text.trim() == "pastel@gmail.com" &&
+                          //     senhaController.text.trim() == "teste123") {
+                          //   Navigator.pushReplacement(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //           builder: (context) => const MyMenu()));
+                          // } else {
+                          //   //No else vai gerar um erro na tela
+                          //   ScaffoldMessenger.of(context)
+                          //       .showSnackBar(const SnackBar(
+                          //           content: Text(
+                          //     "Email ou senha incorreta",
+                          //     style: TextStyle(),
+                          //   )));
+                          // }
+                        },
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            backgroundColor: MaterialStateProperty.all(
+                                const Color.fromARGB(179, 0, 0, 0))),
+                        child: const Text(
+                          'Entrar',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 15,
                           ),
-                        ),
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(179, 0, 0, 0))),
-                    child: const Text(
-                      'Entrar',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 15,
-                      ),
-                    )),
+                        )),
+                  ),
+                ),
               ],
             ),
           ),
