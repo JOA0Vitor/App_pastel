@@ -99,28 +99,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                     alignment: Alignment.center,
                     width: double.infinity,
                     child: TextButton(
-                        onPressed: () {
-                          // ignore: unused_label
-
-                          // ignore: unused_label
-
-                          //No if se for igual vai entrar na tela de menu
-                          // if (emailController.text.trim() == "pastel@gmail.com" &&
-                          //     senhaController.text.trim() == "teste123") {
-                          //   Navigator.pushReplacement(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //           builder: (context) => const MyMenu()));
-                          // } else {
-                          //   //No else vai gerar um erro na tela
-                          //   ScaffoldMessenger.of(context)
-                          //       .showSnackBar(const SnackBar(
-                          //           content: Text(
-                          //     "Email ou senha incorreta",
-                          //     style: TextStyle(),
-                          //   )));
-                          // }
-                        },
+                        onPressed: () {},
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
@@ -130,10 +109,10 @@ class _cadastro_loginState extends State<cadastro_login> {
                             backgroundColor: MaterialStateProperty.all(
                                 const Color.fromARGB(179, 0, 0, 0))),
                         child: const Text(
-                          'Entrar',
+                          'Cadastrar',
                           style: TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 15,
+                            fontSize: 21,
                           ),
                         )),
                   ),

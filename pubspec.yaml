@@ -33,6 +33,7 @@ dependencies:
     # assets:
     #   - images/
   google_fonts: ^6.1.0  
+  flutter_spinbox: ^0.13.1
 
 
   # The following adds the Cupertino Icons font to your application.

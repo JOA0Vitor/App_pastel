@@ -56,15 +56,19 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Container(
                   width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 30),
+                  margin: const EdgeInsets.symmetric(horizontal: 30),
                   child: TextField(
                     controller: emailController,
+                    cursorColor: Colors.black87,
                     onChanged: (value) {
                       debugPrint(value);
                     },
-                    style: const TextStyle(color: Colors.black87),
+                    style: const TextStyle(
+                        color: Colors.black87,
+                        fontSize: 21,
+                        decorationColor: Colors.white70),
                     decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.only(top: 17),
+                        contentPadding: EdgeInsets.only(top: 18),
                         hintText: "Email",
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black87)),
@@ -92,15 +96,19 @@ class _LoginPageState extends State<LoginPage> {
                         Alignment.center, //A linhar o texto dentro do bloco
 
                     child: TextField(
+                      cursorColor: Colors.black87,
                       obscureText: isObscureText,
                       controller: senhaController,
                       onChanged: (value) {
                         //ele é uma variavel que cada vez que a gente click ele vai retorna uam função e parametro string
                         debugPrint(value);
                       },
-                      style: const TextStyle(color: Colors.black87),
+                      style: const TextStyle(
+                          color: Colors.black87,
+                          fontSize: 21,
+                          decorationColor: Colors.white70),
                       decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.only(top: 9),
+                        contentPadding: const EdgeInsets.only(top: 6),
                         hintText: "Senha",
                         enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black87)),

@@ -13,6 +13,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false, //tirar a faixa de debug
       theme: ThemeData(
         textTheme: GoogleFonts.aBeeZeeTextTheme(),
+        // ignore: deprecated_member_use
+        errorColor: Colors.red,
       ),
       home: const LoginPage(),
     );
