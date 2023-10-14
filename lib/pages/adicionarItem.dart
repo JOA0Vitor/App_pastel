@@ -55,7 +55,9 @@ class adicionarItem extends StatelessWidget {
                     const Text("Quantidade:", style: TextStyle(fontSize: 21)),
                     Container(
                       width: 150,
-                      margin: EdgeInsets.only(left: 25, bottom: 0),
+                      margin: const EdgeInsets.only(
+                        left: 25,
+                      ),
                       child: SpinBox(
                         min: 1,
                         max: 1000,

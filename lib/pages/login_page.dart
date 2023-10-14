@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/Cadastro_login.dart';
+import 'package:trilhaapp/pages/esqueci_senha.dart';
 import 'package:trilhaapp/pages/menu.dart'; //padrao ios
 
 class LoginPage extends StatefulWidget {
@@ -187,18 +188,30 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Expanded(child: Container()),
-                Container(
-                  //Botão
-                  // margin: const EdgeInsets.symmetric(
-                  //   horizontal: 100,
-                  // ),
-                  height: 30,
-                  alignment:
-                      Alignment.center, //A linhar o texto dentro do bloco
-                  child: const Text("Esqueci minha senha",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(250, 148, 22, 13))),
+                InkWell(
+                  child: Container(
+                    //Botão
+                    // margin: const EdgeInsets.symmetric(
+                    //   horizontal: 100,
+                    // ),
+
+                    height: 30,
+
+                    alignment:
+                        Alignment.center, //A linhar o texto dentro do bloco
+                    child: const Text("Esqueci minha senha",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color.fromARGB(250, 148, 22, 13))),
+                  ),
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const esqueci_senha()),
+                      (Route<dynamic> route) => true,
+                    );
+                  },
                 ),
                 InkWell(
                   child: Container(
