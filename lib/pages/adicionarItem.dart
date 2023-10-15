@@ -1,10 +1,20 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 
-// ignore: camel_case_types
-class adicionarItem extends StatelessWidget {
-  const adicionarItem({super.key});
+const List<String> disponivelParaSelecionar = <String>['Pastel', 'Coxinha'];
 
+String? dropdownValue;
+
+// ignore: camel_case_types
+class adicionarItem extends StatefulWidget {
+  const adicionarItem({super.key});
+  @override
+  State<adicionarItem> createState() => _adicionarItemState();
+}
+
+// ignore: camel_case_types
+class _adicionarItemState extends State<adicionarItem> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,12 +50,40 @@ class adicionarItem extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                const Text("Sabores:", style: TextStyle(fontSize: 21)),
-                const TextField(
-                  decoration: InputDecoration(
-                      hintText: 'Aqui vou colocar um option',
-                      hintStyle: TextStyle(fontSize: 16)),
+
+                Row(
+                  children: [
+                    const Text("Disponível:", style: TextStyle(fontSize: 21)),
+                    Container(
+                      width: 140,
+                      margin: const EdgeInsets.only(
+                        left: 30,
+                      ),
+                      child: Center(
+                        child: DropdownButton<String>(
+                          iconSize: 20,
+                          isExpanded: true,
+                          style: const TextStyle(
+                              fontSize: 21, color: Colors.black87),
+                          value: dropdownValue,
+                          onChanged: (String? newValue) {
+                            // Atualize o valor quando uma opção for selecionada.
+                            setState(() {
+                              dropdownValue = newValue;
+                            });
+                          },
+                          items: disponivelParaSelecionar.map((String item) {
+                            return DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(item),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+
                 const SizedBox(
                   height: 50,
                 ),
