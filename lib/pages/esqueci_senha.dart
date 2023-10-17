@@ -16,7 +16,7 @@ class _esqueci_senhaState extends State<esqueci_senha> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        title: const Text("Recuperar a senha"),
+        title: const Text("Esqueci minha senha"),
         backgroundColor: const Color.fromARGB(255, 2, 133, 255),
       ),
       body: SingleChildScrollView(
@@ -61,7 +61,7 @@ class _esqueci_senhaState extends State<esqueci_senha> {
                                   const EdgeInsets.all(8)),
                         ),
                         child: const Text(
-                          "enviar e-mail para recuperar senha",
+                          "Recuperar senha ",
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,
