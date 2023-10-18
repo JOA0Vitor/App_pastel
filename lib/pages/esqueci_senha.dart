@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/main.dart';
 
 // ignore: camel_case_types
 class esqueci_senha extends StatefulWidget {

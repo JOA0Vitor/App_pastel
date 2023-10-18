@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/adicionarItem.dart';
 import 'package:trilhaapp/pages/login_page.dart';
+import 'package:trilhaapp/pages/pesquisar.dart';
 
 class MyMenu extends StatefulWidget {
   const MyMenu({super.key});
@@ -16,7 +17,7 @@ class _MyMenuState extends State<MyMenu> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Menu"),
-          backgroundColor: Color.fromARGB(255, 2, 133, 255),
+          backgroundColor: const Color.fromARGB(255, 2, 133, 255),
         ),
         body: const Column(
           children: [
@@ -57,7 +58,7 @@ class _MyMenuState extends State<MyMenu> {
               children: [
                 InkWell(
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: const Text(
                       "Cadastro de itens",
                       style: TextStyle(fontSize: 21),
@@ -77,20 +78,27 @@ class _MyMenuState extends State<MyMenu> {
                 ),
                 InkWell(
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: const Text(
-                      "Pesquisa",
+                      "Pesquisar",
                       style: TextStyle(fontSize: 21),
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context); //remover a aba
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Pesquisar()),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 InkWell(
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: const Text(
                       "Editar",
                       style: TextStyle(fontSize: 21),
@@ -103,7 +111,7 @@ class _MyMenuState extends State<MyMenu> {
                 ),
                 InkWell(
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: const Text(
                       "Gerar Relatórios",
                       style: TextStyle(fontSize: 21),

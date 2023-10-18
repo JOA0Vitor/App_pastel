@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 177, 177, 177),
+        backgroundColor: const Color.fromARGB(255, 177, 177, 177),
         body: SingleChildScrollView(
           child: ConstrainedBox(
             constraints: BoxConstraints(
@@ -177,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             backgroundColor: MaterialStateProperty.all(
-                                Color.fromARGB(179, 0, 0, 0))),
+                                const Color.fromARGB(179, 0, 0, 0))),
                         child: const Text(
                           'Entrar',
                           style: TextStyle(

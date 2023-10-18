@@ -21,6 +21,7 @@ class _adicionarItemState extends State<adicionarItem> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Adicionar itens"),
+          backgroundColor: const Color.fromARGB(255, 2, 133, 255),
         ),
         body: SingleChildScrollView(
           child: Padding(
