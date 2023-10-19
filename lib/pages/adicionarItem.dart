@@ -1,8 +1,12 @@
-// ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 
-const List<String> disponivelParaSelecionar = <String>['Pastel', 'Coxinha'];
+const List<String> disponivelParaSelecionar = <String>[
+  'Bandega Meia',
+  'Bandega Completa'
+];
 
 String? dropdownValue;
 
@@ -13,8 +17,38 @@ class adicionarItem extends StatefulWidget {
   State<adicionarItem> createState() => _adicionarItemState();
 }
 
+class DadosAdicionado {
+  int id;
+  String nome;
+  int quantidade;
+
+  DadosAdicionado(this.id, this.nome, this.quantidade);
+}
+
 // ignore: camel_case_types
 class _adicionarItemState extends State<adicionarItem> {
+  final idController = TextEditingController();
+  final nomeController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+
+    idController.addListener(_printLatestValue);
+    nomeController.addListener(_printLatestValue);
+  }
+
+  @override
+  void dispose() {
+    idController.dispose();
+    nomeController.dispose();
+    super.dispose();
+  }
+
+  void _printLatestValue() {
+    final text = idController.text;
+    print('Second text field: $text (${text.characters.length})');
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,20 +67,28 @@ class _adicionarItemState extends State<adicionarItem> {
                   "ID:",
                   style: TextStyle(fontSize: 21),
                 ),
-                const TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Digite o ID',
-                    hintStyle: TextStyle(fontSize: 16),
-                  ),
+                TextField(
+                  //ID
+                  controller: idController,
+                  onChanged: (value) => print(
+                      'First text field: $value (${value.characters.length})'),
+                  decoration: const InputDecoration(
+                      hintText: 'Digite o ID',
+                      hintStyle: TextStyle(fontSize: 16)),
                 ),
                 const SizedBox(
                   height: 50,
                 ),
                 const Text("Nome do produto:", style: TextStyle(fontSize: 21)),
-                const TextField(
-                  decoration: InputDecoration(
-                      hintText: 'Digite nome do produto',
-                      hintStyle: TextStyle(fontSize: 16)),
+                TextField(
+                  //produto
+                  controller: nomeController,
+                  onChanged: (value) => print(
+                      'First text field: $value (${value.characters.length})'),
+                  decoration: const InputDecoration(
+                    hintText: 'Digite nome do produto ',
+                    hintStyle: TextStyle(fontSize: 16),
+                  ),
                 ),
                 const SizedBox(
                   height: 50,
@@ -56,16 +98,16 @@ class _adicionarItemState extends State<adicionarItem> {
                   children: [
                     const Text("Disponível:", style: TextStyle(fontSize: 21)),
                     Container(
-                      width: 140,
+                      width: 182,
                       margin: const EdgeInsets.only(
-                        left: 30,
+                        left: 10,
                       ),
                       child: Center(
                         child: DropdownButton<String>(
                           iconSize: 20,
                           isExpanded: true,
                           style: const TextStyle(
-                              fontSize: 21, color: Colors.black87),
+                              fontSize: 19, color: Colors.black87),
                           value: dropdownValue,
                           onChanged: (String? newValue) {
                             // Atualize o valor quando uma opção for selecionada.
