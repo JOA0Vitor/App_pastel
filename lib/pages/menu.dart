@@ -141,11 +141,45 @@ class _MyMenuState extends State<MyMenu> {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginPage()),
-                    );
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext bc) {
+                          return AlertDialog(
+                            elevation: 8,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            title: const Text(
+                              'Sair',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            content: const Wrap(
+                              children: [
+                                Text('Você sairá do aplicativo!'),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Text('Deseja realmente sair do aplicativo ?'),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Não')),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginPage()),
+                                    );
+                                  },
+                                  child: const Text('Sim'))
+                            ],
+                          );
+                        });
                   },
                 ),
               ],

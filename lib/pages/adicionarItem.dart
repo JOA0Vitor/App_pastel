@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 
 const List<String> disponivelParaSelecionar = <String>[
-  'Bandega Meia',
-  'Bandega Completa'
+  'Bandeja Meia',
+  'Bandeja Completa'
 ];
 
 String? dropdownValue;
@@ -70,8 +70,9 @@ class _adicionarItemState extends State<adicionarItem> {
                 TextField(
                   //ID
                   controller: idController,
+                  // ignore: avoid_print
                   onChanged: (value) => print(
-                      'First text field: $value (${value.characters.length})'),
+                      'O valor do ID é: $value (${value.characters.length})'),
                   decoration: const InputDecoration(
                       hintText: 'Digite o ID',
                       hintStyle: TextStyle(fontSize: 16)),
@@ -80,11 +81,13 @@ class _adicionarItemState extends State<adicionarItem> {
                   height: 50,
                 ),
                 const Text("Nome do produto:", style: TextStyle(fontSize: 21)),
+
                 TextField(
                   //produto
                   controller: nomeController,
+                  // ignore: avoid_print
                   onChanged: (value) => print(
-                      'First text field: $value (${value.characters.length})'),
+                      'O nome do produto é  : $value (${value.characters.length})'),
                   decoration: const InputDecoration(
                     hintText: 'Digite nome do produto ',
                     hintStyle: TextStyle(fontSize: 16),
@@ -153,13 +156,63 @@ class _adicionarItemState extends State<adicionarItem> {
                       ),
                     ),
                   ],
-                ),
+                ), //ShowModalBottonSheet
+                // InkWell(
+                //   child: Container(
+                //     padding: const EdgeInsets.symmetric(vertical: 10),
+                //   ),
+                //   onTap: () {},
+                // ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
                   child: Center(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext bc) {
+                              return AlertDialog(
+                                title: const Text(
+                                  "Item adicionado!!",
+                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                ),
+                                elevation: 8,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                content: const Wrap(
+                                  direction: Axis.vertical,
+                                  children: [
+                                    Text("Id: "),
+                                    SizedBox(
+                                      height: 30,
+                                    ),
+                                    Text("Nome do produto: "),
+                                    SizedBox(
+                                      height: 30,
+                                    ),
+                                    Text("Tipo de Bandeja: "),
+                                    SizedBox(
+                                      height: 30,
+                                    ),
+                                    Text("Quantidade: "),
+                                  ],
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text(
+                                        "OK",
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 2, 133, 255)),
+                                      ))
+                                ],
+                              );
+                            });
+                      },
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Colors.blue),
