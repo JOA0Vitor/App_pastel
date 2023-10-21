@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/adicionarItem.dart';
 import 'package:trilhaapp/pages/login_page.dart';
 import 'package:trilhaapp/pages/pesquisar.dart';
+// Adicionar no menu https://api.flutter.dev/flutter/widgets/ListView-class.html
 
 class MyMenu extends StatefulWidget {
   const MyMenu({super.key});

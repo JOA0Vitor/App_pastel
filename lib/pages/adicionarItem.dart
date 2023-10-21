@@ -13,40 +13,24 @@ String? dropdownValue;
 // ignore: camel_case_types
 class adicionarItem extends StatefulWidget {
   const adicionarItem({super.key});
+
   @override
   State<adicionarItem> createState() => _adicionarItemState();
-}
-
-class DadosAdicionado {
-  int id;
-  String nome;
-  int quantidade;
-
-  DadosAdicionado(this.id, this.nome, this.quantidade);
 }
 
 // ignore: camel_case_types
 class _adicionarItemState extends State<adicionarItem> {
   final idController = TextEditingController();
   final nomeController = TextEditingController();
+  double quantidadeController = 1.0;
+
   @override
   void initState() {
     super.initState();
 
-    idController.addListener(_printLatestValue);
-    nomeController.addListener(_printLatestValue);
-  }
-
-  @override
-  void dispose() {
-    idController.dispose();
-    nomeController.dispose();
-    super.dispose();
-  }
-
-  void _printLatestValue() {
-    final text = idController.text;
-    print('Second text field: $text (${text.characters.length})');
+    dropdownValue;
+    idController.text;
+    nomeController.text;
   }
 
   @override
@@ -70,6 +54,7 @@ class _adicionarItemState extends State<adicionarItem> {
                 TextField(
                   //ID
                   controller: idController,
+
                   // ignore: avoid_print
                   onChanged: (value) => print(
                       'O valor do ID é: $value (${value.characters.length})'),
@@ -87,7 +72,7 @@ class _adicionarItemState extends State<adicionarItem> {
                   controller: nomeController,
                   // ignore: avoid_print
                   onChanged: (value) => print(
-                      'O nome do produto é  : $value (${value.characters.length})'),
+                      'O nome do produto é: $value (${value.characters.length})'),
                   decoration: const InputDecoration(
                     hintText: 'Digite nome do produto ',
                     hintStyle: TextStyle(fontSize: 16),
@@ -107,13 +92,13 @@ class _adicionarItemState extends State<adicionarItem> {
                       ),
                       child: Center(
                         child: DropdownButton<String>(
+                          hint: const Center(child: Text('Selecione Um')),
                           iconSize: 20,
                           isExpanded: true,
                           style: const TextStyle(
                               fontSize: 19, color: Colors.black87),
                           value: dropdownValue,
                           onChanged: (String? newValue) {
-                            // Atualize o valor quando uma opção for selecionada.
                             setState(() {
                               dropdownValue = newValue;
                             });
@@ -121,6 +106,7 @@ class _adicionarItemState extends State<adicionarItem> {
                           items: disponivelParaSelecionar.map((String item) {
                             return DropdownMenuItem<String>(
                               value: item,
+                              onTap: () {},
                               child: Text(item),
                             );
                           }).toList(),
@@ -145,10 +131,14 @@ class _adicionarItemState extends State<adicionarItem> {
                       child: SpinBox(
                         min: 1,
                         max: 1000,
-                        value: 1,
+                        value: quantidadeController,
 
                         // ignore: avoid_print
-                        onChanged: (value) => print(value),
+                        onChanged: (value) {
+                          setState(() {
+                            quantidadeController = value;
+                          });
+                        },
                         decoration: const InputDecoration(
                           // border: InputBorder.none,
                           contentPadding: EdgeInsets.zero,
@@ -157,12 +147,7 @@ class _adicionarItemState extends State<adicionarItem> {
                     ),
                   ],
                 ), //ShowModalBottonSheet
-                // InkWell(
-                //   child: Container(
-                //     padding: const EdgeInsets.symmetric(vertical: 10),
-                //   ),
-                //   onTap: () {},
-                // ),
+
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
@@ -171,36 +156,45 @@ class _adicionarItemState extends State<adicionarItem> {
                       onPressed: () {
                         showDialog(
                             context: context,
-                            builder: (BuildContext bc) {
+                            builder: (BuildContext context) {
                               return AlertDialog(
-                                title: const Text(
-                                  "Item adicionado!!",
-                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                scrollable: true,
+                                title: const Center(
+                                  child: Text(
+                                    "Item adicionado!!",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w600),
+                                  ),
                                 ),
                                 elevation: 8,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
-                                content: const Wrap(
+                                content: Wrap(
                                   direction: Axis.vertical,
+                                  // mainAxisSize: MainAxisSize.max,
+                                  // mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Text("Id: "),
-                                    SizedBox(
+                                    Text("Id: ${idController.text}"),
+                                    const SizedBox(
                                       height: 30,
                                     ),
-                                    Text("Nome do produto: "),
-                                    SizedBox(
+                                    Text(
+                                        "Nome do produto:\n ${nomeController.text} "),
+                                    const SizedBox(
                                       height: 30,
                                     ),
-                                    Text("Tipo de Bandeja: "),
-                                    SizedBox(
+                                    Text("Tipo de Bandeja:\n $dropdownValue "),
+                                    const SizedBox(
                                       height: 30,
                                     ),
-                                    Text("Quantidade: "),
+                                    Text(
+                                        "Quantidade: ${quantidadeController.toStringAsFixed(0)}"),
                                   ],
                                 ),
                                 actions: [
                                   TextButton(
                                       onPressed: () {
+                                        // ignore: unused_label
                                         Navigator.pop(context);
                                       },
                                       child: const Text(
