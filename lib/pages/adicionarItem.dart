@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
+import 'package:trilhaapp/pages/menu.dart';
 
 const List<String> disponivelParaSelecionar = <String>[
   'Bandeja Meia',
@@ -20,16 +21,16 @@ class adicionarItem extends StatefulWidget {
 
 // ignore: camel_case_types
 class _adicionarItemState extends State<adicionarItem> {
-  final idController = TextEditingController();
   final nomeController = TextEditingController();
   double quantidadeController = 1.0;
+  double idController = 1.0;
 
   @override
   void initState() {
     super.initState();
 
     dropdownValue;
-    idController.text;
+    idController;
     nomeController.text;
   }
 
@@ -47,21 +48,43 @@ class _adicionarItemState extends State<adicionarItem> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "ID:",
-                  style: TextStyle(fontSize: 21),
-                ),
-                TextField(
-                  //ID
-                  controller: idController,
+                Row(
+                  children: [
+                    const Text("ID do Item:", style: TextStyle(fontSize: 21)),
+                    Container(
+                      width: 166,
+                      margin: const EdgeInsets.only(
+                        left: 25,
+                      ),
+                      child: SpinBox(
+                        min: 1,
+                        max: 1000,
+                        value: idController,
 
-                  // ignore: avoid_print
-                  onChanged: (value) => print(
-                      'O valor do ID é: $value (${value.characters.length})'),
-                  decoration: const InputDecoration(
-                      hintText: 'Digite o ID',
-                      hintStyle: TextStyle(fontSize: 16)),
+                        // ignore: avoid_print
+                        onChanged: (value) {
+                          setState(() {
+                            idController = value;
+                          });
+                        },
+                        decoration: const InputDecoration(
+                          // border: InputBorder.none,
+                          contentPadding: EdgeInsets.zero,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+                // TextField(
+                //   //ID
+
+                //   // ignore: avoid_print
+                //   onChanged: (value) => print(
+                //       'O valor do ID é: $value (${value.characters.length})'),
+                //   decoration: const InputDecoration(
+                //       hintText: 'Digite o ID',
+                //       hintStyle: TextStyle(fontSize: 18)),
+                // ),
                 const SizedBox(
                   height: 50,
                 ),
@@ -147,6 +170,9 @@ class _adicionarItemState extends State<adicionarItem> {
                     ),
                   ],
                 ), //ShowModalBottonSheet
+                const SizedBox(
+                  height: 40,
+                ),
 
                 Padding(
                   padding:
@@ -159,50 +185,123 @@ class _adicionarItemState extends State<adicionarItem> {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 scrollable: true,
-                                title: const Center(
-                                  child: Text(
-                                    "Item adicionado!!",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w600),
-                                  ),
+                                title: const Text(
+                                  "Item adicionado!!",
+                                  style: TextStyle(fontWeight: FontWeight.w600),
                                 ),
                                 elevation: 8,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),
-                                content: Wrap(
-                                  direction: Axis.vertical,
+                                content: Column(
+                                  // direction: Axis.vertical,
                                   // mainAxisSize: MainAxisSize.max,
-                                  // mainAxisAlignment: MainAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Text("Id: ${idController.text}"),
+                                    RichText(
+                                      text: TextSpan(children: <TextSpan>[
+                                        const TextSpan(
+                                          text: 'Id: ',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                        ),
+                                        TextSpan(
+                                            text:
+                                                idController.toStringAsFixed(0),
+                                            style: const TextStyle(
+                                                color: Colors.blue,
+                                                fontSize: 18)),
+                                      ]),
+                                    ),
+                                    // Text(
+                                    //   " ${idController.toStringAsFixed(0)}",
+                                    // ),
                                     const SizedBox(
                                       height: 30,
                                     ),
-                                    Text(
-                                        "Nome do produto:\n ${nomeController.text} "),
+                                    RichText(
+                                      text: TextSpan(children: <TextSpan>[
+                                        const TextSpan(
+                                          text: '   Nome do produto:\n\n',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                        ),
+                                        TextSpan(
+                                            text: nomeController.text,
+                                            style: const TextStyle(
+                                                color: Colors.blue,
+                                                fontSize: 16)),
+                                      ]),
+                                    ),
+                                    // Text(
+                                    //     "Nome do produto:\n ${nomeController.text} "),
                                     const SizedBox(
                                       height: 30,
                                     ),
-                                    Text("Tipo de Bandeja:\n $dropdownValue "),
+                                    RichText(
+                                      text: TextSpan(children: <TextSpan>[
+                                        const TextSpan(
+                                          text: 'Tipo de Bandeja:\n\n',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                        ),
+                                        TextSpan(
+                                            text: dropdownValue,
+                                            style: const TextStyle(
+                                                color: Colors.blue,
+                                                fontSize: 18)),
+                                      ]),
+                                    ),
+                                    // Text("Tipo de Bandeja:\n $dropdownValue "),
                                     const SizedBox(
                                       height: 30,
                                     ),
-                                    Text(
-                                        "Quantidade: ${quantidadeController.toStringAsFixed(0)}"),
+                                    RichText(
+                                      text: TextSpan(children: <TextSpan>[
+                                        const TextSpan(
+                                          text: 'Quantidade: ',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                        ),
+                                        TextSpan(
+                                            text: quantidadeController
+                                                .toStringAsFixed(0),
+                                            style: const TextStyle(
+                                              color: Colors.blue,
+                                              fontSize: 18,
+                                            )),
+                                      ]),
+                                    ),
+                                    // Text(
+                                    //     "Quantidade: ${quantidadeController.toStringAsFixed(0)}"),
                                   ],
                                 ),
                                 actions: [
                                   TextButton(
                                       onPressed: () {
-                                        // ignore: unused_label
-                                        Navigator.pop(context);
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const adicionarItem()));
                                       },
-                                      child: const Text(
-                                        "OK",
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 2, 133, 255)),
-                                      ))
+                                      child: const Text("Adicionar novo item")),
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const MyMenu()));
+                                      },
+                                      child: const Text("Voltar para Menu"))
                                 ],
                               );
                             });
@@ -211,7 +310,8 @@ class _adicionarItemState extends State<adicionarItem> {
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Colors.blue),
                         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                            const EdgeInsets.all(16)),
+                            const EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 20)),
                       ),
                       child: const Text(
                         "Adicionar",
