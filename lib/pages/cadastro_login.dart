@@ -65,7 +65,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                   style: TextStyle(fontSize: 21),
                 ),
                 TextField(
-                  controller: emailController,
+                  controller: senhaController,
                   decoration: const InputDecoration(
                     hintText: 'Digite sua senha',
                   ),
@@ -78,7 +78,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                   style: TextStyle(fontSize: 21),
                 ),
                 TextField(
-                  controller: emailController,
+                  controller: conSenhaController,
                   decoration: const InputDecoration(
                     hintText: 'Digite sua senha',
                   ),
