@@ -1,29 +1,31 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'adicionarItem.dart';
-import 'package:searchfield/searchfield.dart';
+// import 'package:searchfield/searchfield.dart';
 //https://www.youtube.com/watch?v=XNU3hX3QFeE ordenar list
 
 class Pesquisar extends StatefulWidget {
   const Pesquisar({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _PesquisarState createState() => _PesquisarState();
 }
 
 class _PesquisarState extends State<Pesquisar> {
-  // String searchValue = '';
-  // final List<String> _suggestions = [
-  //   'Afghanistan',
-  //   'Albania',
-  //   'Algeria',
-  //   'Australia',
-  //   'Brazil',
-  //   'Germany',
-  //   'Madagascar',
-  //   'Mozambique',
-  //   'Portugal',
-  //   'Zambia',
-  // ];
+  final List<ListItem> items = <ListItem>[
+    ListItem(
+      title: 'Item 1',
+      subtitle: 'Subitem 1',
+      quantidade: 0,
+    ),
+    ListItem(
+      title: 'Item 2',
+      subtitle: 'Subitem 2',
+      quantidade: 0,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -68,19 +70,22 @@ class _PesquisarState extends State<Pesquisar> {
                 });
                 // ignore: dead_code
               }),
+              const SizedBox(
+                height: 20,
+              ),
               Expanded(
                 // padding: const EdgeInsets.symmetric(vertical: 20),
                 child: ListView(
                   shrinkWrap: true, // Defina shrinkWrap como true
                   padding: const EdgeInsets.all(8),
                   children: <Widget>[
-                    Card(
+                    const Card(
                       child: ListTile(
-                        leading: FlutterLogo(size: 72.0),
                         title: Text('nome do produto'),
                         subtitle: Text("colocar aqui a data"),
                       ),
                     ),
+                    // ListView.builder(itemCount: ),
                     Card(
                       child: Container(
                         height: 50,
@@ -88,13 +93,32 @@ class _PesquisarState extends State<Pesquisar> {
                         child: const Center(child: Text('Entry B')),
                       ),
                     ),
-                    ListTile(
+                    ListView.builder(
+                      itemCount: items.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          title: Text(items[index].title),
+                          subtitle: Text(items[index].subtitle),
+                          trailing: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Icon(items[index].icon1),
+                              // Icon(items[index].icon2),
+                            ],
+                          ),
+                          onTap: () {
+                            // Ação quando o item for tocado
+                          },
+                        );
+                      },
+                    ),
+                    const ListTile(
                       title: Text("nome do prudto"),
                       subtitle: Text("22 Unidades"),
                       enabled: true,
                       trailing: Icon(Icons.abc),
                     ),
-                    Card(
+                    const Card(
                         child: ListTile(
                       title: Text('nome do produto'),
                       subtitle: Text("colocar aqui a data"),
@@ -105,42 +129,42 @@ class _PesquisarState extends State<Pesquisar> {
                       //   child: const Center(child: Text('Entry B')),
                       // ),
                     )),
-                    Card(
+                    const Card(
                         child: ListTile(
                       title: Text('nome do produto'),
                       subtitle: Text("colocar aqui a data"),
                     )),
-                    Card(
+                    const Card(
                         child: ListTile(
                       title: Text('nome do produto'),
                       subtitle: Text("colocar aqui a data"),
                     )),
-                    Card(
+                    const Card(
                         child: ListTile(
                       title: Text('nome do produto'),
                       subtitle: Text("colocar aqui a data"),
                     )),
-                    Card(
+                    const Card(
                         child: ListTile(
                       title: Text('nome do produto'),
                       subtitle: Text("colocar aqui a data"),
                     )),
-                    Card(
+                    const Card(
                         child: ListTile(
                       title: Text('nome do produto'),
                       subtitle: Text("colocar aqui a data"),
                     )),
-                    Card(
+                    const Card(
                         child: ListTile(
                       title: Text('nome do produto'),
                       subtitle: Text("colocar aqui a data"),
                     )),
-                    Card(
+                    const Card(
                         child: ListTile(
                       title: Text('nome do produto'),
                       subtitle: Text("colocar aqui a data"),
                     )),
-                    Card(
+                    const Card(
                         child: ListTile(
                       title: Text('nome do produto'),
                       subtitle: Text("colocar aqui a data"),
@@ -155,8 +179,9 @@ class _PesquisarState extends State<Pesquisar> {
     );
     // ignore: dead_code
   }
-}
+
 /* lixo e editar
+   
 
   child: Row (
     children: [
@@ -212,3 +237,20 @@ class _PesquisarState extends State<Pesquisar> {
     );
 
  */
+}
+
+class ListItem {
+  final String title;
+  final String subtitle;
+  final int quantidade;
+  // final IconData icon1;
+  // final IconData icon2;
+
+  ListItem({
+    required this.title,
+    required this.subtitle,
+    required this.quantidade,
+    // required this.icon1,
+    // required this.icon2,
+  });
+}
