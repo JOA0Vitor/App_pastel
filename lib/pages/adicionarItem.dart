@@ -19,6 +19,20 @@ class adicionarItem extends StatefulWidget {
   State<adicionarItem> createState() => _adicionarItemState();
 }
 
+class Item {
+  int id;
+  String nome;
+  int quantidade;
+  /*  bool disponivel; */
+
+  Item({
+    required this.id,
+    required this.nome,
+    required this.quantidade,
+    /* required this.disponivel, */
+  });
+}
+
 // ignore: camel_case_types
 class _adicionarItemState extends State<adicionarItem> {
   final nomeController = TextEditingController();
