@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/adicionarItem.dart';
+//lib search https://pub.dev/packages/flutter_typeahead
+//https://ctupa7.medium.com/flutter-search-using-bloc-and-firestore-32aef4b9512c
 
 class Pesquisar extends StatefulWidget {
   const Pesquisar({super.key});
@@ -16,7 +18,7 @@ final List<Item> itens = [
   ),
   Item(
     id: 2,
-    nome: 'Pastel de charque com queijo',
+    nome: 'Pastel de charque c/ queijo',
     quantidade: 51, /* disponivel: true */
   ),
   Item(
@@ -31,12 +33,12 @@ final List<Item> itens = [
   ),
   Item(
     id: 5,
-    nome: 'Pastel de frango com bacon',
+    nome: 'Pastel de frango c/ bacon',
     quantidade: 32, /* disponivel: true */
   ),
   Item(
     id: 6,
-    nome: 'Pastel de carne com queijo',
+    nome: 'Pastel de carne c/ queijo',
     quantidade: 90, /* disponivel: true */
   ),
   Item(
@@ -86,17 +88,7 @@ class _PesquisarState extends State<Pesquisar> {
               backgroundColor: const Color.fromARGB(255, 2, 133, 255),
             ),
             body: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 28),
-              // child: ListView.builder(
-              //     itemCount: itens.length,
-              //     itemExtent: 30,
-              //     itemBuilder: (context, index) {
-              //       // ignore: non_constant_identifier_names
-              //       final Item = itens[index];
-              //       return Text(
-              //           "Id ${Item.id}, nome: ${Item.nome},  quantidade ${Item.quantidade}");
-              //     }),
-
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
               child: ListView.builder(
                   itemCount: itens.length,
                   itemBuilder: (context, index) {
@@ -108,37 +100,72 @@ class _PesquisarState extends State<Pesquisar> {
                           borderRadius: BorderRadius.circular(10),
                           side: const BorderSide(color: Colors.black, width: 1),
                         ),
-                        title: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  item.nome,
-                                ),
-                                Text(
-                                  ' Id: ${item.id}',
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Quantidade: ${item.quantidade}                     ',
-                                ),
-                                StreamBuilder<Object>(
-                                    stream: null,
-                                    builder: (context, snapshot) {
-                                      return const Icon(
-                                        Icons.create_rounded,
-                                      );
-                                    }),
-                                const Icon(Icons.delete)
-                              ],
-                            ),
-                          ],
+                        title: Container(
+                          padding: const EdgeInsets.only(top: 10),
+                          height: 80, //talvez mude o tamanho
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  // ignore: sized_box_for_whitespace
+                                  Container(
+                                    width: 196,
+                                    child: Text(
+                                      item.nome,
+                                      style: const TextStyle(fontSize: 19),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                  Text(
+                                    'ID: ${item.id} ',
+                                    textAlign: TextAlign.end,
+                                    style: const TextStyle(fontSize: 11),
+                                  ),
+                                ],
+                              ),
+                              // const SizedBox(
+                              //   height: 0,
+                              // ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                      child: Text(
+                                          '${item.quantidade} Uni Disponível')),
+                                  Row(
+                                    children: [
+                                      IconButton(
+                                        // splashColor: Colors
+                                        //     .transparent, //talvez eu tire o zoom
+                                        onPressed: () {
+                                          print('Clicou no ícone de editar');
+                                        },
+                                        icon: const Icon(
+                                          Icons.create_rounded,
+                                          color: Colors.black,
+                                          size: 24,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  IconButton(
+                                    // splashColor: Colors.transparent,
+                                    onPressed: () {
+                                      print('Clicou no ícone de remover');
+                                    },
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: Colors.black,
+                                      size: 24,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
