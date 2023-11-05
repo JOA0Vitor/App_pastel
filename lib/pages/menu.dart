@@ -49,18 +49,18 @@ class _MyMenuState extends State<MyMenu> {
                       ),
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.only(top: 20),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Column(
+                          const Column(
                             children: [
                               Text(
                                 'Total de Itens',
                                 style: TextStyle(
                                   color: Colors.black87,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                 ),
                               ),
                               Padding(
@@ -75,13 +75,26 @@ class _MyMenuState extends State<MyMenu> {
                               ),
                             ],
                           ),
-                          Column(
+                          Container(
+                            //barra horizontal
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 254, 254, 254),
+                              border: Border.all(
+                                width: .8,
+                              ),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.only(top: 50),
+                            ),
+                          ),
+                          const Column(
                             children: [
                               Text(
-                                'Quantidade vendida',
+                                'Quantidades vendidas',
                                 style: TextStyle(
                                   color: Colors.black87,
-                                  fontSize: 16,
+                                  fontSize: 13,
                                 ),
                               ),
                               Padding(
@@ -100,6 +113,32 @@ class _MyMenuState extends State<MyMenu> {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  const Row(
+                    children: [
+                      Text(
+                        'Adicionados recentemente',
+                        style: TextStyle(fontSize: 21),
+                      ),
+                    ],
+                  ),
+
+                  Container(
+                    width: double.infinity,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 254, 254, 254),
+                      border: Border.all(
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.only(top: 50),
+                    ),
+                  )
 
                   // Divider(
                   //   //linha pos nome
