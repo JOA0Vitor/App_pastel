@@ -29,6 +29,7 @@ class Item {
     required this.id,
     required this.nome,
     required this.quantidade,
+
     /* required this.disponivel, */
   });
 }

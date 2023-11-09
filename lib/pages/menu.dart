@@ -113,33 +113,453 @@ class _MyMenuState extends State<MyMenu> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  const Row(
-                    children: [
-                      Text(
-                        'Adicionados recentemente',
-                        style: TextStyle(fontSize: 21),
-                      ),
-                    ],
-                  ),
 
-                  Container(
-                    width: double.infinity,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 254, 254, 254),
-                      border: Border.all(
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.only(top: 50),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  SizedBox(
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Adicionados recentemente',
+                          // textAlign: TextAlign.right, //olha depois
+                          style: TextStyle(fontSize: 22),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: ListTile(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                side: const BorderSide(color: Colors.black12)),
+                            title: Container(
+                              color: const Color.fromARGB(255, 96, 115, 92),
+                              height: 90,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    ////////////////////////////////
+                                    Container(
+                                      width: 180,
+                                      height: 70, //olhar a fonte depois
+                                      margin: const EdgeInsets.only(
+                                        left: 5,
+                                        right: 5,
+                                      ),
+                                      decoration: const ShapeDecoration(
+                                        shape: RoundedRectangleBorder(
+                                            side: BorderSide(width: .7)),
+                                      ),
+                                      child: const Stack(
+                                        children: [
+                                          Positioned(
+                                            //Data
+                                            left: 10,
+                                            top: 9,
+                                            child: SizedBox(
+                                              width: 71,
+                                              child: Text(
+                                                '11 out 2023',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 11,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 10,
+                                            top: 35,
+                                            child: SizedBox(
+                                              width: 121,
+                                              child: Text(
+                                                'Pastel de queijo',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 130,
+                                            top: 8,
+                                            child: SizedBox(
+                                              width: 50,
+                                              child: Text(
+                                                '32 Uni',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            //Data
+                                            left: 10,
+                                            top: 9,
+                                            child: SizedBox(
+                                              width: 71,
+                                              child: Text(
+                                                '11 out 2023',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 11,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 10,
+                                            top: 35,
+                                            child: SizedBox(
+                                              width: 121,
+                                              child: Text(
+                                                'Pastel de queijo',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 130,
+                                            top: 8,
+                                            child: SizedBox(
+                                              width: 50,
+                                              child: Text(
+                                                '32 Uni',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    ////////////////////////////////
+                                    Container(
+                                      width: 180,
+                                      height: 70, //olhar a fonte depois
+                                      margin: const EdgeInsets.only(
+                                        left: 5,
+                                        right: 5,
+                                      ),
+                                      decoration: const ShapeDecoration(
+                                        shape: RoundedRectangleBorder(
+                                            side: BorderSide(width: .7)),
+                                      ),
+                                      child: const Stack(
+                                        children: [
+                                          Positioned(
+                                            //Data
+                                            left: 10,
+                                            top: 9,
+                                            child: SizedBox(
+                                              width: 71,
+                                              child: Text(
+                                                '11 out 2023',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 11,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 10,
+                                            top: 35,
+                                            child: SizedBox(
+                                              width: 121,
+                                              child: Text(
+                                                'Pastel de queijo',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 130,
+                                            top: 8,
+                                            child: SizedBox(
+                                              width: 50,
+                                              child: Text(
+                                                '32 Uni',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            //Data
+                                            left: 10,
+                                            top: 9,
+                                            child: SizedBox(
+                                              width: 71,
+                                              child: Text(
+                                                '11 out 2023',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 11,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 10,
+                                            top: 35,
+                                            child: SizedBox(
+                                              width: 121,
+                                              child: Text(
+                                                'Pastel de queijo',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 130,
+                                            top: 8,
+                                            child: SizedBox(
+                                              width: 50,
+                                              child: Text(
+                                                '32 Uni',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    ////////////////////////////////
+                                    Container(
+                                      width: 180,
+                                      height: 70, //olhar a fonte depois
+                                      margin: const EdgeInsets.only(
+                                        left: 5,
+                                        right: 5,
+                                      ),
+                                      decoration: const ShapeDecoration(
+                                        shape: RoundedRectangleBorder(
+                                            side: BorderSide(width: .7)),
+                                      ),
+                                      child: const Stack(
+                                        children: [
+                                          Positioned(
+                                            //Data
+                                            left: 10,
+                                            top: 9,
+                                            child: SizedBox(
+                                              width: 71,
+                                              child: Text(
+                                                '11 out 2023',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 11,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 10,
+                                            top: 35,
+                                            child: SizedBox(
+                                              width: 121,
+                                              child: Text(
+                                                'Pastel de queijo',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 130,
+                                            top: 8,
+                                            child: SizedBox(
+                                              width: 50,
+                                              child: Text(
+                                                '32 Uni',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            //Data
+                                            left: 10,
+                                            top: 9,
+                                            child: SizedBox(
+                                              width: 71,
+                                              child: Text(
+                                                '11 out 2023',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 11,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 10,
+                                            top: 35,
+                                            child: SizedBox(
+                                              width: 121,
+                                              child: Text(
+                                                'Pastel de queijo',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 130,
+                                            top: 8,
+                                            child: SizedBox(
+                                              width: 50,
+                                              child: Text(
+                                                '32 Uni',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    ////////////////////////////////
+                                    Container(
+                                      width: 180,
+                                      height: 70, //olhar a fonte depois
+                                      margin: const EdgeInsets.only(
+                                        left: 5,
+                                        right: 5,
+                                      ),
+                                      decoration: const ShapeDecoration(
+                                        shape: RoundedRectangleBorder(
+                                            side: BorderSide(width: .7)),
+                                      ),
+                                      child: const Stack(
+                                        children: [
+                                          Positioned(
+                                            //Data
+                                            left: 10,
+                                            top: 9,
+                                            child: SizedBox(
+                                              width: 71,
+                                              child: Text(
+                                                '11 out 2023',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 11,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 10,
+                                            top: 35,
+                                            child: SizedBox(
+                                              width: 121,
+                                              child: Text(
+                                                'Pastel de queijo',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 130,
+                                            top: 8,
+                                            child: SizedBox(
+                                              width: 50,
+                                              child: Text(
+                                                '32 Uni',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            //Data
+                                            left: 10,
+                                            top: 9,
+                                            child: SizedBox(
+                                              width: 71,
+                                              child: Text(
+                                                '11 out 2023',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 11,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 10,
+                                            top: 35,
+                                            child: SizedBox(
+                                              width: 121,
+                                              child: Text(
+                                                'Pastel de queijo',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 130,
+                                            top: 8,
+                                            child: SizedBox(
+                                              width: 50,
+                                              child: Text(
+                                                '32 Uni',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    ////////////////////////////////
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   )
-
                   // Divider(
                   //   //linha pos nome
                   //   height: 20,
@@ -148,7 +568,7 @@ class _MyMenuState extends State<MyMenu> {
                   //   endIndent: 70,
                   // ),
                 ],
-              ), //     ))),
+              ),
             ),
           ],
         ),

@@ -141,6 +141,7 @@ class _PesquisarState extends State<Pesquisar> {
                                         // splashColor: Colors
                                         //     .transparent, //talvez eu tire o zoom
                                         onPressed: () {
+                                          // ignore: avoid_print
                                           print('Clicou no ícone de editar');
                                         },
                                         icon: const Icon(
@@ -154,6 +155,7 @@ class _PesquisarState extends State<Pesquisar> {
                                   IconButton(
                                     // splashColor: Colors.transparent,
                                     onPressed: () {
+                                      // ignore: avoid_print
                                       print('Clicou no ícone de remover');
                                     },
                                     icon: const Icon(
