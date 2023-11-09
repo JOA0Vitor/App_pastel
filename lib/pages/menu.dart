@@ -113,33 +113,34 @@ class _MyMenuState extends State<MyMenu> {
                       ),
                     ),
                   ),
-
                   const SizedBox(
                     height: 25,
                   ),
                   SizedBox(
                     child: Column(
                       children: [
-                        const Text(
-                          'Adicionados recentemente',
-                          // textAlign: TextAlign.right, //olha depois
-                          style: TextStyle(fontSize: 22),
+                        const SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            'Adicionados recentemente',
+                            // textAlign: TextAlign.right, //olha depois
+                            style: TextStyle(fontSize: 22),
+                          ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 15),
+                          padding: const EdgeInsets.only(top: 5),
                           child: ListTile(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                                side: const BorderSide(color: Colors.black12)),
-                            title: Container(
-                              color: const Color.fromARGB(255, 96, 115, 92),
-                              height: 90,
+                            // shape: RoundedRectangleBorder(
+                            //     borderRadius: BorderRadius.circular(5),
+                            //     side: const BorderSide(color: Colors.black12)),
+                            title: SizedBox(
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
                                   children: [
                                     ////////////////////////////////
                                     Container(
+                                      //Primeiro card
                                       width: 180,
                                       height: 70, //olhar a fonte depois
                                       margin: const EdgeInsets.only(
@@ -152,97 +153,62 @@ class _MyMenuState extends State<MyMenu> {
                                       ),
                                       child: const Stack(
                                         children: [
-                                          Positioned(
-                                            //Data
-                                            left: 10,
-                                            top: 9,
-                                            child: SizedBox(
-                                              width: 71,
-                                              child: Text(
-                                                '11 out 2023',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 11,
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 4, left: 4),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                SizedBox(
+                                                  width: 71,
+                                                  child: Text(
+                                                    '1 out 2023', //Ainda nao sei se vou colocar a data
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 11,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                                SizedBox(
+                                                  width: 50,
+                                                  child: Text(
+                                                    '32 Uni', //Variavel
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          Positioned(
-                                            left: 10,
-                                            top: 35,
-                                            child: SizedBox(
-                                              width: 121,
-                                              child: Text(
-                                                'Pastel de queijo',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                ),
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 4, bottom: 6),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Text(
+                                                        'Pastel de queijo',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                    ]),
                                               ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 130,
-                                            top: 8,
-                                            child: SizedBox(
-                                              width: 50,
-                                              child: Text(
-                                                '32 Uni',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            //Data
-                                            left: 10,
-                                            top: 9,
-                                            child: SizedBox(
-                                              width: 71,
-                                              child: Text(
-                                                '11 out 2023',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 11,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 10,
-                                            top: 35,
-                                            child: SizedBox(
-                                              width: 121,
-                                              child: Text(
-                                                'Pastel de queijo',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 130,
-                                            top: 8,
-                                            child: SizedBox(
-                                              width: 50,
-                                              child: Text(
-                                                '32 Uni',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ),
+                                            ],
                                           ),
                                         ],
                                       ),
                                     ),
-                                    ////////////////////////////////
                                     Container(
+                                      //Primeiro card
                                       width: 180,
                                       height: 70, //olhar a fonte depois
                                       margin: const EdgeInsets.only(
@@ -255,97 +221,62 @@ class _MyMenuState extends State<MyMenu> {
                                       ),
                                       child: const Stack(
                                         children: [
-                                          Positioned(
-                                            //Data
-                                            left: 10,
-                                            top: 9,
-                                            child: SizedBox(
-                                              width: 71,
-                                              child: Text(
-                                                '11 out 2023',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 11,
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 4, left: 4),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                SizedBox(
+                                                  width: 71,
+                                                  child: Text(
+                                                    '2 out 2023', //Ainda nao sei se vou colocar a data
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 11,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                                SizedBox(
+                                                  width: 50,
+                                                  child: Text(
+                                                    '32 Uni', //Variavel
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          Positioned(
-                                            left: 10,
-                                            top: 35,
-                                            child: SizedBox(
-                                              width: 121,
-                                              child: Text(
-                                                'Pastel de queijo',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                ),
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 4, bottom: 6),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Text(
+                                                        'Pastel de frango',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                    ]),
                                               ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 130,
-                                            top: 8,
-                                            child: SizedBox(
-                                              width: 50,
-                                              child: Text(
-                                                '32 Uni',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            //Data
-                                            left: 10,
-                                            top: 9,
-                                            child: SizedBox(
-                                              width: 71,
-                                              child: Text(
-                                                '11 out 2023',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 11,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 10,
-                                            top: 35,
-                                            child: SizedBox(
-                                              width: 121,
-                                              child: Text(
-                                                'Pastel de queijo',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 130,
-                                            top: 8,
-                                            child: SizedBox(
-                                              width: 50,
-                                              child: Text(
-                                                '32 Uni',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ),
+                                            ],
                                           ),
                                         ],
                                       ),
                                     ),
-                                    ////////////////////////////////
                                     Container(
+                                      //Primeiro card
                                       width: 180,
                                       height: 70, //olhar a fonte depois
                                       margin: const EdgeInsets.only(
@@ -358,97 +289,62 @@ class _MyMenuState extends State<MyMenu> {
                                       ),
                                       child: const Stack(
                                         children: [
-                                          Positioned(
-                                            //Data
-                                            left: 10,
-                                            top: 9,
-                                            child: SizedBox(
-                                              width: 71,
-                                              child: Text(
-                                                '11 out 2023',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 11,
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 4, left: 4),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                SizedBox(
+                                                  width: 71,
+                                                  child: Text(
+                                                    '3 out 2023', //Ainda nao sei se vou colocar a data
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 11,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                                SizedBox(
+                                                  width: 50,
+                                                  child: Text(
+                                                    '32 Uni', //Variavel
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          Positioned(
-                                            left: 10,
-                                            top: 35,
-                                            child: SizedBox(
-                                              width: 121,
-                                              child: Text(
-                                                'Pastel de queijo',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                ),
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 4, bottom: 6),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Text(
+                                                        'Pastel de bacalhau',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                    ]),
                                               ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 130,
-                                            top: 8,
-                                            child: SizedBox(
-                                              width: 50,
-                                              child: Text(
-                                                '32 Uni',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            //Data
-                                            left: 10,
-                                            top: 9,
-                                            child: SizedBox(
-                                              width: 71,
-                                              child: Text(
-                                                '11 out 2023',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 11,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 10,
-                                            top: 35,
-                                            child: SizedBox(
-                                              width: 121,
-                                              child: Text(
-                                                'Pastel de queijo',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 130,
-                                            top: 8,
-                                            child: SizedBox(
-                                              width: 50,
-                                              child: Text(
-                                                '32 Uni',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ),
+                                            ],
                                           ),
                                         ],
                                       ),
                                     ),
-                                    ////////////////////////////////
                                     Container(
+                                      //Primeiro card
                                       width: 180,
                                       height: 70, //olhar a fonte depois
                                       margin: const EdgeInsets.only(
@@ -461,96 +357,60 @@ class _MyMenuState extends State<MyMenu> {
                                       ),
                                       child: const Stack(
                                         children: [
-                                          Positioned(
-                                            //Data
-                                            left: 10,
-                                            top: 9,
-                                            child: SizedBox(
-                                              width: 71,
-                                              child: Text(
-                                                '11 out 2023',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 11,
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 4, left: 4),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                SizedBox(
+                                                  width: 71,
+                                                  child: Text(
+                                                    '4 out 2023', //Ainda nao sei se vou colocar a data
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 11,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                                SizedBox(
+                                                  width: 50,
+                                                  child: Text(
+                                                    '32 Uni', //Variavel
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          Positioned(
-                                            left: 10,
-                                            top: 35,
-                                            child: SizedBox(
-                                              width: 121,
-                                              child: Text(
-                                                'Pastel de queijo',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                ),
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 4, bottom: 6),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Text(
+                                                        'Pastel de charque',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                    ]),
                                               ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 130,
-                                            top: 8,
-                                            child: SizedBox(
-                                              width: 50,
-                                              child: Text(
-                                                '32 Uni',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            //Data
-                                            left: 10,
-                                            top: 9,
-                                            child: SizedBox(
-                                              width: 71,
-                                              child: Text(
-                                                '11 out 2023',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 11,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 10,
-                                            top: 35,
-                                            child: SizedBox(
-                                              width: 121,
-                                              child: Text(
-                                                'Pastel de queijo',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 130,
-                                            top: 8,
-                                            child: SizedBox(
-                                              width: 50,
-                                              child: Text(
-                                                '32 Uni',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ),
+                                            ],
                                           ),
                                         ],
                                       ),
                                     ),
-                                    ////////////////////////////////
                                   ],
                                 ),
                               ),
@@ -559,14 +419,185 @@ class _MyMenuState extends State<MyMenu> {
                         )
                       ],
                     ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(top: 20),
+                    child: const Text(
+                      'Histórico de saida',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
+                  const Divider(
+                    //linha pos nome
+                    height: 20,
+                    color: Colors.grey,
+                    thickness: 1,
+                    endIndent: 70,
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: 65,
+                          margin: const EdgeInsets.symmetric(vertical: 5),
+                          decoration: const ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(width: 1)),
+                          ),
+                          child: const Stack(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'Pastel de queijo',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 19,
+                                      ),
+                                    ),
+                                    Text(
+                                      '25 Uni Disponível',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 19, bottom: 5),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      'Terça,  1 de outubro',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 65,
+                          margin: const EdgeInsets.symmetric(vertical: 5),
+                          decoration: const ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(width: 1)),
+                          ),
+                          child: const Stack(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'Pastel de queijo',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 19,
+                                      ),
+                                    ),
+                                    Text(
+                                      '25 Uni Disponível',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 19, bottom: 5),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      'Terça,  2 de outubro',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 65,
+                          margin: const EdgeInsets.symmetric(vertical: 5),
+                          decoration: const ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(width: 1)),
+                          ),
+                          child: const Stack(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'Pastel de queijo',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 19,
+                                      ),
+                                    ),
+                                    Text(
+                                      '25 Uni Disponível',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 19, bottom: 5),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      'Terça,  3 de outubro',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   )
-                  // Divider(
-                  //   //linha pos nome
-                  //   height: 20,
-                  //   color: Colors.grey,
-                  //   thickness: 1,
-                  //   endIndent: 70,
-                  // ),
                 ],
               ),
             ),
