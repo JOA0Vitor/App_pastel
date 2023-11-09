@@ -174,33 +174,6 @@ class _PesquisarState extends State<Pesquisar> {
                     // ignore: dead_code, unused_label
                   }
 
-                  // child: ListView(
-                  //   scrollDirection: Axis.vertical,
-                  //   shrinkWrap: true,
-                  //   padding: const EdgeInsets.symmetric(vertical: 10),
-                  //   children: [
-                  //     ListTile(
-                  //       title: const Text("nome do produto"),
-                  //       subtitle: const Text("22 Quantidade"),
-                  //       trailing: SizedBox(
-                  //         width: 100,
-                  //         height: 200,
-                  //         child: Row(
-                  //           children: [
-                  //             IconButton(
-                  //               icon: const Icon(Icons.edit),
-                  //               onPressed: () {},
-                  //             ),
-                  //             IconButton(
-                  //               icon: const Icon(Icons.delete),
-                  //               onPressed: () {},
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ),
-
-                  //   ],
                   // )
                   ),
             )));

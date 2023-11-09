@@ -138,7 +138,6 @@ class _MyMenuState extends State<MyMenu> {
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
                                   children: [
-                                    ////////////////////////////////
                                     Container(
                                       //Primeiro card
                                       width: 180,
@@ -423,6 +422,7 @@ class _MyMenuState extends State<MyMenu> {
                   Container(
                     width: double.infinity,
                     margin: const EdgeInsets.only(top: 20),
+                    // color: Colors.black12,
                     child: const Text(
                       'Histórico de saida',
                       style: TextStyle(
@@ -438,166 +438,525 @@ class _MyMenuState extends State<MyMenu> {
                     thickness: 1,
                     endIndent: 70,
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          height: 65,
-                          margin: const EdgeInsets.symmetric(vertical: 5),
-                          decoration: const ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(width: 1)),
-                          ),
-                          child: const Stack(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 8),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      'Pastel de queijo',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 19,
-                                      ),
-                                    ),
-                                    Text(
-                                      '25 Uni Disponível',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                  Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: SizedBox(
+                      height: 250, //255
+                      child: ListView(
+                        children: [
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              width: double.infinity,
+                              height: 65,
+                              margin: const EdgeInsets.symmetric(vertical: 5),
+                              decoration: const ShapeDecoration(
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(width: 1)),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 19, bottom: 5),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      'Terça,  1 de outubro',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 11,
-                                      ),
+                              child: const Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 8),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          'Pastel de queijo',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 19,
+                                          ),
+                                        ),
+                                        Text(
+                                          '25 Uni Disponível',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 19, bottom: 5),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Terça,  1 de outubro',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 65,
-                          margin: const EdgeInsets.symmetric(vertical: 5),
-                          decoration: const ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(width: 1)),
-                          ),
-                          child: const Stack(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 8),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      'Pastel de queijo',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 19,
-                                      ),
-                                    ),
-                                    Text(
-                                      '25 Uni Disponível',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              width: double.infinity,
+                              height: 65,
+                              margin: const EdgeInsets.symmetric(vertical: 5),
+                              decoration: const ShapeDecoration(
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(width: 1)),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 19, bottom: 5),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      'Terça,  2 de outubro',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 11,
-                                      ),
+                              child: const Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 8),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          'Pastel de queijo',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 19,
+                                          ),
+                                        ),
+                                        Text(
+                                          '25 Uni Disponível',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 19, bottom: 5),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Terça,  1 de outubro',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 65,
-                          margin: const EdgeInsets.symmetric(vertical: 5),
-                          decoration: const ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(width: 1)),
-                          ),
-                          child: const Stack(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 8),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      'Pastel de queijo',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 19,
-                                      ),
-                                    ),
-                                    Text(
-                                      '25 Uni Disponível',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              width: double.infinity,
+                              height: 65,
+                              margin: const EdgeInsets.symmetric(vertical: 5),
+                              decoration: const ShapeDecoration(
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(width: 1)),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 19, bottom: 5),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      'Terça,  3 de outubro',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 11,
-                                      ),
+                              child: const Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 8),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          'Pastel de queijo',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 19,
+                                          ),
+                                        ),
+                                        Text(
+                                          '25 Uni Disponível',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 19, bottom: 5),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Terça,  1 de outubro',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ],
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              width: double.infinity,
+                              height: 65,
+                              margin: const EdgeInsets.symmetric(vertical: 5),
+                              decoration: const ShapeDecoration(
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(width: 1)),
+                              ),
+                              child: const Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 8),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          'Pastel de queijo',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 19,
+                                          ),
+                                        ),
+                                        Text(
+                                          '25 Uni Disponível',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 19, bottom: 5),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Terça,  1 de outubro',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              width: double.infinity,
+                              height: 65,
+                              margin: const EdgeInsets.symmetric(vertical: 5),
+                              decoration: const ShapeDecoration(
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(width: 1)),
+                              ),
+                              child: const Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 8),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          'Pastel de queijo',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 19,
+                                          ),
+                                        ),
+                                        Text(
+                                          '25 Uni Disponível',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 19, bottom: 5),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Terça,  1 de outubro',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  )
+                  ),
+
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: ListView(
+                  //     children: [
+                  //       Column(
+                  //         children: [
+                  //           Container(
+                  //             width: double.infinity,
+                  //             height: 65,
+                  //             margin: const EdgeInsets.symmetric(vertical: 5),
+                  //             decoration: const ShapeDecoration(
+                  //               shape: RoundedRectangleBorder(
+                  //                   side: BorderSide(width: 1)),
+                  //             ),
+                  //             child: const Stack(
+                  //               children: [
+                  //                 Padding(
+                  //                   padding: EdgeInsets.only(top: 8),
+                  //                   child: Row(
+                  //                     mainAxisAlignment:
+                  //                         MainAxisAlignment.spaceAround,
+                  //                     children: [
+                  //                       Text(
+                  //                         'Pastel de queijo',
+                  //                         style: TextStyle(
+                  //                           color: Colors.black,
+                  //                           fontSize: 19,
+                  //                         ),
+                  //                       ),
+                  //                       Text(
+                  //                         '25 Uni Disponível',
+                  //                         style: TextStyle(
+                  //                           color: Colors.black,
+                  //                           fontSize: 11,
+                  //                         ),
+                  //                       ),
+                  //                     ],
+                  //                   ),
+                  //                 ),
+                  //                 Padding(
+                  //                   padding:
+                  //                       EdgeInsets.only(left: 19, bottom: 5),
+                  //                   child: Column(
+                  //                     mainAxisAlignment: MainAxisAlignment.end,
+                  //                     children: [
+                  //                       Text(
+                  //                         'Terça,  1 de outubro',
+                  //                         style: TextStyle(
+                  //                           color: Colors.black,
+                  //                           fontSize: 11,
+                  //                         ),
+                  //                       ),
+                  //                     ],
+                  //                   ),
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+
+                  // SingleChildScrollView(
+                  //   scrollDirection: Axis.vertical,
+                  //   child: Column(
+                  //     children: [
+                  //       GestureDetector(
+                  //         onTap: () {},
+                  //         child: Container(
+                  //           width: double.infinity,
+                  //           height: 65,
+                  //           margin: const EdgeInsets.symmetric(vertical: 5),
+                  //           decoration: const ShapeDecoration(
+                  //             shape: RoundedRectangleBorder(
+                  //                 side: BorderSide(width: 1)),
+                  //           ),
+                  //           child: const Stack(
+                  //             children: [
+                  //               Padding(
+                  //                 padding: EdgeInsets.only(top: 8),
+                  //                 child: Row(
+                  //                   mainAxisAlignment:
+                  //                       MainAxisAlignment.spaceAround,
+                  //                   children: [
+                  //                     Text(
+                  //                       'Pastel de queijo',
+                  //                       style: TextStyle(
+                  //                         color: Colors.black,
+                  //                         fontSize: 19,
+                  //                       ),
+                  //                     ),
+                  //                     Text(
+                  //                       '25 Uni Disponível',
+                  //                       style: TextStyle(
+                  //                         color: Colors.black,
+                  //                         fontSize: 11,
+                  //                       ),
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               ),
+                  //               Padding(
+                  //                 padding: EdgeInsets.only(left: 19, bottom: 5),
+                  //                 child: Column(
+                  //                   mainAxisAlignment: MainAxisAlignment.end,
+                  //                   children: [
+                  //                     Text(
+                  //                       'Terça,  1 de outubro',
+                  //                       style: TextStyle(
+                  //                         color: Colors.black,
+                  //                         fontSize: 11,
+                  //                       ),
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       GestureDetector(
+                  //         onTap: () {},
+                  //         child: Container(
+                  //           width: double.infinity,
+                  //           height: 65,
+                  //           margin: const EdgeInsets.symmetric(vertical: 5),
+                  //           decoration: const ShapeDecoration(
+                  //             shape: RoundedRectangleBorder(
+                  //                 side: BorderSide(width: 1)),
+                  //           ),
+                  //           child: const Stack(
+                  //             children: [
+                  //               Padding(
+                  //                 padding: EdgeInsets.only(top: 8),
+                  //                 child: Row(
+                  //                   mainAxisAlignment:
+                  //                       MainAxisAlignment.spaceAround,
+                  //                   children: [
+                  //                     Text(
+                  //                       'Pastel de queijo',
+                  //                       style: TextStyle(
+                  //                         color: Colors.black,
+                  //                         fontSize: 19,
+                  //                       ),
+                  //                     ),
+                  //                     Text(
+                  //                       '25 Uni Disponível',
+                  //                       style: TextStyle(
+                  //                         color: Colors.black,
+                  //                         fontSize: 11,
+                  //                       ),
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               ),
+                  //               Padding(
+                  //                 padding: EdgeInsets.only(left: 19, bottom: 5),
+                  //                 child: Column(
+                  //                   mainAxisAlignment: MainAxisAlignment.end,
+                  //                   children: [
+                  //                     Text(
+                  //                       'Terça,  1 de outubro',
+                  //                       style: TextStyle(
+                  //                         color: Colors.black,
+                  //                         fontSize: 11,
+                  //                       ),
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       GestureDetector(
+                  //         onTap: () {},
+                  //         child: Container(
+                  //           width: double.infinity,
+                  //           height: 65,
+                  //           margin: const EdgeInsets.symmetric(vertical: 5),
+                  //           decoration: const ShapeDecoration(
+                  //             shape: RoundedRectangleBorder(
+                  //                 side: BorderSide(width: 1)),
+                  //           ),
+                  //           child: const Stack(
+                  //             children: [
+                  //               Padding(
+                  //                 padding: EdgeInsets.only(top: 8),
+                  //                 child: Row(
+                  //                   mainAxisAlignment:
+                  //                       MainAxisAlignment.spaceAround,
+                  //                   children: [
+                  //                     Text(
+                  //                       'Pastel de queijo',
+                  //                       style: TextStyle(
+                  //                         color: Colors.black,
+                  //                         fontSize: 19,
+                  //                       ),
+                  //                     ),
+                  //                     Text(
+                  //                       '25 Uni Disponível',
+                  //                       style: TextStyle(
+                  //                         color: Colors.black,
+                  //                         fontSize: 11,
+                  //                       ),
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               ),
+                  //               Padding(
+                  //                 padding: EdgeInsets.only(left: 19, bottom: 5),
+                  //                 child: Column(
+                  //                   mainAxisAlignment: MainAxisAlignment.end,
+                  //                   children: [
+                  //                     Text(
+                  //                       'Terça,  1 de outubro',
+                  //                       style: TextStyle(
+                  //                         color: Colors.black,
+                  //                         fontSize: 11,
+                  //                       ),
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // )
                 ],
               ),
             ),
