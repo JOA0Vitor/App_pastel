@@ -14,6 +14,8 @@ class _cadastro_loginState extends State<cadastro_login> {
   TextEditingController emailController = TextEditingController(text: "");
   TextEditingController senhaController = TextEditingController(text: "");
   TextEditingController conSenhaController = TextEditingController(text: "");
+  bool isObscureText = true;
+  bool isObscureTextsenha = true;
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +48,13 @@ class _cadastro_loginState extends State<cadastro_login> {
                 ),
                 TextFormField(
                   controller: nomeController,
+                  style: const TextStyle(
+                      color: Colors.black87,
+                      fontSize: 19,
+                      decorationColor: Colors.white70),
                   decoration: const InputDecoration(
                     hintText: 'Digite seu nome',
-                    contentPadding: EdgeInsets.only(top: 23),
+                    contentPadding: EdgeInsets.only(top: 22, left: 5),
                   ),
                 ),
                 const SizedBox(
@@ -60,9 +66,13 @@ class _cadastro_loginState extends State<cadastro_login> {
                 ),
                 TextFormField(
                   controller: emailController,
+                  style: const TextStyle(
+                      color: Colors.black87,
+                      fontSize: 19,
+                      decorationColor: Colors.white70),
                   decoration: const InputDecoration(
                     hintText: 'Digite seu email',
-                    contentPadding: EdgeInsets.only(top: 23),
+                    contentPadding: EdgeInsets.only(top: 22, left: 5),
                   ),
                 ),
                 const SizedBox(
@@ -74,10 +84,27 @@ class _cadastro_loginState extends State<cadastro_login> {
                 ),
                 TextFormField(
                   controller: senhaController,
-                  decoration: const InputDecoration(
-                    hintText: 'Digite sua senha',
-                    contentPadding: EdgeInsets.only(top: 23),
-                  ),
+                  obscureText: isObscureText,
+                  style: const TextStyle(
+                      color: Colors.black87,
+                      fontSize: 19,
+                      decorationColor: Colors.white70),
+                  decoration: InputDecoration(
+                      hintText: 'Digite sua senha',
+                      contentPadding: const EdgeInsets.only(top: 22, left: 5),
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isObscureText = !isObscureText;
+                          });
+                        },
+                        child: Icon(
+                          isObscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.black87,
+                        ),
+                      )),
                 ),
                 const SizedBox(
                   height: 15,
@@ -88,10 +115,27 @@ class _cadastro_loginState extends State<cadastro_login> {
                 ),
                 TextFormField(
                   controller: conSenhaController,
-                  decoration: const InputDecoration(
-                    hintText: 'Digite sua senha',
-                    contentPadding: EdgeInsets.only(top: 23),
-                  ),
+                  obscureText: isObscureTextsenha,
+                  style: const TextStyle(
+                      color: Colors.black87,
+                      fontSize: 19,
+                      decorationColor: Colors.white70),
+                  decoration: InputDecoration(
+                      hintText: 'Digite sua senha',
+                      contentPadding: const EdgeInsets.only(top: 22, left: 5),
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isObscureTextsenha = !isObscureTextsenha;
+                          });
+                        },
+                        child: Icon(
+                          isObscureTextsenha
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.black87,
+                        ),
+                      )),
                 ),
                 const SizedBox(
                   height: 30,
@@ -106,25 +150,26 @@ class _cadastro_loginState extends State<cadastro_login> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                   child: Container(
-                    alignment: Alignment.center,
                     width: double.infinity,
-                    child: TextButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                            backgroundColor: MaterialStateProperty.all(
-                                const Color.fromARGB(179, 0, 0, 0))),
-                        child: const Text(
-                          'Cadastrar',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 21,
-                          ),
-                        )),
+                    height: 80,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        //Fazer a funçao caso o email não seja entrado no bd
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                                content: Text(
+                          "Conta criada com sucesso! Faça login agora",
+                          style: TextStyle(),
+                        )));
+                        return;
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue),
+                      child: const Text(
+                        'Criar uma conta',
+                        style: TextStyle(fontSize: 21, color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
               ],
