@@ -1052,16 +1052,7 @@ class _MyMenuState extends State<MyMenu> {
                 InkWell(
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 10),
-                    child:
-                        // TextButton(
-                        //   onPressed: () {
-                        //      Navigator.pushReplacement(
-                        //             context,
-                        //             MaterialPageRoute(
-                        //                 builder: (context) => const MyMenu()));
-                        //   },
-                        // )
-                        const Text(
+                    child: const Text(
                       "Sair",
                       style: TextStyle(fontSize: 21),
                     ),

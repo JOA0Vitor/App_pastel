@@ -44,7 +44,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                 ),
                 const Text(
                   "Nome:",
-                  style: TextStyle(fontSize: 21),
+                  style: TextStyle(fontSize: 19),
                 ),
                 TextFormField(
                   controller: nomeController,
@@ -62,7 +62,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                 ),
                 const Text(
                   "E-mail:",
-                  style: TextStyle(fontSize: 21),
+                  style: TextStyle(fontSize: 19),
                 ),
                 TextFormField(
                   controller: emailController,
@@ -80,7 +80,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                 ),
                 const Text(
                   "Senha:",
-                  style: TextStyle(fontSize: 21),
+                  style: TextStyle(fontSize: 19),
                 ),
                 TextFormField(
                   controller: senhaController,
@@ -111,7 +111,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                 ),
                 const Text(
                   "Confirme a Senha:",
-                  style: TextStyle(fontSize: 21),
+                  style: TextStyle(fontSize: 19),
                 ),
                 TextFormField(
                   controller: conSenhaController,
@@ -140,16 +140,10 @@ class _cadastro_loginState extends State<cadastro_login> {
                 const SizedBox(
                   height: 30,
                 ),
-                // TextButton(
-                //     onPressed: () {
-                //       debugPrint(nomeController.text);
-                //       debugPrint(emailController.text);
-                //     },
-                //     child: const Text("Salvar")),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     height: 80,
                     child: ElevatedButton(
