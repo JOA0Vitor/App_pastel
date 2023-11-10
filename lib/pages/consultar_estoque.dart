@@ -4,11 +4,11 @@ import 'package:trilhaapp/pages/adicionarItem.dart';
 //lib search https://pub.dev/packages/flutter_typeahead
 //https://ctupa7.medium.com/flutter-search-using-bloc-and-firestore-32aef4b9512c
 
-class Pesquisar extends StatefulWidget {
-  const Pesquisar({super.key});
+class consultarEstoque extends StatefulWidget {
+  const consultarEstoque({super.key});
 
   @override
-  State<Pesquisar> createState() => _PesquisarState();
+  State<consultarEstoque> createState() => _consultarEstoqueState();
 }
 
 final List<Item> itens = [
@@ -79,13 +79,13 @@ final List<Item> itens = [
   ),
 ];
 
-class _PesquisarState extends State<Pesquisar> {
+class _consultarEstoqueState extends State<consultarEstoque> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
-              title: const Text("Pesquisar"),
+              title: const Text("consultar Estoque"),
               backgroundColor: const Color.fromARGB(255, 2, 133, 255),
             ),
             body: Padding(

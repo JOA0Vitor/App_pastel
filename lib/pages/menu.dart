@@ -972,7 +972,7 @@ class _MyMenuState extends State<MyMenu> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: const Text(
-                      "Cadastro de itens",
+                      "Adicionar itens",
                       style: TextStyle(fontSize: 21),
                     ),
                   ),
@@ -1012,25 +1012,39 @@ class _MyMenuState extends State<MyMenu> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: const Text(
-                      "Editar",
+                      "Consultar estoque",
                       style: TextStyle(fontSize: 21),
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context); //remover a aba
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Pesquisar()),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: const Text(
-                      "Gerar Relatórios",
-                      style: TextStyle(fontSize: 21),
-                    ),
-                  ),
-                  onTap: () {},
-                ),
+                // InkWell(
+                //   child: Container(
+                //     padding: const EdgeInsets.symmetric(vertical: 10),
+                //     child: const Text(
+                //       "Editar",
+                //       style: TextStyle(fontSize: 21),
+                //     ),
+                //   ),
+                //   onTap: () {
+                //     Navigator.pop(context); //remover a aba
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) => const Pesquisar()),
+                //     );
+                //   },
+                // ),
                 const SizedBox(
                   height: 300,
                 ),
