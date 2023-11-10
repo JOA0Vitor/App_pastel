@@ -20,53 +20,53 @@ class _esqueci_senhaState extends State<esqueci_senha> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
+          padding: const EdgeInsets.only(top: 40, left: 30, right: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                "Insira o seu email, e enviaremos um link para você voltar a acessar a sua conta ",
+                "Insira o seu email cadastrado: ",
                 style: TextStyle(fontSize: 21),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(
                 height: 20,
               ),
-              const TextField(
-                decoration: InputDecoration(hintText: "Digite seu email"),
+              TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                style: const TextStyle(
+                    color: Colors.black87,
+                    fontSize: 18,
+                    decorationColor: Colors.white70),
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.only(top: 23),
+                  hintText: "Digite seu email",
+                ),
               ),
               Padding(
+                //gerar uma mensagem que o email foi enviado
                 padding: const EdgeInsets.symmetric(
                   vertical: 20,
                 ),
-                child: SizedBox(
-                  width: 260,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  width: 220,
+                  height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      //     content: Text(
-                      //   "Email Invalidado",
-                      //   style: TextStyle(),
-                      // )));
+                      //Fazer a funçao caso o email não seja entrado no bd
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text(
+                        "Desculpe, não encontramos uma conta associada ao endereço de e-mail fornecido. Por favor, verifique o endereço de e-mail e tente novamente.",
+                        style: TextStyle(),
+                      )));
+                      return;
                     },
-                    style: const ButtonStyle(),
-                    child: SizedBox(
-                      child: TextButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.blue),
-                          padding:
-                              MaterialStateProperty.all<EdgeInsetsGeometry>(
-                                  const EdgeInsets.all(8)),
-                        ),
-                        child: const Text(
-                          "Recuperar senha ",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                    child: const Text(
+                      'Recuperar senha',
+                      style: TextStyle(fontSize: 19, color: Colors.white),
                     ),
                   ),
                 ),

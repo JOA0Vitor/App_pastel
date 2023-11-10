@@ -29,58 +29,68 @@ class _cadastro_loginState extends State<cadastro_login> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const Text(
-                    "Preencha o espaço abaixo para começar a usar o app"),
                 const SizedBox(
-                  height: 50,
+                  width: double.infinity,
+                  child: Text(
+                    "Preencha o espaço abaixo",
+                    style: TextStyle(fontSize: 24),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
                 ),
                 const Text(
                   "Nome:",
                   style: TextStyle(fontSize: 21),
                 ),
-                TextField(
+                TextFormField(
                   controller: nomeController,
                   decoration: const InputDecoration(
                     hintText: 'Digite seu nome',
+                    contentPadding: EdgeInsets.only(top: 23),
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 const Text(
                   "E-mail:",
                   style: TextStyle(fontSize: 21),
                 ),
-                TextField(
+                TextFormField(
                   controller: emailController,
                   decoration: const InputDecoration(
                     hintText: 'Digite seu email',
+                    contentPadding: EdgeInsets.only(top: 23),
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 const Text(
                   "Senha:",
                   style: TextStyle(fontSize: 21),
                 ),
-                TextField(
+                TextFormField(
                   controller: senhaController,
                   decoration: const InputDecoration(
                     hintText: 'Digite sua senha',
+                    contentPadding: EdgeInsets.only(top: 23),
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 const Text(
                   "Confirme a Senha:",
                   style: TextStyle(fontSize: 21),
                 ),
-                TextField(
+                TextFormField(
                   controller: conSenhaController,
                   decoration: const InputDecoration(
                     hintText: 'Digite sua senha',
+                    contentPadding: EdgeInsets.only(top: 23),
                   ),
                 ),
                 const SizedBox(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
-import 'package:trilhaapp/pages/adicionarItem.dart';
-//lib search https://pub.dev/packages/flutter_typeahead
-//https://ctupa7.medium.com/flutter-search-using-bloc-and-firestore-32aef4b9512c
 
+import 'pesquisar.dart';
+
+// ignore: camel_case_types
 class consultarEstoque extends StatefulWidget {
   const consultarEstoque({super.key});
 
@@ -11,81 +11,14 @@ class consultarEstoque extends StatefulWidget {
   State<consultarEstoque> createState() => _consultarEstoqueState();
 }
 
-final List<Item> itens = [
-  Item(
-    id: 1,
-    nome: 'Pastel de queijo',
-    quantidade: 17, /* disponivel: true */
-  ),
-  Item(
-    id: 2,
-    nome: 'Pastel de charque c/ queijo',
-    quantidade: 51, /* disponivel: true */
-  ),
-  Item(
-    id: 3,
-    nome: 'Pastel de carne',
-    quantidade: 27, /* disponivel: true */
-  ),
-  Item(
-    id: 4,
-    nome: 'Pastel de camarão c/ catupiry',
-    quantidade: 76, /* disponivel: true */
-  ),
-  Item(
-    id: 5,
-    nome: 'Pastel de frango c/ bacon',
-    quantidade: 32, /* disponivel: true */
-  ),
-  Item(
-    id: 6,
-    nome: 'Pastel de carne c/ queijo',
-    quantidade: 90, /* disponivel: true */
-  ),
-  Item(
-    id: 7,
-    nome: 'Pastel de queijo c/ calabresa',
-    quantidade: 67, /* disponivel: true */
-  ),
-  Item(
-    id: 8,
-    nome: 'Pastel de charque',
-    quantidade: 91, /* disponivel: true */
-  ),
-  Item(
-    id: 9,
-    nome: 'Pastel de franquijo',
-    quantidade: 26, /* disponivel: true */
-  ),
-  Item(
-    id: 10,
-    nome: 'Pastel de bacalhau',
-    quantidade: 65, /* disponivel: true */
-  ),
-  Item(
-    id: 11,
-    nome: 'Pastel de frango',
-    quantidade: 68, /* disponivel: true */
-  ),
-  Item(
-    id: 12,
-    nome: 'Pastel de 3 queijos',
-    quantidade: 49, /* disponivel: true */
-  ),
-  Item(
-    id: 13,
-    nome: 'Coxinha',
-    quantidade: 54, /* disponivel: true */
-  ),
-];
-
+// ignore: camel_case_types
 class _consultarEstoqueState extends State<consultarEstoque> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
-              title: const Text("consultar Estoque"),
+              title: const Text('Consultar estoque'),
               backgroundColor: const Color.fromARGB(255, 2, 133, 255),
             ),
             body: Padding(
