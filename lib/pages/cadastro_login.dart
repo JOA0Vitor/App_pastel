@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:trilhaapp/pages/login_page.dart';
+import 'package:trilhaapp/services/flutter_fire_auth.dart';
 
 // ignore: camel_case_types
 class cadastro_login extends StatefulWidget {
@@ -10,15 +13,43 @@ class cadastro_login extends StatefulWidget {
 
 // ignore: camel_case_types
 class _cadastro_loginState extends State<cadastro_login> {
-  var nomeController = TextEditingController(text: "");
-  TextEditingController emailController = TextEditingController(text: "");
-  TextEditingController senhaController = TextEditingController(text: "");
-  TextEditingController conSenhaController = TextEditingController(text: "");
+  var _nomeController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final con_passwordController = TextEditingController();
   bool isObscureText = true;
   bool isObscureTextsenha = true;
 
   @override
+  void dispose() {
+    _nomeController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    void _enviar() async {
+      final name = _nomeController.text;
+      final email = _emailController.text;
+      final password = _passwordController.text;
+
+      bool _isloading;
+      setState(() => _isloading = true);
+
+      final user = await FlutterFireAute(context)
+          .createUserWithEmailAndPassword(name, email, password);
+
+      setState(() => _isloading = false);
+
+      if (user != null) {
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const LoginPage()));
+      }
+    }
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -47,7 +78,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                   style: TextStyle(fontSize: 19),
                 ),
                 TextFormField(
-                  controller: nomeController,
+                  controller: _nomeController,
                   style: const TextStyle(
                       color: Colors.black87,
                       fontSize: 19,
@@ -65,7 +96,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                   style: TextStyle(fontSize: 19),
                 ),
                 TextFormField(
-                  controller: emailController,
+                  controller: _emailController,
                   style: const TextStyle(
                       color: Colors.black87,
                       fontSize: 19,
@@ -83,7 +114,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                   style: TextStyle(fontSize: 19),
                 ),
                 TextFormField(
-                  controller: senhaController,
+                  controller: _passwordController,
                   obscureText: isObscureText,
                   style: const TextStyle(
                       color: Colors.black87,
@@ -114,7 +145,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                   style: TextStyle(fontSize: 19),
                 ),
                 TextFormField(
-                  controller: conSenhaController,
+                  controller: con_passwordController,
                   obscureText: isObscureTextsenha,
                   style: const TextStyle(
                       color: Colors.black87,

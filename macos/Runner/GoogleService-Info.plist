@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBg0jcJ7mEy0RmieFIaZXUthWrjEH_6__Q</string>
+	<key>GCM_SENDER_ID</key>
+	<string>768386623591</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.joao.trilhaflutter.trilhaapp.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>app-pastel-c2439</string>
+	<key>STORAGE_BUCKET</key>
+	<string>app-pastel-c2439.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:768386623591:ios:fb7ffefc27277adee08cc2</string>
+</dict>
+</plist>

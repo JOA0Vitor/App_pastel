@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/Cadastro_login.dart';
 import 'package:trilhaapp/pages/esqueci_senha.dart';
+// ignore: unused_import
+import 'package:firebase_auth/firebase_auth.dart';
+// Import the generated file https://firebase.flutter.dev/docs/cli/
+
 import 'package:trilhaapp/pages/menu.dart'; //padrao ios
 
 class LoginPage extends StatefulWidget {
@@ -11,15 +15,27 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController =
-      TextEditingController(text: ""); //text: "email@email.com"
-  TextEditingController senhaController =
-      TextEditingController(text: ""); //text: "teste123"
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
+  //email: pastel@gmail.com
+  //senha: teste123
   bool isObscureText = true;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override //tela
   Widget build(BuildContext context) {
+    void _resetarForm() {
+      _emailController.clear();
+      _passwordController.clear();
+    }
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -59,11 +75,12 @@ class _LoginPageState extends State<LoginPage> {
                   width: double.infinity,
                   margin: const EdgeInsets.symmetric(horizontal: 30),
                   child: TextField(
-                    controller: emailController,
+                    controller: _emailController,
                     cursorColor: Colors.black87,
                     onChanged: (value) {
                       debugPrint(value);
                     },
+                    textInputAction: TextInputAction.next,
                     style: const TextStyle(
                         color: Colors.black87,
                         fontSize: 21,
@@ -99,11 +116,12 @@ class _LoginPageState extends State<LoginPage> {
                     child: TextField(
                       cursorColor: Colors.black87,
                       obscureText: isObscureText,
-                      controller: senhaController,
+                      controller: _passwordController,
                       onChanged: (value) {
                         //ele é uma variavel que cada vez que a gente click ele vai retorna uam função e parametro string
                         debugPrint(value);
                       },
+                      textInputAction: TextInputAction.done,
                       style: const TextStyle(
                           color: Colors.black87,
                           fontSize: 21,
@@ -153,9 +171,9 @@ class _LoginPageState extends State<LoginPage> {
                     child: TextButton(
                         onPressed: () {
                           //No if se for igual vai entrar na tela de menu
-                          if (emailController.text.trim() ==
+                          if (_emailController.text.trim() ==
                                   "pastel@gmail.com" &&
-                              senhaController.text.trim() == "teste123") {
+                              _passwordController.text.trim() == "teste123") {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
