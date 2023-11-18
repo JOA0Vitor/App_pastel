@@ -1,7 +1,10 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/login_page.dart';
-import 'package:trilhaapp/services/flutter_fire_auth.dart';
+import 'package:trilhaapp/services/firebase_auth.dart';
+import 'package:trilhaapp/services/firebase_auth.dart';
 
 // ignore: camel_case_types
 class cadastro_login extends StatefulWidget {
@@ -13,16 +16,19 @@ class cadastro_login extends StatefulWidget {
 
 // ignore: camel_case_types
 class _cadastro_loginState extends State<cadastro_login> {
-  var _nomeController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  // final FirebaseAuth _auth = FirebaseAuth();
+
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
   final con_passwordController = TextEditingController();
   bool isObscureText = true;
   bool isObscureTextsenha = true;
 
   @override
   void dispose() {
-    _nomeController.dispose();
+    _usernameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -30,25 +36,39 @@ class _cadastro_loginState extends State<cadastro_login> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable, no_leading_underscores_for_local_identifiers
+    // bool _isloading = false;
+
+    void _signUp() {}
+
+    // ignore: no_leading_underscores_for_local_identifiers, unused_element
     void _enviar() async {
-      final name = _nomeController.text;
-      final email = _emailController.text;
-      final password = _passwordController.text;
+      String username = _usernameController.text;
+      String email = _emailController.text;
+      String password = _passwordController.text;
 
-      bool _isloading;
-      setState(() => _isloading = true);
-
-      final user = await FlutterFireAute(context)
-          .createUserWithEmailAndPassword(name, email, password);
-
-      setState(() => _isloading = false);
-
-      if (user != null) {
-        // ignore: use_build_context_synchronously
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const LoginPage()));
-      }
+      //   setState(() {
+      //     _isloading = false;
+      //     _usernameController.clear();
+      //     _emailController.clear();
+      //     _passwordController.clear();
+      //   });
+      // } catch (e) {
+      //   print('Error creating user: ${e.toString()}');
+      //   setState(() => _isloading = false);
+      // }
     }
+
+    // final user = await FlutterFireAuth(context)
+    //     .createUserWithEmailAndPassword(username, email, password);
+
+    // setState(() => _isloading = false);
+
+    // if (user != null) {
+    //   // ignore: use_build_context_synchronously
+    //   Navigator.pushReplacement(context,
+    //       MaterialPageRoute(builder: (context) => const LoginPage()));
+    // }
 
     return SafeArea(
       child: Scaffold(
@@ -78,7 +98,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                   style: TextStyle(fontSize: 19),
                 ),
                 TextFormField(
-                  controller: _nomeController,
+                  controller: _usernameController,
                   style: const TextStyle(
                       color: Colors.black87,
                       fontSize: 19,
