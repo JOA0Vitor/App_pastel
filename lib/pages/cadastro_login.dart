@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/login_page.dart';
 import 'package:trilhaapp/services/firebase_auth.dart';
 import 'package:trilhaapp/services/firebase_auth.dart';
+import 'package:trilhaapp/services/sign_up_page.dart';
 
 // ignore: camel_case_types
 class cadastro_login extends StatefulWidget {
@@ -17,7 +18,6 @@ class cadastro_login extends StatefulWidget {
 // ignore: camel_case_types
 class _cadastro_loginState extends State<cadastro_login> {
   // final FirebaseAuth _auth = FirebaseAuth();
-
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -36,10 +36,18 @@ class _cadastro_loginState extends State<cadastro_login> {
 
   @override
   Widget build(BuildContext context) {
+    final _formaKey = GlobalKey<FormState>();
     // ignore: unused_local_variable, no_leading_underscores_for_local_identifiers
     // bool _isloading = false;
 
-    void _signUp() {}
+    void _signUp() {
+      if (_formaKey.currentState != null &&
+          _formaKey.currentState!.validate()) {
+        SignUpService().signUp(_emailController.text, _passwordController.text);
+      } else {
+        print('invalido');
+      }
+    }
 
     // ignore: no_leading_underscores_for_local_identifiers, unused_element
     void _enviar() async {
@@ -93,101 +101,121 @@ class _cadastro_loginState extends State<cadastro_login> {
                 const SizedBox(
                   height: 40,
                 ),
-                const Text(
-                  "Nome:",
-                  style: TextStyle(fontSize: 19),
-                ),
-                TextFormField(
-                  controller: _usernameController,
-                  style: const TextStyle(
-                      color: Colors.black87,
-                      fontSize: 19,
-                      decorationColor: Colors.white70),
-                  decoration: const InputDecoration(
-                    hintText: 'Digite seu nome',
-                    contentPadding: EdgeInsets.only(top: 22, left: 5),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                const Text(
-                  "E-mail:",
-                  style: TextStyle(fontSize: 19),
-                ),
-                TextFormField(
-                  controller: _emailController,
-                  style: const TextStyle(
-                      color: Colors.black87,
-                      fontSize: 19,
-                      decorationColor: Colors.white70),
-                  decoration: const InputDecoration(
-                    hintText: 'Digite seu email',
-                    contentPadding: EdgeInsets.only(top: 22, left: 5),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                const Text(
-                  "Senha:",
-                  style: TextStyle(fontSize: 19),
-                ),
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: isObscureText,
-                  style: const TextStyle(
-                      color: Colors.black87,
-                      fontSize: 19,
-                      decorationColor: Colors.white70),
-                  decoration: InputDecoration(
-                      hintText: 'Digite sua senha',
-                      contentPadding: const EdgeInsets.only(top: 22, left: 5),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isObscureText = !isObscureText;
-                          });
-                        },
-                        child: Icon(
-                          isObscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: Colors.black87,
+                Form(
+                    key: _formaKey,
+                    child: Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: const Text(
+                            "Nome:",
+                            style: TextStyle(fontSize: 19),
+                          ),
                         ),
-                      )),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                const Text(
-                  "Confirme a Senha:",
-                  style: TextStyle(fontSize: 19),
-                ),
-                TextFormField(
-                  controller: con_passwordController,
-                  obscureText: isObscureTextsenha,
-                  style: const TextStyle(
-                      color: Colors.black87,
-                      fontSize: 19,
-                      decorationColor: Colors.white70),
-                  decoration: InputDecoration(
-                      hintText: 'Digite sua senha',
-                      contentPadding: const EdgeInsets.only(top: 22, left: 5),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isObscureTextsenha = !isObscureTextsenha;
-                          });
-                        },
-                        child: Icon(
-                          isObscureTextsenha
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: Colors.black87,
+                        TextFormField(
+                          controller: _usernameController,
+                          style: const TextStyle(
+                              color: Colors.black87,
+                              fontSize: 19,
+                              decorationColor: Colors.white70),
+                          decoration: const InputDecoration(
+                            hintText: 'Digite seu nome',
+                            contentPadding: EdgeInsets.only(top: 22, left: 5),
+                          ),
                         ),
-                      )),
-                ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: const Text(
+                            "E-mail:",
+                            style: TextStyle(fontSize: 19),
+                          ),
+                        ),
+                        TextFormField(
+                          controller: _emailController,
+                          style: const TextStyle(
+                              color: Colors.black87,
+                              fontSize: 19,
+                              decorationColor: Colors.white70),
+                          decoration: const InputDecoration(
+                            hintText: 'Digite seu email',
+                            contentPadding: EdgeInsets.only(top: 22, left: 5),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: const Text(
+                            "Senha:",
+                            style: TextStyle(fontSize: 19),
+                          ),
+                        ),
+                        TextFormField(
+                          controller: _passwordController,
+                          obscureText: isObscureText,
+                          style: const TextStyle(
+                              color: Colors.black87,
+                              fontSize: 19,
+                              decorationColor: Colors.white70),
+                          decoration: InputDecoration(
+                              hintText: 'Digite sua senha',
+                              contentPadding:
+                                  const EdgeInsets.only(top: 22, left: 5),
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isObscureText = !isObscureText;
+                                  });
+                                },
+                                child: Icon(
+                                  isObscureText
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Colors.black87,
+                                ),
+                              )),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: const Text(
+                            "Confirme a Senha:",
+                            style: TextStyle(fontSize: 19),
+                          ),
+                        ),
+                        TextFormField(
+                          controller: con_passwordController,
+                          obscureText: isObscureTextsenha,
+                          style: const TextStyle(
+                              color: Colors.black87,
+                              fontSize: 19,
+                              decorationColor: Colors.white70),
+                          decoration: InputDecoration(
+                              hintText: 'Digite sua senha',
+                              contentPadding:
+                                  const EdgeInsets.only(top: 22, left: 5),
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isObscureTextsenha = !isObscureTextsenha;
+                                  });
+                                },
+                                child: Icon(
+                                  isObscureTextsenha
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Colors.black87,
+                                ),
+                              )),
+                        ),
+                      ],
+                    )),
                 const SizedBox(
                   height: 30,
                 ),
@@ -199,14 +227,7 @@ class _cadastro_loginState extends State<cadastro_login> {
                     height: 80,
                     child: ElevatedButton(
                       onPressed: () {
-                        //Fazer a funçao caso o email não seja entrado no bd
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                                content: Text(
-                          "Conta criada com sucesso! Faça login agora",
-                          style: TextStyle(),
-                        )));
-                        return;
+                        _signUp();
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue),

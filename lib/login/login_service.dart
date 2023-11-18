@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:trilhaapp/widgets/routes.dart';
 
-class SignUpService {
-  signUp(String email, String password) async {
-    http.Response response = await http.post(Uri.parse(Routes.signUp),
+class LoginService {
+  login(String email, String password) async {
+    http.Response response = await http.post(Uri.parse(Routes.login),
         body: json.encode({
           "email": email,
           "password": password,

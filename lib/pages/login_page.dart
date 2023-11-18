@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trilhaapp/login/login_service.dart';
 import 'package:trilhaapp/pages/Cadastro_login.dart';
 import 'package:trilhaapp/pages/esqueci_senha.dart';
 // ignore: unused_import
@@ -36,12 +37,8 @@ class _LoginPageState extends State<LoginPage> {
 
     // ignore: no_leading_underscores_for_local_identifiers
     void _login() {
-      if (_formaKey.currentState != null &&
-          _formaKey.currentState!.validate() &&
-          _emailController.text == "pastel@gmail.com" &&
-          _passwordController.text == "teste123") {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const MyMenu()));
+      if (_formaKey.currentState!.validate()) {
+        LoginService().login(_emailController.text, _passwordController.text);
       } else {
         //No else vai gerar um erro na tela
       }
