@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "768386623591",
+    "project_id": "app-pastel-c2439",
+    "storage_bucket": "app-pastel-c2439.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768386623591:android:c2639d21a11f7e11e08cc2",
+        "android_client_info": {
+          "package_name": "com.joao.trilhaflutter.trilhaapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP36eP_VNLqcGDcPbJ41AET9jfOPbp_U0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
