@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:trilhaapp/pages/adicionarItem.dart';
 // import 'package:trilhaapp/pages/home_page.dart';
 import 'package:trilhaapp/pages/login_page.dart';
+import 'package:trilhaapp/pages/menu.dart';
+import 'package:trilhaapp/pages/pesquisar.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         // ignore: deprecated_member_use
         errorColor: Colors.red,
       ),
-      home: const adicionarItem(),
+      home: const MyMenu(),
     );
   }
 }

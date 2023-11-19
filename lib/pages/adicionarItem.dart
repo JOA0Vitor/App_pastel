@@ -63,6 +63,12 @@ class _adicionarItemState extends State<adicionarItem> {
       tipoDeBandeja,
       quantidade,
     );
+
+    if (dropdownValue != null) {
+      print('Valor Selecionado: $dropdownValue');
+    } else {
+      print('Nenhum valor selecionado.');
+    }
   }
 
   @override
@@ -146,8 +152,7 @@ class _adicionarItemState extends State<adicionarItem> {
                               dropdownValue = newValue;
                             });
                           },
-                          items: <String>['Bandeja Meia', 'Bandeja Completa']
-                              .map((String item) {
+                          items: disponivelParaSelecionar.map((String item) {
                             return DropdownMenuItem<String>(
                               value: item,
                               child: Text(item),
