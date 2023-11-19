@@ -52,10 +52,17 @@ class _adicionarItemState extends State<adicionarItem> {
 
   void _enviarParaFirestore() {
     String name = _nameController.text;
+    List<String> tipoDeBandeja = disponivelParaSelecionar;
     int quantidade = _quantidadeController.toInt();
     int id = _idController.toInt();
+
     // // Enviar para o Firestore usando as funções que mencionei anteriormente
-    adicionarDados(name, quantidade, id);
+    adicionarDados(
+      id,
+      name,
+      tipoDeBandeja,
+      quantidade,
+    );
   }
 
   @override
@@ -139,10 +146,10 @@ class _adicionarItemState extends State<adicionarItem> {
                               dropdownValue = newValue;
                             });
                           },
-                          items: disponivelParaSelecionar.map((String item) {
+                          items: <String>['Bandeja Meia', 'Bandeja Completa']
+                              .map((String item) {
                             return DropdownMenuItem<String>(
                               value: item,
-                              onTap: () {},
                               child: Text(item),
                             );
                           }).toList(),
@@ -271,7 +278,7 @@ class _adicionarItemState extends State<adicionarItem> {
                                                 fontSize: 18)),
                                       ]),
                                     ),
-                                    // Text("Tipo de Bandeja:\n $dropdownValue "),
+
                                     const SizedBox(
                                       height: 30,
                                     ),
