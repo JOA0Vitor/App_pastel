@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trilhaapp/pages/adicionarItem.dart';
 // import 'package:trilhaapp/pages/home_page.dart';
 import 'package:trilhaapp/pages/login_page.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         // ignore: deprecated_member_use
         errorColor: Colors.red,
       ),
-      home: const LoginPage(),
+      home: const adicionarItem(),
     );
   }
 }

@@ -15,7 +15,8 @@ final List<Item> itens = [
   Item(
     id: 1,
     nome: 'Pastel de queijo',
-    quantidade: 17, /* disponivel: true */
+    /* disponivel: true */
+    quantidade: 17,
   ),
   Item(
     id: 2,
@@ -42,41 +43,6 @@ final List<Item> itens = [
     nome: 'Pastel de carne c/ queijo',
     quantidade: 90, /* disponivel: true */
   ),
-  // Item(
-  //   id: 7,
-  //   nome: 'Pastel de queijo c/ calabresa',
-  //   quantidade: 67, /* disponivel: true */
-  // ),
-  // Item(
-  //   id: 8,
-  //   nome: 'Pastel de charque',
-  //   quantidade: 91, /* disponivel: true */
-  // ),
-  // Item(
-  //   id: 9,
-  //   nome: 'Pastel de franquijo',
-  //   quantidade: 26, /* disponivel: true */
-  // ),
-  // Item(
-  //   id: 10,
-  //   nome: 'Pastel de bacalhau',
-  //   quantidade: 65, /* disponivel: true */
-  // ),
-  // Item(
-  //   id: 11,
-  //   nome: 'Pastel de frango',
-  //   quantidade: 68, /* disponivel: true */
-  // ),
-  // Item(
-  //   id: 12,
-  //   nome: 'Pastel de 3 queijos',
-  //   quantidade: 49, /* disponivel: true */
-  // ),
-  // Item(
-  //   id: 13,
-  //   nome: 'Coxinha',
-  //   quantidade: 54, /* disponivel: true */
-  // ),
 ];
 
 class _PesquisarState extends State<Pesquisar> {
@@ -130,8 +96,7 @@ class _PesquisarState extends State<Pesquisar> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        // ignore: sized_box_for_whitespace
-                                        Container(
+                                        SizedBox(
                                           width: 196,
                                           child: Text(
                                             item.nome,
@@ -149,9 +114,6 @@ class _PesquisarState extends State<Pesquisar> {
                                         ),
                                       ],
                                     ),
-                                    // const SizedBox(
-                                    //   height: 0,
-                                    // ),
                                     Row(
                                       children: [
                                         Expanded(
@@ -169,8 +131,6 @@ class _PesquisarState extends State<Pesquisar> {
                                         Row(
                                           children: [
                                             IconButton(
-                                              // splashColor: Colors
-                                              //     .transparent, //talvez eu tire o zoom
                                               onPressed: () {
                                                 // ignore: avoid_print
                                                 print(
@@ -182,122 +142,120 @@ class _PesquisarState extends State<Pesquisar> {
                                                 size: 24,
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                        IconButton(
-                                          onPressed: () {
-                                            // ignore: avoid_print
-                                            print('Clicou no ícone de remover');
-                                            showDialog(
-                                                context: context,
-                                                builder: (BuildContext bc) {
-                                                  return AlertDialog(
-                                                    elevation: 8,
-                                                    shape:
-                                                        RoundedRectangleBorder(
+                                            IconButton(
+                                              onPressed: () {
+                                                // ignore: avoid_print
+                                                print(
+                                                    'Clicou no ícone de remover');
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (BuildContext bc) {
+                                                      return AlertDialog(
+                                                        elevation: 8,
+                                                        shape: RoundedRectangleBorder(
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
                                                                         10)),
-                                                    title: const Text(
-                                                      'Remover Item',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                    content: Wrap(
-                                                      children: [
-                                                        const Text(
-                                                            'Quantas Unidades você quer retirar ?'),
-                                                        Container(
-                                                          width:
-                                                              double.infinity,
-                                                          margin:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                            top: 15,
-                                                          ),
-                                                          child: SpinBox(
-                                                            min: 1,
-                                                            max: 1000,
-
-                                                            // ignore: avoid_print
-                                                            onChanged: (value) {
-                                                              setState(() {});
-                                                            },
-                                                            decoration:
-                                                                const InputDecoration(
-                                                              // border: InputBorder.none,
-                                                              contentPadding:
-                                                                  EdgeInsets
-                                                                      .zero,
+                                                        content: Wrap(
+                                                          children: [
+                                                            const Text(
+                                                                'Quantas Unidades você quer retirar ?'),
+                                                            const SizedBox(
+                                                              height: 50,
                                                             ),
-                                                          ),
+                                                            Container(
+                                                              width: double
+                                                                  .infinity,
+                                                              margin:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                top: 15,
+                                                              ),
+                                                              child: SpinBox(
+                                                                min: 1,
+                                                                max: 1000,
+
+                                                                // ignore: avoid_print
+                                                                onChanged:
+                                                                    (value) {
+                                                                  setState(
+                                                                      () {});
+                                                                },
+                                                                decoration:
+                                                                    const InputDecoration(
+                                                                  // border: InputBorder.none,
+                                                                  contentPadding:
+                                                                      EdgeInsets
+                                                                          .zero,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        const SizedBox(
-                                                          height: 80,
-                                                        ),
-                                                        const Text(
-                                                            'Remover o item: '),
-                                                        Container(
-                                                          margin:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  top: 10),
-                                                          width:
-                                                              double.infinity,
-                                                          height: 50,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
-                                                                color:
-                                                                    Colors.grey,
-                                                                width: 1),
+                                                        actions: [
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: const Text(
+                                                                  'Cancelar')),
+                                                          TextButton(
+                                                              onPressed: () {},
+                                                              child: const Text(
+                                                                  'Retirar'))
+                                                        ],
+                                                      );
+                                                    });
+                                              },
+                                              icon: const Icon(
+                                                Icons.do_disturb_on_rounded,
+                                                color: Colors.black,
+                                                size: 24,
+                                              ),
+                                            ),
+                                            IconButton(
+                                              onPressed: () {
+                                                // ignore: avoid_print
+                                                print(
+                                                    'Clicou no ícone de remover');
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (BuildContext bc) {
+                                                      return AlertDialog(
+                                                        elevation: 8,
+                                                        shape: RoundedRectangleBorder(
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
-                                                                        4.0),
-                                                          ),
-                                                          child: ElevatedButton(
-                                                            onPressed: () {},
-                                                            style: ElevatedButton
-                                                                .styleFrom(
-                                                                    backgroundColor:
-                                                                        Colors
-                                                                            .white),
-                                                            child: const Text(
-                                                              'Remover tudo !!',
-                                                              style: TextStyle(
-                                                                  fontSize: 19,
-                                                                  color: Colors
-                                                                      .black),
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    actions: [
-                                                      TextButton(
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          child: const Text(
-                                                              'Cancelar')),
-                                                      TextButton(
-                                                          onPressed: () {},
-                                                          child: const Text(
-                                                              'Remover'))
-                                                    ],
-                                                  );
-                                                });
-                                          },
-                                          icon: const Icon(
-                                            Icons.delete,
-                                            color: Color.fromARGB(
-                                                255, 165, 29, 29),
-                                            size: 24,
-                                          ),
+                                                                        10)),
+                                                        content: const Text(
+                                                            'Tem certeza que quer remover este item ?'),
+                                                        actions: [
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: const Text(
+                                                                  'Cancelar')),
+                                                          TextButton(
+                                                              onPressed: () {},
+                                                              child: const Text(
+                                                                  'Sim'))
+                                                        ],
+                                                      );
+                                                    });
+                                              },
+                                              icon: const Icon(
+                                                Icons.delete,
+                                                color: Color.fromARGB(
+                                                    255, 165, 29, 29),
+                                                size: 24,
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -306,14 +264,10 @@ class _PesquisarState extends State<Pesquisar> {
                               ),
                             ),
                           );
-                          // ignore: dead_code, unused_label
-                        }
-                        // )
-                        ),
+                        }),
                   ),
                 ],
               ),
             )));
-    // ignore: dead_code
   }
 }

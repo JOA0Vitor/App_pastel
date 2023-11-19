@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:trilhaapp/pages/menu.dart';
+import 'package:trilhaapp/services/adicionar_item_fire.dart';
 
 const List<String> disponivelParaSelecionar = <String>[
   'Bandeja Meia',
@@ -36,17 +37,25 @@ class Item {
 
 // ignore: camel_case_types
 class _adicionarItemState extends State<adicionarItem> {
-  final nomeController = TextEditingController();
-  double quantidadeController = 1.0;
-  double idController = 1.0;
+  final _nameController = TextEditingController();
+  double _idController = 0.0;
+  double _quantidadeController = 0.0;
 
   @override
   void initState() {
     super.initState();
 
     dropdownValue;
-    idController;
-    nomeController.text;
+    _idController;
+    _nameController.text;
+  }
+
+  void _enviarParaFirestore() {
+    String name = _nameController.text;
+    int quantidade = _quantidadeController.toInt();
+    int id = _idController.toInt();
+    // // Enviar para o Firestore usando as funções que mencionei anteriormente
+    adicionarDados(name, quantidade, id);
   }
 
   @override
@@ -74,12 +83,12 @@ class _adicionarItemState extends State<adicionarItem> {
                       child: SpinBox(
                         min: 1,
                         max: 1000,
-                        value: idController,
+                        value: _idController,
 
                         // ignore: avoid_print
                         onChanged: (value) {
                           setState(() {
-                            idController = value;
+                            _idController = value;
                           });
                         },
                         decoration: const InputDecoration(
@@ -90,30 +99,19 @@ class _adicionarItemState extends State<adicionarItem> {
                     ),
                   ],
                 ),
-                // TextField(
-                //   //ID
-
-                //   // ignore: avoid_print
-                //   onChanged: (value) => print(
-                //       'O valor do ID é: $value (${value.characters.length})'),
-                //   decoration: const InputDecoration(
-                //       hintText: 'Digite o ID',
-                //       hintStyle: TextStyle(fontSize: 18)),
-                // ),
                 const SizedBox(
                   height: 50,
                 ),
                 const Text("Nome do produto:", style: TextStyle(fontSize: 21)),
-
                 TextField(
-                  //produto
-                  controller: nomeController,
+                  controller: _nameController,
                   // ignore: avoid_print
                   onChanged: (value) => print(
                       'O nome do produto é: $value (${value.characters.length})'),
                   decoration: const InputDecoration(
                     hintText: 'Digite nome do produto ',
-                    hintStyle: TextStyle(fontSize: 16),
+                    hintStyle: TextStyle(
+                        fontSize: 16), //Colocar as pavalras mais perto da linha
                   ),
                 ),
                 const SizedBox(
@@ -169,14 +167,15 @@ class _adicionarItemState extends State<adicionarItem> {
                       child: SpinBox(
                         min: 1,
                         max: 1000,
-                        value: quantidadeController,
+                        value: _quantidadeController,
 
                         // ignore: avoid_print
                         onChanged: (value) {
                           setState(() {
-                            quantidadeController = value;
+                            _quantidadeController = value;
                           });
                         },
+                        keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           // border: InputBorder.none,
                           contentPadding: EdgeInsets.zero,
@@ -222,15 +221,15 @@ class _adicionarItemState extends State<adicionarItem> {
                                               color: Colors.black),
                                         ),
                                         TextSpan(
-                                            text:
-                                                idController.toStringAsFixed(0),
+                                            text: _idController
+                                                .toStringAsFixed(0),
                                             style: const TextStyle(
                                                 color: Colors.blue,
                                                 fontSize: 18)),
                                       ]),
                                     ),
                                     // Text(
-                                    //   " ${idController.toStringAsFixed(0)}",
+                                    //   " ${_idController.toStringAsFixed(0)}",
                                     // ),
                                     const SizedBox(
                                       height: 30,
@@ -245,14 +244,14 @@ class _adicionarItemState extends State<adicionarItem> {
                                               color: Colors.black),
                                         ),
                                         TextSpan(
-                                            text: nomeController.text,
+                                            text: _nameController.text,
                                             style: const TextStyle(
                                                 color: Colors.blue,
                                                 fontSize: 16)),
                                       ]),
                                     ),
                                     // Text(
-                                    //     "Nome do produto:\n ${nomeController.text} "),
+                                    //     "Nome do produto:\n ${_nameController.text} "),
                                     const SizedBox(
                                       height: 30,
                                     ),
@@ -286,7 +285,7 @@ class _adicionarItemState extends State<adicionarItem> {
                                               color: Colors.black),
                                         ),
                                         TextSpan(
-                                            text: quantidadeController
+                                            text: _quantidadeController
                                                 .toStringAsFixed(0),
                                             style: const TextStyle(
                                               color: Colors.blue,
@@ -295,7 +294,7 @@ class _adicionarItemState extends State<adicionarItem> {
                                       ]),
                                     ),
                                     // Text(
-                                    //     "Quantidade: ${quantidadeController.toStringAsFixed(0)}"),
+                                    //     "Quantidade: ${_quantidadeController.toStringAsFixed(0)}"),
                                   ],
                                 ),
                                 actions: [
@@ -328,11 +327,14 @@ class _adicionarItemState extends State<adicionarItem> {
                             const EdgeInsets.symmetric(
                                 horizontal: 50, vertical: 20)),
                       ),
-                      child: const Text(
-                        "Adicionar",
-                        style: TextStyle(
-                          fontSize: 21,
-                          color: Colors.white,
+                      child: ElevatedButton(
+                        onPressed: _enviarParaFirestore,
+                        child: const Text(
+                          "Adicionar",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
