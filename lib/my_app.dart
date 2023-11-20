@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         // ignore: deprecated_member_use
         errorColor: Colors.red,
       ),
-      home: const MyMenu(),
+      home: const LoginPage(),
     );
   }
 }

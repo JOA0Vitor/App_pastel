@@ -33,8 +33,15 @@ _removerItem(Item item) async {
 }
 
 class _PesquisarState extends State<Pesquisar> {
+  int quantidadeSelecionada = 1;
+
   @override
   Widget build(BuildContext context) {
+    void diminuirUnidade(BuildContext context) async {
+      // ignore: unused_local_variable
+      int quantidadeSelecionada = 1;
+    }
+
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection('Itens adicionados')
@@ -200,12 +207,16 @@ class _PesquisarState extends State<Pesquisar> {
                                                                         min: 1,
                                                                         max:
                                                                             1000,
-
+                                                                        value: quantidadeSelecionada
+                                                                            .toDouble(),
                                                                         // ignore: avoid_print
                                                                         onChanged:
                                                                             (value) {
                                                                           setState(
-                                                                              () {});
+                                                                              () {
+                                                                            quantidadeSelecionada =
+                                                                                value.toInt();
+                                                                          });
                                                                         },
                                                                         decoration:
                                                                             const InputDecoration(
@@ -227,7 +238,10 @@ class _PesquisarState extends State<Pesquisar> {
                                                                           'Cancelar')),
                                                                   TextButton(
                                                                       onPressed:
-                                                                          () {},
+                                                                          () {
+                                                                        print(
+                                                                            'Retirar $quantidadeSelecionada unidades');
+                                                                      },
                                                                       child: const Text(
                                                                           'Retirar'))
                                                                 ],

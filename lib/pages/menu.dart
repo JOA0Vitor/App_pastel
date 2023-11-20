@@ -9,9 +9,23 @@ class MyMenu extends StatefulWidget {
 
   @override
   State<MyMenu> createState() => _MyMenuState();
+
+  void incrementarTotalDeItens() {
+    //Colocar o setState aqui
+  }
 }
 
 class _MyMenuState extends State<MyMenu> {
+  int totalDeItens = 0;
+  // ignore: unused_element
+  void incrementarTotalDeItens() {
+    print('Incrementando Total de Itens');
+    setState(() {
+      totalDeItens += 1;
+      print('Novo Total de Itens: $totalDeItens');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -54,9 +68,9 @@ class _MyMenuState extends State<MyMenu> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          const Column(
+                          Column(
                             children: [
-                              Text(
+                              const Text(
                                 'Total de Itens',
                                 style: TextStyle(
                                   color: Colors.black87,
@@ -64,10 +78,10 @@ class _MyMenuState extends State<MyMenu> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 8),
+                                padding: const EdgeInsets.only(top: 8),
                                 child: Text(
-                                  '14',
-                                  style: TextStyle(
+                                  totalDeItens.toString(),
+                                  style: const TextStyle(
                                     color: Colors.black87,
                                     fontSize: 21,
                                   ),
@@ -91,7 +105,7 @@ class _MyMenuState extends State<MyMenu> {
                           const Column(
                             children: [
                               Text(
-                                'Quantidades vendidas',
+                                'Quantidades retiradas',
                                 style: TextStyle(
                                   color: Colors.black87,
                                   fontSize: 13,
@@ -1006,28 +1020,9 @@ class _MyMenuState extends State<MyMenu> {
                   },
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 100,
                 ),
-                InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: const Text(
-                      "Consultar estoque",
-                      style: TextStyle(fontSize: 21),
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context); //remover a aba
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Pesquisar()),
-                    );
-                  },
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
+
                 // InkWell(
                 //   child: Container(
                 //     padding: const EdgeInsets.symmetric(vertical: 10),
@@ -1044,7 +1039,7 @@ class _MyMenuState extends State<MyMenu> {
                 //           builder:   (context) => const Pesquisar()),
                 //     );
                 //   },
-                // ),
+                // ),Night of the Dead
                 const SizedBox(
                   height: 300,
                 ),

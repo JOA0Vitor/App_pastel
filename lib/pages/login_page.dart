@@ -22,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isObscureText = true;
+  final _formaKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -33,14 +34,32 @@ class _LoginPageState extends State<LoginPage> {
 
   @override //tela
   Widget build(BuildContext context) {
-    final _formaKey = GlobalKey<FormState>();
-
     // ignore: no_leading_underscores_for_local_identifiers
-    void _login() {
+    void _login() async {
       if (_formaKey.currentState!.validate()) {
-        LoginService().login(_emailController.text, _passwordController.text);
+        try {
+          // Se o formulário for válido, faça o login
+          var loginResult = await LoginService()
+              .login(_emailController.text, _passwordController.text);
+
+          if (loginResult) {
+            // Se o login for bem-sucedido, navegue para a tela MyMenu
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const MyMenu()),
+              (Route<dynamic> route) => false,
+            );
+          } else {
+            // Caso contrário, exiba uma mensagem de erro ou lide com o login mal-sucedido
+            // Pode ser útil imprimir o valor de loginResult para depuração
+            print('Erro no login: $loginResult');
+          }
+        } catch (e) {
+          // Lidar com exceções, imprima para depuração
+          print('Erro durante o login: $e');
+        }
       } else {
-        //No else vai gerar um erro na tela
+        // Caso o formulário não seja válido, você pode lidar com isso aqui se necessário
       }
     }
 
@@ -56,6 +75,8 @@ class _LoginPageState extends State<LoginPage> {
         print('O usuário está conectado!!');
       }
     });
+
+    FocusNode().requestFocus();
 
     return SafeArea(
       child: Scaffold(
@@ -101,16 +122,17 @@ class _LoginPageState extends State<LoginPage> {
                           return null;
                         },
                         controller: _emailController,
-                        autofocus: true,
                         cursorColor: Colors.black87,
                         onChanged: (value) {
                           debugPrint(value);
                         },
                         textInputAction: TextInputAction.next,
+                        //Se eu tirar o focus ele começa a bugar
                         style: const TextStyle(
                             color: Colors.black87,
                             fontSize: 21,
-                            decorationColor: Colors.white70),
+                            decorationColor:
+                                Color.fromRGBO(255, 255, 255, 0.702)),
                         decoration: const InputDecoration(
                             contentPadding: EdgeInsets.only(top: 18),
                             hintText: "Email",
@@ -176,55 +198,56 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                // Text(
-                //   "Esqueceu a senha?",
-                //   textAlign: TextAlign.right,
-                // ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    _login();
-                  },
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                Padding(
+                  padding: const EdgeInsets.only(top: 35),
+                  child: SizedBox(
+                    width: 150,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _login();
+                        FocusScope.of(context).requestFocus(FocusNode());
+                      },
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.blue)),
+                      child: const Text(
+                        'Entrar',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          fontSize: 21,
                         ),
                       ),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue)),
-                  child: const Text(
-                    'Entrar',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontSize: 15,
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 90,
                 ),
-                InkWell(
-                  child: Container(
-                    height: 30,
-                    alignment:
-                        Alignment.center, //A linhar o texto dentro do bloco
-                    child: const Text("Esqueci minha senha",
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Color.fromARGB(250, 148, 22, 13))),
-                  ),
-                  onTap: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const esqueci_senha()),
-                      (Route<dynamic> route) => true,
-                    );
-                  },
-                ),
+                // InkWell(
+                //   child: Container(
+                //     height: 30,
+                //     alignment:
+                //         Alignment.center, //A linhar o texto dentro do bloco
+                //     child: const Text("Esqueci minha senha",
+                //         style: TextStyle(
+                //             fontSize: 20,
+                //             color: Color.fromARGB(250, 148, 22, 13))),
+                //   ),
+                //   onTap: () {
+                //     Navigator.pushAndRemoveUntil(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) => const esqueci_senha()),
+                //       (Route<dynamic> route) => true,
+                //     );
+                //   },
+                // ),
                 InkWell(
                   child: Container(
                       margin: const EdgeInsets.only(top: 10, bottom: 10),

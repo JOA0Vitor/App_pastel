@@ -55,8 +55,8 @@ class _adicionarItemState extends State<adicionarItem> {
     List<String> tipoDeBandeja = disponivelParaSelecionar;
     int quantidade = _quantidadeController.toInt();
     int id = _idController.toInt();
+    const MyMenu().incrementarTotalDeItens();
 
-    // // Enviar para o Firestore usando as funções que mencionei anteriormente
     adicionarDados(
       id,
       name,

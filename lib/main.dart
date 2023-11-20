@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/my_app.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:trilhaapp/pages/login_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
