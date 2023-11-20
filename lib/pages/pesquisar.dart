@@ -20,6 +20,18 @@ class Item {
   Item({required this.id, required this.nome, required this.quantidade});
 }
 
+// ignore: unused_element
+
+_removerItem(Item item) async {
+  FirebaseFirestore.instance
+      .collection('Itens adicionados')
+      .doc(Item(id: 0, nome: '', quantidade: 2).toString())
+      .delete();
+  // ignore: avoid_print
+  // .then((value) => print('Item removido com sucesso'))
+  // .catchError((error) => print('Erro ao remover item: ${error.message}'));
+}
+
 class _PesquisarState extends State<Pesquisar> {
   @override
   Widget build(BuildContext context) {
@@ -29,17 +41,27 @@ class _PesquisarState extends State<Pesquisar> {
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return CircularProgressIndicator(); // Ou qualquer indicador de carregamento
+            return const CircularProgressIndicator();
           }
 
           List<Item> itens =
               snapshot.data!.docs.map((DocumentSnapshot documento) {
             Map<String, dynamic> dados =
                 documento.data() as Map<String, dynamic>;
+
+            // ignore: unnecessary_null_comparison
+            if (dados == null) {
+              return Item(id: 0, nome: '', quantidade: 0);
+            }
+
+            int? id = dados['id'] as int?;
+            String? nome = dados['name'] as String?;
+            int? quantidade = dados['quantidade'] as int?;
+
             return Item(
-              id: dados['id'],
-              nome: dados['name'],
-              quantidade: dados['quantidade'],
+              id: id ?? 0,
+              nome: nome ??= '',
+              quantidade: quantidade ??= 0,
             );
           }).toList();
 
@@ -220,47 +242,58 @@ class _PesquisarState extends State<Pesquisar> {
                                                       ),
                                                     ),
                                                     IconButton(
-                                                      onPressed: () {
-                                                        // ignore: avoid_print
-                                                        print(
-                                                            'Clicou no ícone de remover');
-                                                        showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (BuildContext
-                                                                    bc) {
-                                                              return AlertDialog(
-                                                                elevation: 8,
-                                                                shape: RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            10)),
-                                                                content: const Text(
-                                                                    'Tem certeza que quer remover este item ?'),
-                                                                actions: [
-                                                                  TextButton(
-                                                                      onPressed:
-                                                                          () {
-                                                                        Navigator.pop(
-                                                                            context);
-                                                                      },
-                                                                      child: const Text(
-                                                                          'Cancelar')),
-                                                                  TextButton(
-                                                                      onPressed:
-                                                                          () {},
-                                                                      child: const Text(
-                                                                          'Sim'))
-                                                                ],
-                                                              );
-                                                            });
-                                                      },
                                                       icon: const Icon(
                                                         Icons.delete,
                                                         color: Color.fromARGB(
                                                             255, 165, 29, 29),
                                                         size: 24,
                                                       ),
+                                                      onPressed: () {
+                                                        _removerItem(item);
+                                                        setState(() {});
+
+                                                        // showDialog(
+                                                        //     context: context,
+                                                        //     builder:
+                                                        //         (BuildContext
+                                                        //             bc) {
+                                                        //       return AlertDialog(
+                                                        //         title: const Text(
+                                                        //             'Remover Item'),
+                                                        //         elevation: 8,
+                                                        //         shape: RoundedRectangleBorder(
+                                                        //             borderRadius:
+                                                        //                 BorderRadius.circular(
+                                                        //                     10)),
+                                                        //         content: const Text(
+                                                        //             'Tem certeza que quer remover este item ?'),
+                                                        //         actions: [
+                                                        //           TextButton(
+                                                        //               onPressed:
+                                                        //                   () {
+                                                        //                 Navigator.pop(
+                                                        //                     context);
+                                                        //               },
+                                                        //               child: const Text(
+                                                        //                   'Cancelar')),
+                                                        //           TextButton(
+                                                        //               onPressed:
+                                                        //                   () {
+                                                        //                 itensExibidos
+                                                        //                     .remove(item);
+
+                                                        //                 _removerItem(
+                                                        //                     item);
+
+                                                        //                 Navigator.of(context)
+                                                        //                     .pop();
+                                                        //               },
+                                                        //               child: const Text(
+                                                        //                   'Sim'))
+                                                        //         ],
+                                                        //       );
+                                                        //     });
+                                                      },
                                                     )
                                                   ],
                                                 ),
