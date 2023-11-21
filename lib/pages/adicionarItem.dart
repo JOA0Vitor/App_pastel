@@ -55,8 +55,8 @@ class _adicionarItemState extends State<adicionarItem> {
     List<String> tipoDeBandeja = disponivelParaSelecionar;
     int quantidade = _quantidadeController.toInt();
     int id = _idController.toInt();
-    const MyMenu().incrementarTotalDeItens();
 
+    // // Enviar para o Firestore usando as funções que mencionei anteriormente
     adicionarDados(
       id,
       name,
@@ -118,13 +118,18 @@ class _adicionarItemState extends State<adicionarItem> {
                 const Text("Nome do produto:", style: TextStyle(fontSize: 21)),
                 TextField(
                   controller: _nameController,
+                  style: const TextStyle(
+                      color: Colors.black87,
+                      fontSize: 21,
+                      decorationColor: Color.fromRGBO(255, 255, 255, 0.702)),
                   // ignore: avoid_print
                   onChanged: (value) => print(
                       'O nome do produto é: $value (${value.characters.length})'),
                   decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.only(top: 18),
                     hintText: 'Digite nome do produto ',
                     hintStyle: TextStyle(
-                        fontSize: 16), //Colocar as pavalras mais perto da linha
+                        fontSize: 19), //Colocar as pavalras mais perto da linha
                   ),
                 ),
                 const SizedBox(
@@ -203,152 +208,143 @@ class _adicionarItemState extends State<adicionarItem> {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
-                  child: Center(
-                    child: TextButton(
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                scrollable: true,
-                                title: const Text(
-                                  "Item adicionado!!",
-                                  style: TextStyle(fontWeight: FontWeight.w600),
-                                ),
-                                elevation: 8,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                content: Column(
-                                  // direction: Axis.vertical,
-                                  // mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    RichText(
-                                      text: TextSpan(children: <TextSpan>[
-                                        const TextSpan(
-                                          text: 'Id: ',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black),
-                                        ),
-                                        TextSpan(
-                                            text: _idController
-                                                .toStringAsFixed(0),
-                                            style: const TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 18)),
-                                      ]),
-                                    ),
-                                    // Text(
-                                    //   " ${_idController.toStringAsFixed(0)}",
-                                    // ),
-                                    const SizedBox(
-                                      height: 30,
-                                    ),
-                                    RichText(
-                                      text: TextSpan(children: <TextSpan>[
-                                        const TextSpan(
-                                          text: '   Nome do produto:\n\n',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black),
-                                        ),
-                                        TextSpan(
-                                            text: _nameController.text,
-                                            style: const TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 16)),
-                                      ]),
-                                    ),
-                                    // Text(
-                                    //     "Nome do produto:\n ${_nameController.text} "),
-                                    const SizedBox(
-                                      height: 30,
-                                    ),
-                                    RichText(
-                                      text: TextSpan(children: <TextSpan>[
-                                        const TextSpan(
-                                          text: 'Tipo de Bandeja:\n\n',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black),
-                                        ),
-                                        TextSpan(
-                                            text: dropdownValue,
-                                            style: const TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 18)),
-                                      ]),
-                                    ),
-
-                                    const SizedBox(
-                                      height: 30,
-                                    ),
-                                    RichText(
-                                      text: TextSpan(children: <TextSpan>[
-                                        const TextSpan(
-                                          text: 'Quantidade: ',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black),
-                                        ),
-                                        TextSpan(
-                                            text: _quantidadeController
-                                                .toStringAsFixed(0),
-                                            style: const TextStyle(
+                  child: TextButton(
+                    onPressed: () {
+                      _enviarParaFirestore();
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              scrollable: true,
+                              title: const Text(
+                                "Item adicionado!!",
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              elevation: 8,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              content: Column(
+                                // direction: Axis.vertical,
+                                // mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  RichText(
+                                    text: TextSpan(children: <TextSpan>[
+                                      const TextSpan(
+                                        text: 'Id: ',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      TextSpan(
+                                          text:
+                                              _idController.toStringAsFixed(0),
+                                          style: const TextStyle(
                                               color: Colors.blue,
-                                              fontSize: 18,
-                                            )),
-                                      ]),
-                                    ),
-                                    // Text(
-                                    //     "Quantidade: ${_quantidadeController.toStringAsFixed(0)}"),
-                                  ],
-                                ),
-                                actions: [
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const adicionarItem()));
-                                      },
-                                      child: const Text("Adicionar novo item")),
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const MyMenu()));
-                                      },
-                                      child: const Text("Voltar para Menu"))
+                                              fontSize: 18)),
+                                    ]),
+                                  ),
+                                  // Text(
+                                  //   " ${_idController.toStringAsFixed(0)}",
+                                  // ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  RichText(
+                                    text: TextSpan(children: <TextSpan>[
+                                      const TextSpan(
+                                        text: '   Nome do produto:\n\n',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      TextSpan(
+                                          text: _nameController.text,
+                                          style: const TextStyle(
+                                              color: Colors.blue,
+                                              fontSize: 16)),
+                                    ]),
+                                  ),
+                                  // Text(
+                                  //     "Nome do produto:\n ${_nameController.text} "),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  RichText(
+                                    text: TextSpan(children: <TextSpan>[
+                                      const TextSpan(
+                                        text: 'Tipo de Bandeja:\n\n',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      TextSpan(
+                                          text: dropdownValue,
+                                          style: const TextStyle(
+                                              color: Colors.blue,
+                                              fontSize: 18)),
+                                    ]),
+                                  ),
+
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  RichText(
+                                    text: TextSpan(children: <TextSpan>[
+                                      const TextSpan(
+                                        text: 'Quantidade: ',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                      TextSpan(
+                                          text: _quantidadeController
+                                              .toStringAsFixed(0),
+                                          style: const TextStyle(
+                                            color: Colors.blue,
+                                            fontSize: 18,
+                                          )),
+                                    ]),
+                                  ),
                                 ],
-                              );
-                            });
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.blue),
-                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                            const EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 20)),
-                      ),
-                      child: ElevatedButton(
-                        onPressed: _enviarParaFirestore,
-                        child: const Text(
-                          "Adicionar",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                              ),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const adicionarItem()));
+                                    },
+                                    child: const Text("Adicionar novo item")),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const MyMenu()));
+                                    },
+                                    child: const Text("Voltar para Menu"))
+                              ],
+                            );
+                          });
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blue),
+                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                          const EdgeInsets.symmetric(
+                              horizontal: 50, vertical: 20)),
+                    ),
+                    child: const Text(
+                      'Adicionar',
+                      style: TextStyle(color: Colors.white, fontSize: 21),
                     ),
                   ),
                 ),
