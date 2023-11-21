@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/adicionarItem.dart';
 import 'package:trilhaapp/pages/login_page.dart';
 import 'package:trilhaapp/pages/pesquisar.dart';
+
 // Adicionar no menu https://api.flutter.dev/flutter/widgets/ListView-class.html
+class Item {
+  final String nome;
+  final int quantidade;
+
+  Item({required this.nome, required this.quantidade});
+}
 
 class MyMenu extends StatefulWidget {
   const MyMenu({super.key});
@@ -12,21 +19,13 @@ class MyMenu extends StatefulWidget {
   State<MyMenu> createState() => _MyMenuState();
 }
 
-class Item {
-  final int id;
-  final String nome;
-  final int quantidade;
-
-  Item({required this.id, required this.nome, required this.quantidade});
-}
-
 class _MyMenuState extends State<MyMenu> {
   int totalDeItens = 0;
   // ignore: unused_element
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('Itens adicionados')
             .snapshots(),
@@ -35,26 +34,7 @@ class _MyMenuState extends State<MyMenu> {
             return const CircularProgressIndicator();
           }
 
-          List<Item> itens =
-              snapshot.data!.docs.map((DocumentSnapshot documento) {
-            Map<String, dynamic> dados =
-                documento.data() as Map<String, dynamic>;
-
-            // ignore: unnecessary_null_comparison
-            if (dados == null) {
-              return Item(id: 0, nome: '', quantidade: 0);
-            }
-
-            int? id = dados['id'] as int?;
-            String? nome = dados['name'] as String?;
-            int? quantidade = dados['quantidade'] as int?;
-
-            return Item(
-              id: id ?? 0,
-              nome: nome ??= '',
-              quantidade: quantidade ??= 0,
-            );
-          }).toList();
+          totalDeItens = snapshot.data!.docs.length;
 
           return SafeArea(
             child: Scaffold(
@@ -172,8 +152,6 @@ class _MyMenuState extends State<MyMenu> {
                                   style: TextStyle(fontSize: 22),
                                 ),
                               ),
-                              // Expanded(
-                              //    ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 5),
                                 child: ListTile(
@@ -206,7 +184,7 @@ class _MyMenuState extends State<MyMenu> {
                                                       SizedBox(
                                                         width: 170,
                                                         child: Text(
-                                                          'item.nome', //Variavel
+                                                          'Item.nome', //Variavel
                                                           style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize: 15,
@@ -227,125 +205,7 @@ class _MyMenuState extends State<MyMenu> {
                                                                   .end,
                                                           children: [
                                                             Text(
-                                                              '32 Uni',
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 16,
-                                                              ),
-                                                            ),
-                                                          ]),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            width: 180,
-                                            height: 75,
-                                            margin: const EdgeInsets.only(
-                                              left: 5,
-                                              right: 5,
-                                            ),
-                                            decoration: const ShapeDecoration(
-                                              shape: RoundedRectangleBorder(
-                                                  side: BorderSide(width: .7)),
-                                            ),
-                                            child: const Stack(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 7, left: 5),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 170,
-                                                        child: Text(
-                                                          'Pastel de queijo', //Variavel
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 15,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 6, bottom: 6),
-                                                      child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .end,
-                                                          children: [
-                                                            Text(
-                                                              '33 Uni',
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 16,
-                                                              ),
-                                                            ),
-                                                          ]),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            width: 180,
-                                            height: 75,
-                                            margin: const EdgeInsets.only(
-                                              left: 5,
-                                              right: 5,
-                                            ),
-                                            decoration: const ShapeDecoration(
-                                              shape: RoundedRectangleBorder(
-                                                  side: BorderSide(width: .7)),
-                                            ),
-                                            child: const Stack(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 7, left: 5),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 170,
-                                                        child: Text(
-                                                          'Pastel de queijo', //Variavel
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 15,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 6, bottom: 6),
-                                                      child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .end,
-                                                          children: [
-                                                            Text(
-                                                              '34 Uni',
+                                                              'item.quantidade',
                                                               style: TextStyle(
                                                                 color: Colors
                                                                     .black,
