@@ -212,7 +212,7 @@ class MyPesquisaState extends State<MyPesquisa> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Menu'),
+          title: Text(''), //acho que vou tirar
         ),
         body: Column(
           children: [
@@ -220,12 +220,14 @@ class MyPesquisaState extends State<MyPesquisa> {
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               child: TextField(
                 controller: _searchController,
+                style: TextStyle(fontSize: 21, decorationColor: Colors.white),
                 onChanged: (value) {
                   // Filtra os itens com base no texto da pesquisa
                   _filtrarItens(value);
                 },
                 decoration: InputDecoration(
                   hintText: 'Pesquisar',
+                  contentPadding: EdgeInsets.only(top: 18),
                 ),
               ),
             ),
@@ -251,21 +253,30 @@ class MyPesquisaState extends State<MyPesquisa> {
                                   onPressed: () {
                                     // Editar item
                                   },
-                                  icon: Icon(Icons.edit),
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color: Colors.black,
+                                  ),
                                 ),
                                 IconButton(
                                   onPressed: () {
                                     // Retirar unidade
                                     retirarUnidade(item);
                                   },
-                                  icon: Icon(Icons.remove_circle_outline),
+                                  icon: Icon(
+                                    Icons.remove_circle_outline,
+                                    color: Colors.black,
+                                  ),
                                 ),
                                 IconButton(
                                   onPressed: () {
                                     // Apagar item
                                     apagarItem(context, item);
                                   },
-                                  icon: Icon(Icons.delete),
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: Color.fromARGB(255, 185, 24, 12),
+                                  ),
                                 ),
                               ],
                             ),
