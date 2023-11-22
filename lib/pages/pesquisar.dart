@@ -36,7 +36,6 @@ void _retirarItem(
   Item item,
 ) {
   //ta retirando por click, e nao por unidade selecionada
-  // int quantidadeRetirada = SpinBox.of(context).value;
 
   FirebaseFirestore.instance
       .collection('Itens adicionados')
