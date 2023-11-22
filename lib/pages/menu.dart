@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/adicionarItem.dart';
 import 'package:trilhaapp/pages/login_page.dart';
 import 'package:trilhaapp/pages/pesquisar.dart';
+import 'package:trilhaapp/pages/testPesquisa.dart';
 
 // Adicionar no menu https://api.flutter.dev/flutter/widgets/ListView-class.html
 class Item {
@@ -21,25 +22,56 @@ class MyMenu extends StatefulWidget {
 
 class _MyMenuState extends State<MyMenu> {
   int totalDeItens = 0;
+  int totalRetirado = 0;
+  late Future<List<Item>> itens;
   // ignore: unused_element
+  void _adicionarItemNaLista(Item item) {
+    // Adicione o item à lista de itens (estado do widget)
+    setState(() {
+      // Adicione o item à sua lista de itens existente ou faça o que for necessário
+      // Exemplo: minhaLista.add(item);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
+    return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection('Itens adicionados')
+            //Adiciono collection.doc('nomeGrupo').update para editar
             .snapshots(),
+        //adiconar o SetOptions(merge:true); para editar
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return const CircularProgressIndicator();
           }
 
           totalDeItens = snapshot.data!.docs.length;
+          totalRetirado = snapshot.data!.docs.length - 1;
+
+          // List<Item> itens =
+          //     snapshot.data!.docs.map((DocumentSnapshot documento) {
+          //   Map<String, dynamic> dados =
+          //       documento.data() as Map<String, dynamic>;
+
+          //   // ignore: unnecessary_null_comparison
+          //   if (dados == null) {
+          //     return Item(nome: '', quantidade: 0);
+          //   }
+
+          //   String? nome = dados['name'] as String?;
+          //   int? quantidade = dados['quantidade'] as int?;
+
+          //   return Item(
+          //     nome: nome ?? '',
+          //     quantidade: quantidade ?? 0,
+          //   );
+          // }).toList();
 
           return SafeArea(
             child: Scaffold(
               appBar: AppBar(
-                title: const Text("Menu"),
+                title: const Text("Olá"), //aqui vai ficar o nome do usuario
                 backgroundColor: const Color.fromARGB(255, 2, 133, 255),
               ),
               body: Column(
@@ -91,8 +123,10 @@ class _MyMenuState extends State<MyMenu> {
                                       child: Text(
                                         totalDeItens
                                             .toString(), //adicionar um if para quando estiver menos de 10 itens ele ficar vermelhor
-                                        style: const TextStyle(
-                                          color: Colors.black87,
+                                        style: TextStyle(
+                                          color: totalDeItens <= 10
+                                              ? Colors.red
+                                              : Colors.black,
                                           fontSize: 21,
                                         ),
                                       ),
@@ -113,10 +147,10 @@ class _MyMenuState extends State<MyMenu> {
                                     padding: EdgeInsets.only(top: 50),
                                   ),
                                 ),
-                                const Column(
+                                Column(
                                   children: [
                                     Text(
-                                      'Quantidades retiradas',
+                                      'Total retirado',
                                       style: TextStyle(
                                         color: Colors.black87,
                                         fontSize: 13,
@@ -125,7 +159,8 @@ class _MyMenuState extends State<MyMenu> {
                                     Padding(
                                       padding: EdgeInsets.only(top: 8),
                                       child: Text(
-                                        '54', //valores do bando de dados
+                                        totalRetirado
+                                            .toString(), //valores do bando de dados
                                         style: TextStyle(
                                           color: Colors.black87,
                                           fontSize: 21,
@@ -533,7 +568,23 @@ class _MyMenuState extends State<MyMenu> {
                       const SizedBox(
                         height: 100,
                       ),
-
+                      InkWell(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: const Text(
+                            " teste Pesquisar",
+                            style: TextStyle(fontSize: 21),
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context); //remover a aba
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyPesquisa()),
+                          );
+                        },
+                      ),
                       // InkWell(
                       //   child: Container(
                       //     padding: const EdgeInsets.symmetric(vertical: 10),
@@ -552,7 +603,7 @@ class _MyMenuState extends State<MyMenu> {
                       //   },
                       // ),Night of the Dead
                       const SizedBox(
-                        height: 300,
+                        height: 100,
                       ),
                       const Divider(),
                       InkWell(

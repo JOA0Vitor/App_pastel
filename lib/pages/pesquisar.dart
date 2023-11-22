@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:trilhaapp/pages/adicionarItem.dart';
@@ -15,22 +16,53 @@ class Pesquisar extends StatefulWidget {
 class Item {
   final int id;
   final String nome;
-  final int quantidade;
+  int quantidade;
 
   Item({required this.id, required this.nome, required this.quantidade});
 }
 
-// ignore: unused_element
-
 _removerItem(Item item) async {
+  //esse ta pronto
+  await Firebase.initializeApp();
+  var collection = FirebaseFirestore.instance.collection('Itens adicionados');
+  collection
+      .doc() //o erro ta aqui, ele nao ta conseguindo pegar o item
+      .delete()
+      .then((value) => print('Item removido com sucesso'))
+      .catchError((error) => print('Erro ao remover item: ${error.message}'));
+}
+
+void _retirarItem(
+  Item item,
+) {
+  //ta retirando por click, e nao por unidade selecionada
+  // int quantidadeRetirada = SpinBox.of(context).value;
+
   FirebaseFirestore.instance
       .collection('Itens adicionados')
-      .doc(Item(id: 0, nome: '', quantidade: 2).toString())
-      .delete();
-  // ignore: avoid_print
-  // .then((value) => print('Item removido com sucesso'))
-  // .catchError((error) => print('Erro ao remover item: ${error.message}'));
+      .doc('UCCGM8xX7pEMyvlk7qPb')
+      .update({'quantidade': item.quantidade - 1});
+  // Exemplo hipotético:
 }
+
+// Future<void> _removerItem(Item item) async {
+//   try {
+//     await Firebase.initializeApp();
+
+//     var collection = FirebaseFirestore.instance.collection('Itens adicionados');
+
+//     // Use o id do item para identificar o documento
+//     var documentId = item.toString();
+
+//     await collection
+//         .doc(documentId)
+//         .delete()
+//         .then((value) => print('Item removido com sucesso'))
+//         .catchError((error) => print('Erro ao remover item: ${error.message}'));
+//   } catch (e) {
+//     print("Erro geral: $e");
+//   }
+// }
 
 class _PesquisarState extends State<Pesquisar> {
   int quantidadeSelecionada = 1;
@@ -174,6 +206,7 @@ class _PesquisarState extends State<Pesquisar> {
                                                     IconButton(
                                                       onPressed: () {
                                                         // ignore: avoid_print
+                                                        _retirarItem(item);
                                                         print(
                                                             'Clicou no ícone de retirar');
                                                         showDialog(
@@ -209,6 +242,7 @@ class _PesquisarState extends State<Pesquisar> {
                                                                             1000,
                                                                         value: quantidadeSelecionada
                                                                             .toDouble(),
+
                                                                         // ignore: avoid_print
                                                                         onChanged:
                                                                             (value) {
@@ -249,7 +283,7 @@ class _PesquisarState extends State<Pesquisar> {
                                                             });
                                                       },
                                                       icon: const Icon(
-                                                        Icons
+                                                        Icons //icon retirar
                                                             .do_disturb_on_rounded,
                                                         color: Colors.black,
                                                         size: 24,
@@ -264,6 +298,7 @@ class _PesquisarState extends State<Pesquisar> {
                                                       ),
                                                       onPressed: () {
                                                         _removerItem(item);
+
                                                         setState(() {});
 
                                                         // showDialog(
