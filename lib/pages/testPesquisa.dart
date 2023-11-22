@@ -10,6 +10,9 @@ class MyPesquisa extends StatefulWidget {
 class MyPesquisaState extends State<MyPesquisa> {
   late QuerySnapshot _snapshot;
   List<Item> _itens = [];
+  List<Item> _itensFiltrados = [];
+
+  TextEditingController _searchController = TextEditingController();
 
   void editarItem(Item item) {
     // Navigator.of(context).push(
@@ -51,7 +54,7 @@ class MyPesquisaState extends State<MyPesquisa> {
     }
   }
 
-  // void retirarUnidade(Item item) {
+  // void retirarUnidades(Item item) {
   //   // Verifica se a quantidade do item é maior que zero
   //   if (item.quantidade > 0) {
   //     // Diminui a quantidade do item em uma unidade
@@ -60,12 +63,15 @@ class MyPesquisaState extends State<MyPesquisa> {
   //     // Salva a quantidade do item no Firestore
   //     FirebaseFirestore.instance
   //         .collection('Itens adicionados')
-  //         .doc('UCCGM8xX7pEMyvlk7qPb')
+  //         .doc()
   //         .get()
   //         .then((DocumentSnapshot document) {
   //       if (document.exists) {
   //         // Atualizar o documento
-  //         FirebaseFirestore.instance.collection('items').doc('0').update({
+  //         FirebaseFirestore.instance
+  //             .collection('Itens adicionados')
+  //             .doc('0')
+  //             .update({
   //           'nome': 'novo nome',
   //           'quantidade': 10,
   //         });
@@ -105,7 +111,7 @@ class MyPesquisaState extends State<MyPesquisa> {
 
         // Exclui o documento do Firestore
         await FirebaseFirestore.instance
-            .collection('items')
+            .collection('Itens adicionados')
             .doc(id.toString())
             .delete();
 
@@ -162,50 +168,87 @@ class MyPesquisaState extends State<MyPesquisa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Menu'),
-      ),
-      body: _itens.isEmpty
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.builder(
-              itemCount: _itens.length,
-              itemBuilder: (context, index) {
-                final item = _itens[index];
-                print('pegou??');
-                return ListTile(
-                  title: Text(item.nome),
-                  subtitle: Text('${item.quantidade} unidades'),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          // Editar item
-                        },
-                        icon: Icon(Icons.edit),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          // Retirar unidade
-                          retirarUnidade(item);
-                        },
-                        icon: Icon(Icons.remove_circle_outline),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          // Apagar item
-                          apagarItem;
-                        },
-                        icon: Icon(Icons.delete),
-                      ),
-                    ],
-                  ),
-                );
+        appBar: AppBar(
+          title: Text('Menu'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                // Aqui você pode exibir um diálogo ou realizar alguma ação
+                // com os itens filtrados, se necessário.
+                print('Itens filtrados: $_itensFiltrados');
               },
+              icon: Icon(Icons.search),
             ),
-    );
+          ],
+        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: _searchController,
+                onChanged: (value) {
+                  // Filtra os itens com base no texto da pesquisa
+                  _filtrarItens(value);
+                },
+                decoration: InputDecoration(
+                  hintText: 'Pesquisar',
+                ),
+              ),
+            ),
+            Expanded(
+              child: _itensFiltrados.isEmpty
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : ListView.builder(
+                      itemCount: _itensFiltrados.length,
+                      itemBuilder: (context, index) {
+                        final item = _itensFiltrados[index];
+                        print('pegou??');
+                        return ListTile(
+                          title: Text(item.nome),
+                          subtitle: Text('${item.quantidade} unidades'),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  // Editar item
+                                },
+                                icon: Icon(Icons.edit),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  // Retirar unidade
+                                  retirarUnidade(item);
+                                },
+                                icon: Icon(Icons.remove_circle_outline),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  // Apagar item
+                                  apagarItem(context, item);
+                                },
+                                icon: Icon(Icons.delete),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ));
+  }
+
+  void _filtrarItens(String filtro) {
+    setState(() {
+      _itensFiltrados = _itens
+          .where(
+              (item) => item.nome.toLowerCase().contains(filtro.toLowerCase()))
+          .toList();
+    });
   }
 }
 

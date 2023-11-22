@@ -22,6 +22,7 @@ class Item {
 }
 
 _removerItem(Item item) async {
+  // ta pegando so com codigo(id) do firebase
   //esse ta pronto
   await Firebase.initializeApp();
   var collection = FirebaseFirestore.instance.collection('Itens adicionados');
