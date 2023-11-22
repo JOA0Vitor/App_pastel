@@ -27,16 +27,11 @@ class MyPesquisaState extends State<MyPesquisa> {
   }
 
   Future<void> retirarUnidade(Item item) async {
-    // Verifica se a quantidade do item é maior que zero
-
     if (item.quantidade > 0) {
-      // Diminui a quantidade do item em uma unidade
       item.quantidade--;
 
-      // Atualiza a quantidade no Firestore
       await _atualizarQuantidadeNoFirestore(item);
     } else {
-      // Caso a quantidade já seja zero, você pode lidar com isso de maneira específica
       print('A quantidade já é zero.');
     }
   }

@@ -23,21 +23,27 @@ class MyMenu extends StatefulWidget {
 }
 
 class _MyMenuState extends State<MyMenu> {
-  late List<Map<String, dynamic>> _itens;
+  List<Map<String, dynamic>> _itens = [];
+  // late List<Map<String, dynamic>> _itens;
   @override
   void initState() {
-    _itens = []; // Inicialize aqui
-
     super.initState();
     _carregarItens();
   }
 
   Future<void> _carregarItens() async {
-    setState(() {});
+    try {
+      List<Map<String, dynamic>> itens = await FirestoreService().getItens();
+      setState(() {
+        _itens = itens;
+      });
+    } catch (e) {
+      print('Erro ao carregar itens: $e');
+    }
   }
 
   int totalDeItens = 0;
-  int totalRetirado = 0;
+
   late Future<List<Item>> itens;
   // ignore: unused_element
   void _adicionarItemNaLista(Item item) {
@@ -62,26 +68,6 @@ class _MyMenuState extends State<MyMenu> {
           }
 
           totalDeItens = snapshot.data!.docs.length;
-          totalRetirado = snapshot.data!.docs.length - 1;
-
-          // List<Item> itens =
-          //     snapshot.data!.docs.map((DocumentSnapshot documento) {
-          //   Map<String, dynamic> dados =
-          //       documento.data() as Map<String, dynamic>;
-
-          //   // ignore: unnecessary_null_comparison
-          //   if (dados == null) {
-          //     return Item(nome: '', quantidade: 0);
-          //   }
-
-          //   String? nome = dados['name'] as String?;
-          //   int? quantidade = dados['quantidade'] as int?;
-
-          //   return Item(
-          //     nome: nome ?? '',
-          //     quantidade: quantidade ?? 0,
-          //   );
-          // }).toList();
 
           return SafeArea(
             child: Scaffold(
@@ -127,10 +113,10 @@ class _MyMenuState extends State<MyMenu> {
                                 Column(
                                   children: [
                                     const Text(
-                                      'Total de Itens',
+                                      'Total de Itens cadastrado',
                                       style: TextStyle(
                                         color: Colors.black87,
-                                        fontSize: 14,
+                                        fontSize: 17,
                                       ),
                                     ),
                                     Padding(
@@ -142,43 +128,7 @@ class _MyMenuState extends State<MyMenu> {
                                           color: totalDeItens <= 10
                                               ? Colors.red
                                               : Colors.black,
-                                          fontSize: 21,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Container(
-                                  //barra horizontal
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 254, 254, 254),
-                                    border: Border.all(
-                                      width: .8,
-                                    ),
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(top: 50),
-                                  ),
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      'Total retirado',
-                                      style: TextStyle(
-                                        color: Colors.black87,
-                                        fontSize: 13,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 8),
-                                      child: Text(
-                                        totalRetirado
-                                            .toString(), //valores do bando de dados
-                                        style: TextStyle(
-                                          color: Colors.black87,
-                                          fontSize: 21,
+                                          fontSize: 25,
                                         ),
                                       ),
                                     ),
@@ -211,7 +161,21 @@ class _MyMenuState extends State<MyMenu> {
                                             scrollDirection: Axis.horizontal,
                                             child: Row(
                                               children: [
-                                                // Seu código para exibir os itens aqui
+                                                for (var item in _itens)
+                                                  Container(
+                                                    margin: EdgeInsets.all(8),
+                                                    child: Column(
+                                                      children: [
+                                                        Text(item['Nome produto'] !=
+                                                                null
+                                                            ? item[
+                                                                'Nome produto']
+                                                            : 'Nome não disponível'),
+                                                        Text(
+                                                            'Quantidade: ${item['quantidade']}'),
+                                                      ],
+                                                    ),
+                                                  ),
                                               ],
                                             ),
                                           ),
@@ -225,7 +189,7 @@ class _MyMenuState extends State<MyMenu> {
                         ),
                         Container(
                           width: double.infinity,
-                          margin: const EdgeInsets.only(top: 60),
+                          margin: const EdgeInsets.only(top: 15),
                           // color: Colors.black12,
                           child: const Text(
                             'Histórico de saida',
