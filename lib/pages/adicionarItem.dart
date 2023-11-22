@@ -22,7 +22,7 @@ class adicionarItemState extends State<adicionarItem> {
       // Adicione os dados do item à coleção
       await itemsCollection.add({
         'disponivel': _disponivel,
-        'nomeProduto': _nomeProdutoController.text,
+        'Nome produto': _nomeProdutoController.text,
         'quantidade': _quantidade,
       });
 

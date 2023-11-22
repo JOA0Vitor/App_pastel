@@ -4,6 +4,8 @@ import 'package:trilhaapp/pages/adicionarItem.dart';
 import 'package:trilhaapp/pages/login_page.dart';
 import 'package:trilhaapp/pages/pesquisar.dart';
 import 'package:trilhaapp/pages/testPesquisa.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'
+    show FirebaseFirestore, QuerySnapshot;
 
 // Adicionar no menu https://api.flutter.dev/flutter/widgets/ListView-class.html
 class Item {
@@ -21,6 +23,19 @@ class MyMenu extends StatefulWidget {
 }
 
 class _MyMenuState extends State<MyMenu> {
+  late List<Map<String, dynamic>> _itens;
+  @override
+  void initState() {
+    _itens = []; // Inicialize aqui
+
+    super.initState();
+    _carregarItens();
+  }
+
+  Future<void> _carregarItens() async {
+    setState(() {});
+  }
+
   int totalDeItens = 0;
   int totalRetirado = 0;
   late Future<List<Item>> itens;
@@ -184,88 +199,33 @@ class _MyMenuState extends State<MyMenu> {
                                 child: Text(
                                   'Adicionados recentemente',
                                   // textAlign: TextAlign.right, //olha depois
-                                  style: TextStyle(fontSize: 22),
+                                  style: TextStyle(fontSize: 24),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 5),
-                                child: ListTile(
-                                  title: SizedBox(
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            width: 180,
-                                            height: 75,
-                                            margin: const EdgeInsets.only(
-                                              left: 5,
-                                              right: 5,
-                                            ),
-                                            decoration: const ShapeDecoration(
-                                              shape: RoundedRectangleBorder(
-                                                  side: BorderSide(width: .7)),
-                                            ),
-                                            child: const Stack(
+                                padding: const EdgeInsets.only(top: 29),
+                                child: _itens != null && _itens.isNotEmpty
+                                    ? ListTile(
+                                        title: SizedBox(
+                                          child: SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
                                               children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 7, left: 5),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 170,
-                                                        child: Text(
-                                                          'Item.nome', //Variavel
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 15,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 6, bottom: 6),
-                                                      child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .end,
-                                                          children: [
-                                                            Text(
-                                                              'item.quantidade',
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 16,
-                                                              ),
-                                                            ),
-                                                          ]),
-                                                    ),
-                                                  ],
-                                                ),
+                                                // Seu código para exibir os itens aqui
                                               ],
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
+                                        ),
+                                      )
+                                    : Text(
+                                        'Nenhum produto adicionado recentemente.'),
+                              ),
                             ],
                           ),
                         ),
                         Container(
                           width: double.infinity,
-                          margin: const EdgeInsets.only(top: 20),
+                          margin: const EdgeInsets.only(top: 60),
                           // color: Colors.black12,
                           child: const Text(
                             'Histórico de saida',
@@ -665,5 +625,26 @@ class _MyMenuState extends State<MyMenu> {
             ),
           );
         });
+  }
+}
+
+class FirestoreService {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future<List<Map<String, dynamic>>> getItens() async {
+    try {
+      QuerySnapshot querySnapshot =
+          await _firestore.collection('Itens adicionados').get();
+
+      List<Map<String, dynamic>> itens = [];
+
+      for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+        itens.add(doc.data() as Map<String, dynamic>);
+      }
+
+      return itens;
+    } catch (e) {
+      print('Erro ao obter itens: $e');
+      return [];
+    }
   }
 }

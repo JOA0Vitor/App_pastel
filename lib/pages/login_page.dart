@@ -44,9 +44,10 @@ class _LoginPageState extends State<LoginPage> {
 
           if (loginResult) {
             // Se o login for bem-sucedido, navegue para a tela MyMenu
+            // ignore: use_build_context_synchronously
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => const MyMenu()),
+              MaterialPageRoute(builder: (context) => MyMenu()),
               (Route<dynamic> route) => false,
             );
           } else {

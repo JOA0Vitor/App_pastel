@@ -86,7 +86,7 @@ class _cadastro_loginState extends State<cadastro_login> {
         ), //Header and
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+            padding: const EdgeInsets.symmetric(vertical: 70, horizontal: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -181,38 +181,6 @@ class _cadastro_loginState extends State<cadastro_login> {
                         ),
                         const SizedBox(
                           height: 15,
-                        ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          child: const Text(
-                            "Confirme a Senha:",
-                            style: TextStyle(fontSize: 19),
-                          ),
-                        ),
-                        TextFormField(
-                          controller: con_passwordController,
-                          obscureText: isObscureTextsenha,
-                          style: const TextStyle(
-                              color: Colors.black87,
-                              fontSize: 19,
-                              decorationColor: Colors.white70),
-                          decoration: InputDecoration(
-                              hintText: 'Digite sua senha',
-                              contentPadding:
-                                  const EdgeInsets.only(top: 22, left: 5),
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isObscureTextsenha = !isObscureTextsenha;
-                                  });
-                                },
-                                child: Icon(
-                                  isObscureTextsenha
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                  color: Colors.black87,
-                                ),
-                              )),
                         ),
                       ],
                     )),

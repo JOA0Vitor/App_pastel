@@ -9,6 +9,7 @@ class MyPesquisa extends StatefulWidget {
 
 class MyPesquisaState extends State<MyPesquisa> {
   late QuerySnapshot _snapshot;
+
   List<Item> _itens = [];
   List<Item> _itensFiltrados = [];
 
@@ -27,6 +28,7 @@ class MyPesquisaState extends State<MyPesquisa> {
 
   Future<void> retirarUnidade(Item item) async {
     // Verifica se a quantidade do item é maior que zero
+
     if (item.quantidade > 0) {
       // Diminui a quantidade do item em uma unidade
       item.quantidade--;
@@ -43,7 +45,7 @@ class MyPesquisaState extends State<MyPesquisa> {
     try {
       await FirebaseFirestore.instance
           .collection('Itens adicionados')
-          .doc(item.toString())
+          .doc(item.documentId)
           .update({
         'quantidade': item.quantidade,
       });
@@ -84,7 +86,6 @@ class MyPesquisaState extends State<MyPesquisa> {
   // }
 
   Future<void> apagarItem(BuildContext context, Item item) async {
-    // Mostra um diálogo de confirmação
     bool confirmado = await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -107,12 +108,10 @@ class MyPesquisaState extends State<MyPesquisa> {
 
     if (confirmado == true) {
       try {
-        final id = item.id;
-
         // Exclui o documento do Firestore
         await FirebaseFirestore.instance
             .collection('Itens adicionados')
-            .doc(id.toString())
+            .doc(item.documentId) //olhar esse document
             .delete();
 
         print('Item excluído com sucesso.');
@@ -131,31 +130,75 @@ class MyPesquisaState extends State<MyPesquisa> {
     _carregarDados();
   }
 
+  // Future<void> _carregarDados() async {
+  //   try {
+  //     // Obtenha a coleção de Firestore e aguarde a conclusão
+  //     _snapshot = await FirebaseFirestore.instance
+  //         .collection('Itens adicionados')
+  //         .get();
+
+  //     setState(() {
+  //       // Converta os documentos em uma lista de itens
+  //       _itens = _snapshot.docs.map((documento) {
+  //         Map<String, dynamic> dados = documento.data() as Map<String, dynamic>;
+
+  //         // ignore: unnecessary_null_comparison
+  //         if (dados == null) {
+  //           return Item(
+  //             nome: '',
+  //             quantidade: 0,
+  //             documentId: documento.id,
+  //           ); //olhar aqui
+  //         }
+
+  //         String? nome = dados['Nome produto'] as String?;
+  //         int? quantidade = dados['quantidade'] as int?;
+
+  //         return Item(
+  //           nome: nome ?? '',
+  //           quantidade: quantidade ?? 0,
+  //           documentId: documento.id,
+
+  //         );
+  //       }).toList();
+  //     });
+  //   } catch (e) {
+  //     // Trate possíveis erros aqui
+  //     print('Erro ao carregar dados: $e');
+  //   }
+  // }
+
   Future<void> _carregarDados() async {
     try {
       // Obtenha a coleção de Firestore e aguarde a conclusão
-      _snapshot = await FirebaseFirestore.instance
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
           .collection('Itens adicionados')
           .get();
 
       setState(() {
         // Converta os documentos em uma lista de itens
-        _itens = _snapshot.docs.map((documento) {
+        _itens = snapshot.docs.map((documento) {
           Map<String, dynamic> dados = documento.data() as Map<String, dynamic>;
 
           // ignore: unnecessary_null_comparison
           if (dados == null) {
-            return Item(id: 0, nome: '', quantidade: 0);
+            return Item(
+              nome: '',
+              quantidade: 0,
+              bandeja: '',
+              documentId: documento.id,
+            );
           }
 
-          int? id = dados['id'] as int?;
-          String? nome = dados['name'] as String?;
+          String? nome = dados['Nome produto'] as String?;
           int? quantidade = dados['quantidade'] as int?;
+          String? bandeja = dados['disponivel'] as String?;
 
           return Item(
-            id: id ?? 0,
             nome: nome ?? '',
             quantidade: quantidade ?? 0,
+            bandeja: bandeja ?? '',
+            documentId: documento.id,
           );
         }).toList();
       });
@@ -170,21 +213,11 @@ class MyPesquisaState extends State<MyPesquisa> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Menu'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                // Aqui você pode exibir um diálogo ou realizar alguma ação
-                // com os itens filtrados, se necessário.
-                print('Itens filtrados: $_itensFiltrados');
-              },
-              icon: Icon(Icons.search),
-            ),
-          ],
         ),
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               child: TextField(
                 controller: _searchController,
                 onChanged: (value) {
@@ -205,34 +238,37 @@ class MyPesquisaState extends State<MyPesquisa> {
                       itemCount: _itensFiltrados.length,
                       itemBuilder: (context, index) {
                         final item = _itensFiltrados[index];
-                        print('pegou??');
-                        return ListTile(
-                          title: Text(item.nome),
-                          subtitle: Text('${item.quantidade} unidades'),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  // Editar item
-                                },
-                                icon: Icon(Icons.edit),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  // Retirar unidade
-                                  retirarUnidade(item);
-                                },
-                                icon: Icon(Icons.remove_circle_outline),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  // Apagar item
-                                  apagarItem(context, item);
-                                },
-                                icon: Icon(Icons.delete),
-                              ),
-                            ],
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: ListTile(
+                            title: Text(item.nome),
+                            subtitle: Text(
+                                '${item.quantidade} unidades - ${item.bandeja}'),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    // Editar item
+                                  },
+                                  icon: Icon(Icons.edit),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    // Retirar unidade
+                                    retirarUnidade(item);
+                                  },
+                                  icon: Icon(Icons.remove_circle_outline),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    // Apagar item
+                                    apagarItem(context, item);
+                                  },
+                                  icon: Icon(Icons.delete),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -253,13 +289,29 @@ class MyPesquisaState extends State<MyPesquisa> {
 }
 
 class Item {
-  int id;
+  String documentId;
   String nome;
+  String? bandeja;
   int quantidade;
 
   Item({
-    required this.id,
+    required this.documentId,
     required this.nome,
+    this.bandeja,
     required this.quantidade,
   });
+
+  Item.fromFirestore(Map<String, dynamic> map, String documentId)
+      : nome = map['Nome produto'] ?? '',
+        quantidade = map['quantidade'] ?? 0,
+        bandeja = map['disponivel'] ?? '',
+        documentId = documentId;
+
+  Map<String, dynamic> toFirestore() {
+    return {
+      'Nome produto': nome,
+      'quantidade': quantidade,
+      'disponivel': bandeja,
+    };
+  }
 }
