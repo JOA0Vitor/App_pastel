@@ -93,18 +93,16 @@ class _LoginPageState extends State<LoginPage> {
                     Expanded(child: Container()), //aqui tem 1 flex
                     Expanded(
                       //ficou seis/oito
-                      flex: 6,
-                      child: Image.network(
-                        "https://i.pinimg.com/originals/28/12/d7/2812d78d2f192fc317da48602c93666c.png",
-                      ),
+                      flex: 8,
+                      child: Image.asset("lib/images/logo.png"),
                     ),
                     Expanded(child: Container()), //aqui tem 1 flex
                   ],
                 ),
-                const Text(
-                  "Bem-vindo",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-                ),
+                // const Text(
+                //   "Bem-vindo",
+                //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                // ),
                 const SizedBox(
                   height: 40,
                 ),

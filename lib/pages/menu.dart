@@ -72,7 +72,8 @@ class _MyMenuState extends State<MyMenu> {
           return SafeArea(
             child: Scaffold(
               appBar: AppBar(
-                title: const Text("Olá"), //aqui vai ficar o nome do usuario
+                title: const Text(
+                    "Olá , teste"), //aqui vai ficar o nome do usuario
                 backgroundColor: const Color.fromARGB(255, 2, 133, 255),
               ),
               body: Column(
@@ -153,7 +154,7 @@ class _MyMenuState extends State<MyMenu> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 29),
+                                padding: const EdgeInsets.only(top: 10),
                                 child: _itens != null && _itens.isNotEmpty
                                     ? ListTile(
                                         title: SizedBox(
@@ -163,17 +164,39 @@ class _MyMenuState extends State<MyMenu> {
                                               children: [
                                                 for (var item in _itens)
                                                   Container(
-                                                    margin: EdgeInsets.all(8),
-                                                    child: Column(
-                                                      children: [
-                                                        Text(item['Nome produto'] !=
-                                                                null
-                                                            ? item[
-                                                                'Nome produto']
-                                                            : 'Nome não disponível'),
-                                                        Text(
-                                                            'Quantidade: ${item['quantidade']}'),
-                                                      ],
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                      left: 5,
+                                                      right: 5,
+                                                    ),
+                                                    child: Container(
+                                                      height: 85,
+                                                      width: 180,
+                                                      decoration:
+                                                          const ShapeDecoration(
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                                side: BorderSide(
+                                                                    width: .7)),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 4),
+                                                        child: Column(
+                                                          children: [
+                                                            Text(item['Nome produto'] !=
+                                                                    null
+                                                                ? item[
+                                                                    //Deixar assim
+                                                                    'Nome produto']
+                                                                : 'Nome não disponível'),
+                                                            Text(
+                                                                'Quantidade: ${item['quantidade']}'),
+                                                            Text('Bandeja: ')
+                                                          ],
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                               ],
@@ -189,7 +212,7 @@ class _MyMenuState extends State<MyMenu> {
                         ),
                         Container(
                           width: double.infinity,
-                          margin: const EdgeInsets.only(top: 15),
+                          margin: const EdgeInsets.only(top: 23),
                           // color: Colors.black12,
                           child: const Text(
                             'Histórico de saida',
@@ -198,13 +221,6 @@ class _MyMenuState extends State<MyMenu> {
                               fontSize: 25,
                             ),
                           ),
-                        ),
-                        const Divider(
-                          //linha pos nome
-                          height: 20,
-                          color: Colors.grey,
-                          thickness: 1,
-                          endIndent: 70,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(1.0),

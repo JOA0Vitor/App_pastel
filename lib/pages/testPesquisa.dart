@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/EditItemPage.dart';
+import 'dart:async';
 
 class MyPesquisa extends StatefulWidget {
   @override
@@ -9,11 +10,18 @@ class MyPesquisa extends StatefulWidget {
 
 class MyPesquisaState extends State<MyPesquisa> {
   late QuerySnapshot _snapshot;
-
+  late StreamController<List<Item>> _itensController;
   List<Item> _itens = [];
   List<Item> _itensFiltrados = [];
 
   TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _itensController = StreamController<List<Item>>.broadcast();
+    _carregarDados();
+  }
 
   void editarItem(Item item) {
     // Navigator.of(context).push(
@@ -80,99 +88,45 @@ class MyPesquisaState extends State<MyPesquisa> {
   //   }
   // }
 
-  Future<void> apagarItem(BuildContext context, Item item) async {
-    bool confirmado = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Confirmação'),
-          content: Text('Você realmente deseja excluir este item?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text('Cancelar'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Confirmar'),
-            ),
-          ],
-        );
-      },
-    );
+  Future<void> apagarItem(BuildContext context, String documentId) async {
+    try {
+      // Referência para a coleção no Firestore
+      CollectionReference collection =
+          FirebaseFirestore.instance.collection('Itens adicionados');
 
-    if (confirmado == true) {
-      try {
-        // Exclui o documento do Firestore
-        await FirebaseFirestore.instance
-            .collection('Itens adicionados')
-            .doc(item.documentId) //olhar esse document
-            .delete();
+      // Excluir o documento usando o documentId fornecido
+      await collection.doc(documentId).delete();
 
-        print('Item excluído com sucesso.');
-      } catch (e) {
-        print('Erro ao excluir o item: $e');
-        // Adicione tratamento de erro conforme necessário
-      }
-    } else {
-      print('Exclusão cancelada pelo usuário.');
+      // Mostrar uma mensagem de sucesso (opcional)
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Item removido com sucesso!"),
+        ),
+      );
+    } catch (e) {
+      // Tratar erros, se necessário
+      print('Erro ao remover item: $e');
+
+      // Mostrar uma mensagem de erro (opcional)
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Erro ao remover o item."),
+        ),
+      );
     }
   }
-
-  @override
-  void initState() {
-    super.initState();
-    _carregarDados();
-  }
-
-  // Future<void> _carregarDados() async {
-  //   try {
-  //     // Obtenha a coleção de Firestore e aguarde a conclusão
-  //     _snapshot = await FirebaseFirestore.instance
-  //         .collection('Itens adicionados')
-  //         .get();
-
-  //     setState(() {
-  //       // Converta os documentos em uma lista de itens
-  //       _itens = _snapshot.docs.map((documento) {
-  //         Map<String, dynamic> dados = documento.data() as Map<String, dynamic>;
-
-  //         // ignore: unnecessary_null_comparison
-  //         if (dados == null) {
-  //           return Item(
-  //             nome: '',
-  //             quantidade: 0,
-  //             documentId: documento.id,
-  //           ); //olhar aqui
-  //         }
-
-  //         String? nome = dados['Nome produto'] as String?;
-  //         int? quantidade = dados['quantidade'] as int?;
-
-  //         return Item(
-  //           nome: nome ?? '',
-  //           quantidade: quantidade ?? 0,
-  //           documentId: documento.id,
-
-  //         );
-  //       }).toList();
-  //     });
-  //   } catch (e) {
-  //     // Trate possíveis erros aqui
-  //     print('Erro ao carregar dados: $e');
-  //   }
-  // }
 
   Future<void> _carregarDados() async {
     try {
       // Obtenha a coleção de Firestore e aguarde a conclusão
-      QuerySnapshot snapshot = await FirebaseFirestore.instance
+      _snapshot = await FirebaseFirestore.instance
           .collection('Itens adicionados')
           .get();
 
       setState(() {
         // Converta os documentos em uma lista de itens
-        _itens = snapshot.docs.map((documento) {
+        _itens = _snapshot.docs.map((documento) {
           Map<String, dynamic> dados = documento.data() as Map<String, dynamic>;
 
           // ignore: unnecessary_null_comparison
@@ -266,7 +220,7 @@ class MyPesquisaState extends State<MyPesquisa> {
                                 IconButton(
                                   onPressed: () {
                                     // Apagar item
-                                    apagarItem(context, item);
+                                    apagarItem(context, item.documentId);
                                   },
                                   icon: Icon(
                                     Icons.delete,
