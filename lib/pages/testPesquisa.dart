@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/pages/EditItemPage.dart';
+
 import 'dart:async';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 
@@ -35,15 +35,63 @@ class MyPesquisaState extends State<MyPesquisa> {
     // );
   }
 
-  // Future<void> retirarUnidade(Item item) async {
-  //   if (item.quantidade > 0) {
-  //     item.quantidade--;
+  void editarNomeItem(Item item) async {
+    TextEditingController _nomeController = TextEditingController();
 
-  //     await _atualizarQuantidadeNoFirestore(item);
-  //   } else {
-  //     print('A quantidade já é zero.');
-  //   }
-  // }
+    // Preencher o TextEditingController com o nome atual do item
+    _nomeController.text = item.nome;
+
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Editar Nome do Item'),
+          content: TextField(
+            controller: _nomeController,
+            decoration: InputDecoration(labelText: 'Novo Nome'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Fechar o AlertDialog
+              },
+              child: Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () async {
+                // Atualizar o nome do item no Firestore
+                await FirebaseFirestore.instance
+                    .collection('Itens adicionados')
+                    .doc(item.documentId)
+                    .update({'Nome produto': _nomeController.text});
+
+                Navigator.of(context).pop(); // Fechar o AlertDialog
+              },
+              child: Text('Salvar'),
+            ),
+          ],
+        );
+      },
+    );
+
+    // Atualizar a lista após editar o nome
+    _carregarDados();
+  }
+
+  Future<void> _atualizarNomeNoFirestore(Item item) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('Itens adicionados')
+          .doc(item.documentId)
+          .update({
+        'Nome produto': item.nome,
+      });
+      print('Nome do item atualizado com sucesso.');
+    } catch (e) {
+      print('Erro ao atualizar o nome do item: $e');
+      // Adicione tratamento de erro conforme necessário
+    }
+  }
 
   Future<void> _atualizarQuantidadeNoFirestore(
       Item item, int novaQuantidade) async {
@@ -61,13 +109,6 @@ class MyPesquisaState extends State<MyPesquisa> {
     }
   }
 
-  // void retirarUnidades(Item item) {
-  //   // Verifica se a quantidade do item é maior que zero
-  //   if (item.quantidade > 0) {
-  //     // Diminui a quantidade do item em uma unidade
-  //     item.quantidade--;
-
-  //     // Salva a quantidade do item no Firestore
   //     FirebaseFirestore.instance
   //         .collection('Itens adicionados')
   //         .doc()
@@ -255,6 +296,7 @@ class MyPesquisaState extends State<MyPesquisa> {
                                 IconButton(
                                   onPressed: () {
                                     // Editar item
+                                    editarNomeItem(item);
                                   },
                                   icon: Icon(
                                     Icons.edit,
