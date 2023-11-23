@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 
 class MyPesquisa extends StatefulWidget {
-  final Function(Item) onItemRemovido;
+  final Function(Item, int) onItemRemovido;
 
   MyPesquisa({required this.onItemRemovido});
 
@@ -109,28 +109,6 @@ class MyPesquisaState extends State<MyPesquisa> {
     }
   }
 
-  //     FirebaseFirestore.instance
-  //         .collection('Itens adicionados')
-  //         .doc()
-  //         .get()
-  //         .then((DocumentSnapshot document) {
-  //       if (document.exists) {
-  //         // Atualizar o documento
-  //         FirebaseFirestore.instance
-  //             .collection('Itens adicionados')
-  //             .doc('0')
-  //             .update({
-  //           'nome': 'novo nome',
-  //           'quantidade': 10,
-  //         });
-  //       } else {
-  //         // O documento não existe
-  //         print('O documento não existe');
-  //       }
-  //     });
-  //   }
-  // }
-
   Future<void> apagarItem(BuildContext context, String documentId) async {
     try {
       // Referência para a coleção no Firestore
@@ -161,8 +139,12 @@ class MyPesquisaState extends State<MyPesquisa> {
     }
   }
 
-  void _exibirAlertDialog(BuildContext context, Item item) {
-    int quantidadeRemovida = 0;
+  void _exibirAlertDialog(
+    BuildContext context,
+    Item item,
+  ) {
+    int quantidadeRemovida;
+    quantidadeRemovida = 0;
 
     showDialog(
       context: context,
@@ -206,6 +188,8 @@ class MyPesquisaState extends State<MyPesquisa> {
       }
 
       await _atualizarQuantidadeNoFirestore(item, novaQuantidade);
+      widget.onItemRemovido(item, quantidadeRemovida);
+
       _carregarDados();
     } else {
       print('A quantidade a ser removida deve ser maior que zero.');

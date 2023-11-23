@@ -3,8 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/adicionarItem.dart';
 import 'package:trilhaapp/pages/login_page.dart';
-import 'package:trilhaapp/pages/pesquisar.dart';
+// import 'package:trilhaapp/pages/pesquisar.dart';
 import 'package:trilhaapp/pages/testPesquisa.dart';
+// import 'package:trilhaapp/services/test_remover_item.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart'
     show FirebaseFirestore, QuerySnapshot;
 
@@ -17,10 +19,10 @@ class Item {
 }
 
 class MyMenu extends StatefulWidget {
-  const MyMenu({Key? key}) : super(key: key);
+  late final void Function(Item, int) onItemRemovido;
 
   @override
-  State<MyMenu> createState() => _MyMenuState();
+  _MyMenuState createState() => _MyMenuState();
 }
 
 class _MyMenuState extends State<MyMenu> {
@@ -54,12 +56,14 @@ class _MyMenuState extends State<MyMenu> {
   int totalDeItens = 0;
 
   late Future<List<Item>> itens;
+
+  List<ItemRemovido> listaDeItensRemovidos = [];
+
   // ignore: unused_element
-  void _adicionarItemNaLista(Item item) {
-    // Adicione o item à lista de itens (estado do widget)
+  void adicionarItemRemovido(ItemRemovido itemRemovido) {
     setState(() {
-      // Adicione o item à sua lista de itens existente ou faça o que for necessário
-      // Exemplo: minhaLista.adrd(item);
+      listaDeItensRemovidos.add(itemRemovido);
+      print('foi quanto ${itemRemovido.quantidade}');
     });
   }
 
@@ -243,15 +247,16 @@ class _MyMenuState extends State<MyMenu> {
                         Padding(
                           padding: const EdgeInsets.all(1.0),
                           child: SizedBox(
-                            height: 250, //255
+                            height: 250,
                             child: ListView(
                               children: [
-                                // MyPesquisa(
-                                //   onItemRemovido: (itemRemovido) {
-                                //     print(
-                                //         'Item removido: ${itemRemovido.nome}');
-                                //   },
-                                // ),
+                                // Exibir os itens removidos aqui
+                                for (var itemRemovido
+                                    in listaDeItensRemovidos) ...[
+                                  Text(
+                                      'Quantidade Removida: ${itemRemovido.quantidade}'),
+                                  // Outros widgets relacionados aos itens removidos
+                                ],
                               ],
                             ),
                           ),
@@ -302,8 +307,7 @@ class _MyMenuState extends State<MyMenu> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => MyPesquisa(
-                                      //Testar amanha
-                                      onItemRemovido: (Item) {},
+                                      onItemRemovido: (p0, p1) {},
                                     )),
                           );
                         },
@@ -372,6 +376,12 @@ class _MyMenuState extends State<MyMenu> {
           );
         });
   }
+}
+
+class ItemRemovido {
+  int quantidade;
+
+  ItemRemovido({required this.quantidade});
 }
 
 class FirestoreService {
