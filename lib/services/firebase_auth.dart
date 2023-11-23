@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/models/dados_usuario.dart';
+import 'package:trilhaapp/pages/menu.dart';
 
 class FlutterFireAuth {
   FlutterFireAuth(this._context);
@@ -23,13 +24,13 @@ class FlutterFireAuth {
   //   });
   // }
   Future<DadosUsuario?> createUserWithEmailAndPassword(
-      String name, String email, String password) async {
+      String username, String email, String password) async {
     try {
       // ignore: unused_local_variable
       final credential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      return DadosUsuario(name: name, email: email);
+      return DadosUsuario(name: username, email: email);
     } on FirebaseAuthException catch (e) {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(_context).showSnackBar(

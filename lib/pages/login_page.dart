@@ -4,9 +4,8 @@ import 'package:trilhaapp/pages/Cadastro_login.dart';
 import 'package:trilhaapp/pages/esqueci_senha.dart';
 // ignore: unused_import
 import 'package:firebase_auth/firebase_auth.dart';
-// Import the generated file https://firebase.flutter.dev/docs/cli/
 
-import 'package:trilhaapp/pages/menu.dart'; //padrao ios
+import 'package:trilhaapp/pages/menu.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

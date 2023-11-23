@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/adicionarItem.dart';
@@ -18,7 +17,7 @@ class Item {
 }
 
 class MyMenu extends StatefulWidget {
-  const MyMenu({super.key});
+  const MyMenu({Key? key}) : super(key: key);
 
   @override
   State<MyMenu> createState() => _MyMenuState();
@@ -29,6 +28,7 @@ class _MyMenuState extends State<MyMenu> {
   StreamController<List<Map<String, dynamic>>> _itensController =
       StreamController<List<Map<String, dynamic>>>.broadcast();
   // late List<Map<String, dynamic>> _itens;
+
   @override
   void initState() {
     super.initState();
@@ -81,8 +81,7 @@ class _MyMenuState extends State<MyMenu> {
           return SafeArea(
             child: Scaffold(
               appBar: AppBar(
-                title: const Text(
-                    "Olá , teste"), //aqui vai ficar o nome do usuario
+                title: Text("Olá"), //aqui vai ficar o nome do usuario
                 backgroundColor: const Color.fromARGB(255, 2, 133, 255),
               ),
               body: Column(
@@ -194,18 +193,25 @@ class _MyMenuState extends State<MyMenu> {
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .only(top: 4),
+                                                                .only(top: 6),
                                                         child: Column(
                                                           children: [
-                                                            Text(item['Nome produto'] !=
-                                                                    null
-                                                                ? item[
-                                                                    //Deixar assim
-                                                                    'Nome produto']
-                                                                : 'Nome não disponível'),
+                                                            Text(
+                                                              item['Nome produto'] !=
+                                                                      null
+                                                                  ? item[
+                                                                      //Deixar assim
+                                                                      'Nome produto']
+                                                                  : 'Nome não disponível',
+                                                              style: TextStyle(
+                                                                  fontSize: 16),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 20,
+                                                            ),
                                                             Text(
                                                                 'Quantidade: ${item['quantidade']}'),
-                                                            Text('Bandeja: ')
+                                                            // Text('Bandeja: ')
                                                           ],
                                                         ),
                                                       ),
@@ -240,230 +246,12 @@ class _MyMenuState extends State<MyMenu> {
                             height: 250, //255
                             child: ListView(
                               children: [
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 65,
-                                    margin:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    decoration: const ShapeDecoration(
-                                      shape: RoundedRectangleBorder(
-                                          side: BorderSide(width: 1)),
-                                    ),
-                                    child: const Stack(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 8),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Text(
-                                                'Pastel de carne',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 19,
-                                                ),
-                                              ),
-                                              // Text(
-                                              //   '25 Uni retirada',
-                                              //   style: TextStyle(
-                                              //     color: Colors.black,
-                                              //     fontSize: 11,
-                                              //   ),
-                                              // ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 21, bottom: 5),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                '21 Unidades retirada',
-                                                style: const TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 164, 25, 15)),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 65,
-                                    margin:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    decoration: const ShapeDecoration(
-                                      shape: RoundedRectangleBorder(
-                                          side: BorderSide(width: 1)),
-                                    ),
-                                    child: const Stack(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 8),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Text(
-                                                'Pastel de queijo',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 19,
-                                                ),
-                                              ),
-                                              // Text(
-                                              //   '25 Uni retirada',
-                                              //   style: TextStyle(
-                                              //     color: Colors.black,
-                                              //     fontSize: 11,
-                                              //   ),
-                                              // ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 21, bottom: 5),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                '22 Unidades retirada',
-                                                style: const TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 164, 25, 15)),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 65,
-                                    margin:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    decoration: const ShapeDecoration(
-                                      shape: RoundedRectangleBorder(
-                                          side: BorderSide(width: 1)),
-                                    ),
-                                    child: const Stack(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 8),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Text(
-                                                'Pastel de queijo',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 19,
-                                                ),
-                                              ),
-                                              // Text(
-                                              //   '25 Uni retirada',
-                                              //   style: TextStyle(
-                                              //     color: Colors.black,
-                                              //     fontSize: 11,
-                                              //   ),
-                                              // ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 21, bottom: 5),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                '23 Unidades retirada',
-                                                style: const TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 164, 25, 15)),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 65,
-                                    margin:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    decoration: const ShapeDecoration(
-                                      shape: RoundedRectangleBorder(
-                                          side: BorderSide(width: 1)),
-                                    ),
-                                    child: const Stack(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 8),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Text(
-                                                'Pastel de queijo',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 19,
-                                                ),
-                                              ),
-                                              // Text(
-                                              //   '25 Uni retirada',
-                                              //   style: TextStyle(
-                                              //     color: Colors.black,
-                                              //     fontSize: 11,
-                                              //   ),
-                                              // ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 21, bottom: 5),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                '24 Unidades retirada',
-                                                style: const TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 164, 25, 15)),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                                // MyPesquisa(
+                                //   onItemRemovido: (itemRemovido) {
+                                //     print(
+                                //         'Item removido: ${itemRemovido.nome}');
+                                //   },
+                                // ),
                               ],
                             ),
                           ),
@@ -504,26 +292,6 @@ class _MyMenuState extends State<MyMenu> {
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: const Text(
-                            "Pesquisar",
-                            style: TextStyle(fontSize: 21),
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.pop(context); //remover a aba
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Pesquisar()),
-                          );
-                        },
-                      ),
-                      const SizedBox(
-                        height: 100,
-                      ),
-                      InkWell(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: const Text(
                             "Consultar estoque",
                             style: TextStyle(fontSize: 21),
                           ),
@@ -533,12 +301,15 @@ class _MyMenuState extends State<MyMenu> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MyPesquisa()),
+                                builder: (context) => MyPesquisa(
+                                      //Testar amanha
+                                      onItemRemovido: (Item) {},
+                                    )),
                           );
                         },
                       ),
                       const SizedBox(
-                        height: 100,
+                        height: 400,
                       ),
                       const Divider(),
                       InkWell(

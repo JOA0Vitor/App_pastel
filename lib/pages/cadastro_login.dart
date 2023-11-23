@@ -1,5 +1,4 @@
 // ignore_for_file: unused_local_variable
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/login_page.dart';
@@ -43,6 +42,7 @@ class _cadastro_loginState extends State<cadastro_login> {
     void _signUp() {
       if (_formaKey.currentState != null &&
           _formaKey.currentState!.validate()) {
+        String username = _usernameController.text;
         SignUpService().signUp(_emailController.text, _passwordController.text);
       } else {
         print('invalido');
@@ -54,29 +54,7 @@ class _cadastro_loginState extends State<cadastro_login> {
       String username = _usernameController.text;
       String email = _emailController.text;
       String password = _passwordController.text;
-
-      //   setState(() {
-      //     _isloading = false;
-      //     _usernameController.clear();
-      //     _emailController.clear();
-      //     _passwordController.clear();
-      //   });
-      // } catch (e) {
-      //   print('Error creating user: ${e.toString()}');
-      //   setState(() => _isloading = false);
-      // }
     }
-
-    // final user = await FlutterFireAuth(context)
-    //     .createUserWithEmailAndPassword(username, email, password);
-
-    // setState(() => _isloading = false);
-
-    // if (user != null) {
-    //   // ignore: use_build_context_synchronously
-    //   Navigator.pushReplacement(context,
-    //       MaterialPageRoute(builder: (context) => const LoginPage()));
-    // }
 
     return SafeArea(
       child: Scaffold(

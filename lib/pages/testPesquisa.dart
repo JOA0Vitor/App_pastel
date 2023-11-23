@@ -5,6 +5,10 @@ import 'dart:async';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 
 class MyPesquisa extends StatefulWidget {
+  final Function(Item) onItemRemovido;
+
+  MyPesquisa({required this.onItemRemovido});
+
   @override
   MyPesquisaState createState() => MyPesquisaState();
 }
@@ -14,7 +18,6 @@ class MyPesquisaState extends State<MyPesquisa> {
   late StreamController<List<Item>> _itensController;
   List<Item> _itens = [];
   List<Item> _itensFiltrados = [];
-
   TextEditingController _searchController = TextEditingController();
 
   @override
@@ -285,43 +288,56 @@ class MyPesquisaState extends State<MyPesquisa> {
                       itemBuilder: (context, index) {
                         final item = _itensFiltrados[index];
                         return Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: ListTile(
-                            title: Text(item.nome),
-                            subtitle: Text(
-                                '${item.quantidade} unidades - ${item.bandeja}'),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 1.3,
+                              ),
+                            ),
+                            child: Column(
                               children: [
-                                IconButton(
-                                  onPressed: () {
-                                    // Editar item
-                                    editarNomeItem(item);
-                                  },
-                                  icon: Icon(
-                                    Icons.edit,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    // Retirar unidade
-                                    _exibirAlertDialog(context, item);
-                                    // retirarUnidade(item);
-                                  },
-                                  icon: const Icon(
-                                    Icons.remove_circle_outline,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    // Apagar item
-                                    apagarItem(context, item.documentId);
-                                  },
-                                  icon: Icon(
-                                    Icons.delete,
-                                    color: Color.fromARGB(255, 185, 24, 12),
+                                ListTile(
+                                  title: Text(item.nome),
+                                  subtitle: Text(
+                                      '${item.quantidade} unidades - ${item.bandeja}'),
+                                  trailing: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
+                                          // Editar item
+                                          editarNomeItem(item);
+                                        },
+                                        icon: Icon(
+                                          Icons.edit,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          // Retirar unidade
+                                          _exibirAlertDialog(context, item);
+                                          // retirarUnidade(item);
+                                        },
+                                        icon: const Icon(
+                                          Icons.remove_circle_outline,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          // Apagar item
+                                          apagarItem(context, item.documentId);
+                                        },
+                                        icon: Icon(
+                                          Icons.delete,
+                                          color:
+                                              Color.fromARGB(255, 185, 24, 12),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
