@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/adicionarItem.dart';
@@ -23,23 +25,30 @@ class MyMenu extends StatefulWidget {
 }
 
 class _MyMenuState extends State<MyMenu> {
-  List<Map<String, dynamic>> _itens = [];
+  // List<Map<String, dynamic>> _itens = [];
+  StreamController<List<Map<String, dynamic>>> _itensController =
+      StreamController<List<Map<String, dynamic>>>.broadcast();
   // late List<Map<String, dynamic>> _itens;
   @override
   void initState() {
     super.initState();
+
     _carregarItens();
   }
 
   Future<void> _carregarItens() async {
     try {
       List<Map<String, dynamic>> itens = await FirestoreService().getItens();
-      setState(() {
-        _itens = itens;
-      });
+      _itensController.add(itens); // Emitir itens para o StreamController
     } catch (e) {
       print('Erro ao carregar itens: $e');
     }
+  }
+
+  @override
+  void dispose() {
+    _itensController.close(); // Certifique-se de fechar o StreamController
+    super.dispose();
   }
 
   int totalDeItens = 0;
@@ -59,7 +68,6 @@ class _MyMenuState extends State<MyMenu> {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection('Itens adicionados')
-            //Adiciono collection.doc('nomeGrupo').update para editar
             .snapshots(),
         //adiconar o SetOptions(merge:true); para editar
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -68,6 +76,7 @@ class _MyMenuState extends State<MyMenu> {
           }
 
           totalDeItens = snapshot.data!.docs.length;
+          // totalDeItens = snapshot.data!.docs.length;
 
           return SafeArea(
             child: Scaffold(
@@ -142,7 +151,8 @@ class _MyMenuState extends State<MyMenu> {
                         const SizedBox(
                           height: 25,
                         ),
-                        SizedBox(
+                        Container(
+                          margin: EdgeInsets.only(bottom: 13),
                           child: Column(
                             children: [
                               const SizedBox(
@@ -155,14 +165,16 @@ class _MyMenuState extends State<MyMenu> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
-                                child: _itens != null && _itens.isNotEmpty
+                                child: snapshot.data!.docs != null &&
+                                        snapshot.data!.docs.isNotEmpty
                                     ? ListTile(
                                         title: SizedBox(
                                           child: SingleChildScrollView(
                                             scrollDirection: Axis.horizontal,
                                             child: Row(
                                               children: [
-                                                for (var item in _itens)
+                                                for (var item
+                                                    in snapshot.data!.docs)
                                                   Container(
                                                     margin:
                                                         const EdgeInsets.only(
@@ -212,7 +224,7 @@ class _MyMenuState extends State<MyMenu> {
                         ),
                         Container(
                           width: double.infinity,
-                          margin: const EdgeInsets.only(top: 23),
+                          margin: const EdgeInsets.only(top: 10),
                           // color: Colors.black12,
                           child: const Text(
                             'Histórico de saida',
@@ -512,7 +524,7 @@ class _MyMenuState extends State<MyMenu> {
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: const Text(
-                            " teste Pesquisar",
+                            "Consultar estoque",
                             style: TextStyle(fontSize: 21),
                           ),
                         ),
@@ -525,23 +537,6 @@ class _MyMenuState extends State<MyMenu> {
                           );
                         },
                       ),
-                      // InkWell(
-                      //   child: Container(
-                      //     padding: const EdgeInsets.symmetric(vertical: 10),
-                      //     child: const Text(
-                      //       "Editar",
-                      //       style: TextStyle(fontSize: 21),
-                      //     ),
-                      //   ),
-                      //   onTap: () {
-                      //     Navigator.pop(context); //remover a aba
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder:   (context) => const Pesquisar()),
-                      //     );
-                      //   },
-                      // ),Night of the Dead
                       const SizedBox(
                         height: 100,
                       ),
