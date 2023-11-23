@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/EditItemPage.dart';
 import 'dart:async';
+import 'package:flutter_spinbox/flutter_spinbox.dart';
 
 class MyPesquisa extends StatefulWidget {
   @override
@@ -34,23 +35,24 @@ class MyPesquisaState extends State<MyPesquisa> {
     // );
   }
 
-  Future<void> retirarUnidade(Item item) async {
-    if (item.quantidade > 0) {
-      item.quantidade--;
+  // Future<void> retirarUnidade(Item item) async {
+  //   if (item.quantidade > 0) {
+  //     item.quantidade--;
 
-      await _atualizarQuantidadeNoFirestore(item);
-    } else {
-      print('A quantidade já é zero.');
-    }
-  }
+  //     await _atualizarQuantidadeNoFirestore(item);
+  //   } else {
+  //     print('A quantidade já é zero.');
+  //   }
+  // }
 
-  Future<void> _atualizarQuantidadeNoFirestore(Item item) async {
+  Future<void> _atualizarQuantidadeNoFirestore(
+      Item item, int novaQuantidade) async {
     try {
       await FirebaseFirestore.instance
           .collection('Itens adicionados')
           .doc(item.documentId)
           .update({
-        'quantidade': item.quantidade,
+        'quantidade': novaQuantidade,
       });
       print('Quantidade do item atualizada com sucesso.');
     } catch (e) {
@@ -117,6 +119,56 @@ class MyPesquisaState extends State<MyPesquisa> {
     }
   }
 
+  void _exibirAlertDialog(BuildContext context, Item item) {
+    int quantidadeRemovida = 0;
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Escolha a quantidade'),
+          content: SpinBox(
+            value: 0,
+            min: 0,
+            max: item.quantidade.toDouble(),
+            onChanged: (value) {
+              quantidadeRemovida = value.toInt();
+            },
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _diminuirQuantidade(item, quantidadeRemovida);
+              },
+              child: Text('Confirmar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _diminuirQuantidade(Item item, int quantidadeRemovida) async {
+    if (quantidadeRemovida > 0) {
+      int novaQuantidade = item.quantidade - quantidadeRemovida;
+
+      if (novaQuantidade < 0) {
+        novaQuantidade = 0;
+      }
+
+      await _atualizarQuantidadeNoFirestore(item, novaQuantidade);
+    } else {
+      print('A quantidade a ser removida deve ser maior que zero.');
+    }
+  }
+
   Future<void> _carregarDados() async {
     try {
       // Obtenha a coleção de Firestore e aguarde a conclusão
@@ -150,6 +202,8 @@ class MyPesquisaState extends State<MyPesquisa> {
             documentId: documento.id,
           );
         }).toList();
+
+        _itensController.add(_itens);
       });
     } catch (e) {
       // Trate possíveis erros aqui
@@ -210,9 +264,10 @@ class MyPesquisaState extends State<MyPesquisa> {
                                 IconButton(
                                   onPressed: () {
                                     // Retirar unidade
-                                    retirarUnidade(item);
+                                    _exibirAlertDialog(context, item);
+                                    // retirarUnidade(item);
                                   },
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.remove_circle_outline,
                                     color: Colors.black,
                                   ),
