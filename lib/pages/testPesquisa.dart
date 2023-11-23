@@ -37,8 +37,6 @@ class MyPesquisaState extends State<MyPesquisa> {
 
   void editarNomeItem(Item item) async {
     TextEditingController _nomeController = TextEditingController();
-
-    // Preencher o TextEditingController com o nome atual do item
     _nomeController.text = item.nome;
 
     await showDialog(
@@ -74,7 +72,6 @@ class MyPesquisaState extends State<MyPesquisa> {
       },
     );
 
-    // Atualizar a lista após editar o nome
     _carregarDados();
   }
 
@@ -147,6 +144,7 @@ class MyPesquisaState extends State<MyPesquisa> {
           content: Text("Item removido com sucesso!"),
         ),
       );
+      _carregarDados();
     } catch (e) {
       // Tratar erros, se necessário
       print('Erro ao remover item: $e');
@@ -167,7 +165,7 @@ class MyPesquisaState extends State<MyPesquisa> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Escolha a quantidade'),
+          title: Text('Escolha a quantidade que vai retirar'),
           content: SpinBox(
             value: 0,
             min: 0,
@@ -205,6 +203,7 @@ class MyPesquisaState extends State<MyPesquisa> {
       }
 
       await _atualizarQuantidadeNoFirestore(item, novaQuantidade);
+      _carregarDados();
     } else {
       print('A quantidade a ser removida deve ser maior que zero.');
     }
@@ -245,6 +244,7 @@ class MyPesquisaState extends State<MyPesquisa> {
         }).toList();
 
         _itensController.add(_itens);
+        _filtrarItens(_searchController.text);
       });
     } catch (e) {
       // Trate possíveis erros aqui

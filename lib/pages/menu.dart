@@ -50,7 +50,7 @@ class _MyMenuState extends State<MyMenu> {
     // Adicione o item à lista de itens (estado do widget)
     setState(() {
       // Adicione o item à sua lista de itens existente ou faça o que for necessário
-      // Exemplo: minhaLista.add(item);
+      // Exemplo: minhaLista.adrd(item);
     });
   }
 
