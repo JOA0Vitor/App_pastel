@@ -39,44 +39,21 @@ class _cadastro_loginState extends State<cadastro_login> {
     // ignore: unused_local_variable, no_leading_underscores_for_local_identifiers
     // bool _isloading = false;
 
-    void _showSuccessDialog() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Cadastro Bem-Sucedido'),
-            content: Text('Seu cadastro foi realizado com sucesso!'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  _usernameController.clear();
-                  _emailController.clear();
-                  _passwordController.clear();
-                  Navigator.of(context).pop(); // Fecha o AlertDialog
-                },
-                child: Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
-    void _signUp() async {
+    void _signUp() {
       if (_formaKey.currentState != null &&
           _formaKey.currentState!.validate()) {
         String username = _usernameController.text;
-        var result = await SignUpService().signUp(
-          username,
-          _emailController.text,
-          _passwordController.text,
-        );
-
-        if (result != null) {
-          _showSuccessDialog(); // Mostra o alerta de sucesso
-        } else {
-          print('Falha no cadastro');
-        }
+        SignUpService()
+            .signUp(username, _emailController.text, _passwordController.text)
+            .then((result) {
+          // Verifique se o cadastro foi bem-sucedido antes de limpar os campos
+          if (result == "success") {
+            // Limpe os campos após o cadastro bem-sucedido
+            _usernameController.clear();
+            _emailController.clear();
+            _passwordController.clear();
+          }
+        });
       } else {
         print('Inválido');
       }
@@ -207,7 +184,6 @@ class _cadastro_loginState extends State<cadastro_login> {
                     child: ElevatedButton(
                       onPressed: () {
                         _signUp();
-                        _showSuccessDialog();
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue),

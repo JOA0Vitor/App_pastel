@@ -26,20 +26,25 @@ class FlutterFireAuth {
   Future<DadosUsuario?> createUserWithEmailAndPassword(
       String username, String email, String password) async {
     try {
-      // ignore: unused_local_variable
+      // Verifica se o email contém ".com"
+      if (!email.contains('.com' + '.co' + '.c')) {
+        throw FirebaseAuthException(
+          code: 'invalid-email',
+          message: 'O email deve conter ".com"',
+        );
+      }
+
       final credential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
       return DadosUsuario(name: username, email: email);
     } on FirebaseAuthException catch (e) {
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(_context).showSnackBar(
         SnackBar(
-          content: Text(e.message ?? 'Ocorreu um Error'),
+          content: Text(e.message ?? 'Ocorreu um Erro'),
         ),
       );
     } catch (e) {
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(_context).showSnackBar(
         SnackBar(
           content: Text(e.toString()),

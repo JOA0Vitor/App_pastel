@@ -14,8 +14,9 @@ import 'package:cloud_firestore/cloud_firestore.dart'
 class Item {
   final String nome;
   final int quantidade;
+  String? bandeja;
 
-  Item({required this.nome, required this.quantidade});
+  Item({required this.nome, required this.quantidade, required this.bandeja});
 }
 
 class MyMenu extends StatefulWidget {
@@ -215,7 +216,6 @@ class _MyMenuState extends State<MyMenu> {
                                                             ),
                                                             Text(
                                                                 'Quantidade: ${item['quantidade']}'),
-                                                            // Text('Bandeja: ')
                                                           ],
                                                         ),
                                                       ),
