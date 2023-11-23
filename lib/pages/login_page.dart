@@ -87,6 +87,9 @@ class _LoginPageState extends State<LoginPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                SizedBox(
+                  height: 50,
+                ),
                 Row(
                   children: [
                     Expanded(child: Container()), //aqui tem 1 flex
