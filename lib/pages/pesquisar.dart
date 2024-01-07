@@ -300,48 +300,6 @@ class _PesquisarState extends State<Pesquisar> {
                                                         _removerItem(item);
 
                                                         setState(() {});
-
-                                                        // showDialog(
-                                                        //     context: context,
-                                                        //     builder:
-                                                        //         (BuildContext
-                                                        //             bc) {
-                                                        //       return AlertDialog(
-                                                        //         title: const Text(
-                                                        //             'Remover Item'),
-                                                        //         elevation: 8,
-                                                        //         shape: RoundedRectangleBorder(
-                                                        //             borderRadius:
-                                                        //                 BorderRadius.circular(
-                                                        //                     10)),
-                                                        //         content: const Text(
-                                                        //             'Tem certeza que quer remover este item ?'),
-                                                        //         actions: [
-                                                        //           TextButton(
-                                                        //               onPressed:
-                                                        //                   () {
-                                                        //                 Navigator.pop(
-                                                        //                     context);
-                                                        //               },
-                                                        //               child: const Text(
-                                                        //                   'Cancelar')),
-                                                        //           TextButton(
-                                                        //               onPressed:
-                                                        //                   () {
-                                                        //                 itensExibidos
-                                                        //                     .remove(item);
-
-                                                        //                 _removerItem(
-                                                        //                     item);
-
-                                                        //                 Navigator.of(context)
-                                                        //                     .pop();
-                                                        //               },
-                                                        //               child: const Text(
-                                                        //                   'Sim'))
-                                                        //         ],
-                                                        //       );
-                                                        //     });
                                                       },
                                                     )
                                                   ],
@@ -354,6 +312,8 @@ class _PesquisarState extends State<Pesquisar> {
                                     ),
                                   );
                                 })),
+
+                        //aqui
                       ],
                     ),
                   )));
